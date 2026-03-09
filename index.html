@@ -263,6 +263,10 @@
       <h3>Non-Branded Mentions by Platform</h3>
       <p class="card-sub">When someone asks an AI about a topic without mentioning Rokt, how often does each platform still surface Rokt?</p>
       <div class="chart-container" style="height: 240px;"><canvas id="platformChart"></canvas></div>
+      <div style="display:flex;gap:18px;justify-content:center;margin-top:8px;font-size:11px;color:var(--grey-700);">
+        <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(224,0,77,0.9);vertical-align:middle;margin-right:4px;"></span>Tier 1 — Primary</span>
+        <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(224,0,77,0.35);vertical-align:middle;margin-right:4px;"></span>Tier 2 — Secondary</span>
+      </div>
     </div>
 
     <!-- Overview insights strip -->
@@ -486,11 +490,11 @@ const weekData = [
       labels: ['Google AI Mode','Grok','Google Gemini','Google AI Overviews','ChatGPT','Meta AI','Perplexity','Copilot'],
       mentions: [6171,5968,4167,3270,2985,1548,1558,1730]
     },
-    citationCategories: { owned: 46.0, earned: 11.1, social: 13.4, competition: 1.8, other: 27.8 },
-    prevCitationCategories: { owned: 46.7, earned: 10.2, social: 13.6, competition: 2.0, other: 27.6 },
+    citationCategories: { owned: 51.0, earned: 11.1, social: 13.4, competition: 1.8, other: 22.8 },
+    prevCitationCategories: { owned: 51.4, earned: 10.2, social: 13.6, competition: 2.0, other: 22.9 },
     topDomains: [
       { domain: 'rokt.com', share: 46, delta: -0.8, type: 'Owned', cls: 'badge-green' },
-      { domain: 'aftersell.com', share: 5, delta: 0.3, type: 'Third Party', cls: 'badge-amber' },
+      { domain: 'aftersell.com', share: 5, delta: 0.3, type: 'Owned', cls: 'badge-green' },
       { domain: 'glassdoor.com', share: 3, delta: 0, type: 'Social', cls: 'badge-purple' },
       { domain: 'builtin.com', share: 2.9, delta: -0.3, type: 'Earned', cls: 'badge-blue' },
       { domain: 'linkedin.com', share: 2.2, delta: 0.3, type: 'Social', cls: 'badge-purple' },
@@ -602,11 +606,11 @@ const weekData = [
       labels: ['Google AI Mode','Grok','Google Gemini','Google AI Overviews','ChatGPT','Copilot','Meta AI','Perplexity'],
       mentions: [7939,6543,4866,4136,3248,2668,2067,1856]
     },
-    citationCategories: { owned: 41.3, earned: 13.4, social: 12.6, competition: 1.5, other: 31.3 },
-    prevCitationCategories: { owned: 46.0, earned: 11.1, social: 13.4, competition: 1.8, other: 27.8 },
+    citationCategories: { owned: 45.9, earned: 13.4, social: 12.6, competition: 1.5, other: 26.7 },
+    prevCitationCategories: { owned: 51.0, earned: 11.1, social: 13.4, competition: 1.8, other: 22.8 },
     topDomains: [
       { domain: 'rokt.com', share: 41.2, delta: -4.8, type: 'Owned', cls: 'badge-green' },
-      { domain: 'aftersell.com', share: 4.6, delta: -0.4, type: 'Other', cls: 'badge-amber' },
+      { domain: 'aftersell.com', share: 4.6, delta: -0.4, type: 'Owned', cls: 'badge-green' },
       { domain: 'glassdoor.com', share: 3.3, delta: 0.2, type: 'Social', cls: 'badge-purple' },
       { domain: 'builtin.com', share: 2.9, delta: 0, type: 'Other', cls: 'badge-amber' },
       { domain: 'carthook.com', share: 2.1, delta: 0.2, type: 'Other', cls: 'badge-amber' },
@@ -720,11 +724,11 @@ const weekData = [
       labels: ['Google AI Mode','Grok','Google Gemini','ChatGPT','Copilot','Meta AI','Perplexity','Google AI Overviews'],
       mentions: [6828,5415,3997,3199,2434,2090,1560,1078]
     },
-    citationCategories: { owned: 37.5, earned: 16.6, social: 11.6, competition: 1.9, other: 32.3 },
-    prevCitationCategories: { owned: 41.3, earned: 13.4, social: 12.6, competition: 1.5, other: 31.3 },
+    citationCategories: { owned: 41.5, earned: 16.6, social: 11.6, competition: 1.9, other: 28.3 },
+    prevCitationCategories: { owned: 45.9, earned: 13.4, social: 12.6, competition: 1.5, other: 26.7 },
     topDomains: [
       { domain: 'rokt.com', share: 37.5, delta: -3.6, type: 'Owned', cls: 'badge-green' },
-      { domain: 'aftersell.com', share: 4.0, delta: -0.6, type: 'Other', cls: 'badge-amber' },
+      { domain: 'aftersell.com', share: 4.0, delta: -0.6, type: 'Owned', cls: 'badge-green' },
       { domain: 'glassdoor.com', share: 3.3, delta: 0, type: 'Social', cls: 'badge-purple' },
       { domain: 'builtin.com', share: 2.7, delta: -0.3, type: 'Other', cls: 'badge-amber' },
       { domain: 'prnewswire.com', share: 2.1, delta: 0.4, type: 'PR Wire', cls: 'badge-blue' }
@@ -766,7 +770,7 @@ const weekData = [
         'Industry Thought Leadership': { rokt: 80.2, fluent: 70.5, uptick: 55.8, thanksCo: 57.8 }
       },
       themes: {
-        rokt: ['Integration Complexity','Pricing Transparency','Ecosystem Dependence','Implementation Complexity','Privacy & Data Concerns'],
+        rokt: ['Integration Complexity','Ad-Tech Perception Issues','Pricing Transparency Issues','Client Concentration Risk','Checkout Experience Sensitivity'],
         fluent: ['Financial Instability','Revenue Declines','Profitability Challenges','Weak Competitive Moat'],
         uptick: ['Integration Complexity','Narrow Scope','Limited Reviews','Not Full-Funnel'],
         thanksCo: ['Limited Reviews','Platform Dependency','Lack of Information','Low Trust Score']
@@ -779,6 +783,19 @@ const weekData = [
         'Industry Thought Leadership': { rokt: 0.79, fluent: 0.17, uptick: 0, thanksCo: 0 }
       }
     },
+    negativeThemes: [
+      { theme: 'Integration Complexity', count: 5, delta: -1 },
+      { theme: 'Ad-Tech Perception Issues', count: 4, delta: 4, isNew: true },
+      { theme: 'Pricing Transparency Issues', count: 4, delta: 1 },
+      { theme: 'Dependency on Data Quality', count: 3, delta: 1 },
+      { theme: 'Limited Independent Reviews', count: 3, delta: 2 },
+      { theme: 'Mixed Customer Reviews', count: 3, delta: -3 },
+      { theme: 'Not a Full Ecommerce Platform', count: 3, delta: 2, isNew: true },
+      { theme: 'Client Concentration Risk', count: 3, delta: 1 },
+      { theme: 'Checkout Experience Sensitivity', count: 3, delta: 2, isNew: true },
+      { theme: 'Brand Control Concerns', count: 2, delta: 2, isNew: true },
+      { theme: 'Dependency on Partner Quality', count: 2, delta: 2, isNew: true }
+    ],
     lowSentiment: [
       { topic: 'Competitive', rate: 65.4, note: 'ThanksCo edges Rokt at 67.5%; Uptick close at 65.8%' },
       { topic: 'Culture', rate: 66.2, note: 'All 3 competitors beat Rokt — Fluent leads at 79.1%' },
@@ -787,23 +804,23 @@ const weekData = [
     ],
     insights: {
       overview: [
-        { tag: 'platform', label: 'Platform', text: 'Total non-branded mentions dropped 20% to 26.6K. Google AI Mode still leads (6,828) but all platforms declined. Google AI Overviews saw the sharpest fall (-74%, from 4,136 to 1,078). Grok and Gemini also lost ground but held their relative ranking.' },
-        { tag: 'sentiment', label: 'Sentiment', text: 'Overall Rokt sentiment dropped to 71.1% (-1.9pp). Copilot reversed last week\'s gains, falling back to 64.0% (from 69.8%). AI Overviews remains the most positive platform at 84.4%, while Perplexity held strong at 81.5%.' }
+        { tag: 'platform', label: 'Platform', text: 'Total non-branded mentions dropped 20% to 26.6K. Among Tier 1 platforms: Google AI Mode leads (6,828), Gemini (3,997), and ChatGPT (3,199) held steady, but AI Overviews collapsed 74% (1,078). Among Tier 2: Grok (5,415) and Copilot (2,434) declined but are secondary priorities.' },
+        { tag: 'sentiment', label: 'Sentiment', text: 'Overall Rokt sentiment dropped to 71.1% (-1.9pp). AI Overviews (Tier 1) remains the most positive platform at 84.4%. Copilot (Tier 2) fell back to 64.0% — a reversion, but as a secondary platform this is less urgent. New negative theme "Ad-Tech Perception Issues" surged from 0 to 4 occurrences this week.' }
       ],
       citations: {
-        pieChart: { tag: 'citation', label: 'Citation', text: 'Owned content declined to 37.5% (-3.8pp) of branded citations — down from 46% just two weeks ago. Earned media grew to 16.6% (+3.2pp), and the "other" bucket held at 32.3% (+1.0pp). The diversification of citation sources continues at pace.' },
-        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com citation share dropped to 37.5% (-3.6pp), continuing a 3-week decline trend. prnewswire.com climbed to 2.1% (+0.4pp), entering the top 5. carthook.com dropped out. aftersell.com declined to 4.0% (-0.6pp).' },
+        pieChart: { tag: 'citation', label: 'Citation', text: 'True owned content (rokt.com + aftersell.com) = 41.5%, down from 51.0% two weeks ago. Earned media grew to 16.6% (+3.2pp). The "other" bucket decreased to 28.3% after reclassifying aftersell.com as owned. The owned share erosion continues but is less severe than rokt.com-only figures suggest.' },
+        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com citation share dropped to 37.5% (-3.6pp), continuing a 3-week decline. aftersell.com (Rokt-owned) contributes an additional 4.0% (-0.6pp). prnewswire.com climbed to 2.1% (+0.4pp), entering the top 5. Combined owned share = 41.5%.' },
         unbrandedCit: { tag: 'citation', label: 'Citation', text: 'In non-branded queries, rokt.com dropped to 1.0% (-0.1pp), falling to #5 (↓1). x.com surged to #3 at 1.3% — a new entrant that wasn\'t on the board last week. linkedin.com still leads but declined sharply (-0.6pp to 1.6%).' }
       },
       competition: {
         sov: { tag: 'competition', label: 'Competition', text: 'Rokt\'s competitive SOV stable at 15.77%. Fluent ticked up to 4.72% (+0.16pp) and Uptick held at 3.98%. ThanksCo grew slightly to 2.92%. The competitive landscape remains Rokt-dominated.' },
-        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Copilot sentiment reversed — Rokt dropped to 64.0% (from 69.8% last week), returning to the problem flagged in Week 1. ThanksCo surged on AI Overviews to 95.1%, the highest single-platform sentiment of any competitor.' },
+        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Among Tier 1 platforms, AI Overviews sentiment remains strong at 84.4%. Copilot (Tier 2) fell to 64.0% — a reversion, but as a secondary priority this is less alarming. ThanksCo surged on AI Overviews to 95.1%, the highest single-platform sentiment of any competitor.' },
         sentimentTopic: { tag: 'competition', label: 'Competition', text: 'Culture remains Rokt\'s biggest gap at 66.2%. Fluent (79.1%) leads, followed by Uptick (76.4%) and ThanksCo (74.4%) — all significantly ahead. Rokt now leads Persona-Led at 71.2%, edging out ThanksCo (70.5%).' },
         spillover: { tag: 'competition', label: 'Competition', text: 'Fluent\'s Rokt Product spillover held at 29 mentions. Fluent expanded into Rokt Aftersell (5 mentions, up from 3 last week) and added Rokt Thanks (1 mention). Uptick spillover remained minimal. ThanksCo showed zero spillover this week.' }
       },
       gaps: [
-        { tag: 'gap', label: 'Gap', text: 'Branded citation share has fallen from 46% → 41.2% → 37.5% over three weeks. The erosion is accelerating. Fresh citable owned content — blog posts, case studies, help articles — is increasingly urgent to defend Rokt\'s branded narrative.' },
-        { tag: 'gap', label: 'Gap', text: 'Culture topic sentiment has plateaued at 66% for three weeks while competitors maintain a 8-13pp lead. Non-branded visibility also declined (-0.9pp to 7.1%), and SOV rank dropped to #12. Both areas need content investment.' }
+        { tag: 'gap', label: 'Gap', text: 'True owned citation share (rokt.com + aftersell.com) has fallen from 51.4% → 51.0% → 45.9% → 41.5% over three weeks. Fresh citable owned content across both domains is needed to defend Rokt\'s branded narrative.' },
+        { tag: 'gap', label: 'Gap', text: '"Ad-Tech Perception Issues" is a new negative theme that surged from 0 to 4 occurrences — AI models are framing Rokt as traditional ad-tech. 5 other new themes also appeared this week. Culture sentiment has plateaued at 66% while competitors maintain a 8-13pp lead.' }
       ]
     }
   }
@@ -833,13 +850,21 @@ const weekTLDR = [
   ],
   // Week 3: Mar 2
   [
-    { color: 'red', title: 'Branded metrics declining across the board', text: 'Branded visibility (-1.4pp), SOV (-1.8pp), citation share (-3.6pp), and sentiment (-1.9pp) all dropped this week. Citation share has now fallen from 46% to 37.5% over three weeks — the steepest sustained decline since tracking began. More third-party and competitor sources are being cited in branded queries, diluting Rokt\'s control of its own narrative.' },
-    { color: 'red', title: 'Copilot sentiment reversed after last week\'s recovery', text: 'Copilot sentiment dropped back to 64.0% after jumping to 69.8% last week. This is now the lowest platform sentiment for Rokt, returning to the vulnerability flagged in Week 1. Nearly 4 in 10 Copilot mentions frame Rokt negatively — this platform needs targeted content attention.' },
+    { color: 'red', title: 'Branded metrics declining — AI Overviews (Tier 1) is the driver', text: 'Branded visibility (-1.4pp), SOV (-1.8pp), citation share (-3.6pp), and sentiment (-1.9pp) all dropped this week. The primary driver is AI Overviews (Tier 1), which collapsed 74% in mentions. Copilot (Tier 2) also declined 17%, but as a secondary-priority platform this is less concerning. All other Tier 1 platforms (ChatGPT, Gemini, AI Mode) held steady or improved.' },
+    { color: 'amber', title: 'True owned citation share at 41.5% (incl. aftersell.com)', text: 'When including aftersell.com as a Rokt-owned property, true owned citation share is 41.5% — better than the 37.5% rokt.com-only figure, but still declining from 51.0% two weeks ago. aftersell.com contributed 4.0% this week (-0.6pp). Fresh citable content across both domains is needed to defend the owned narrative.' },
     { color: 'green', title: 'Unbranded avg position improved to #6', text: 'Rokt\'s average position in non-branded queries improved significantly to 2.9 (-0.5), jumping to rank #6 (↑2). This is the best unbranded position since tracking began. When AI models answer general ecommerce queries, Rokt is now appearing higher in their responses.' },
-    { color: 'amber', title: 'x.com surged as a new citation source', text: 'x.com appeared at #3 in unbranded citations at 1.3% — up from essentially zero last week (+1.29pp). Social platforms are increasingly being cited by AI models. Meanwhile, non-branded mentions dropped 20% overall to 26.6K, with Google AI Overviews seeing the sharpest decline (-74%).' },
+    { color: 'red', title: '"Ad-Tech Perception Issues" surged as a new negative theme', text: '"Ad-Tech Perception Issues" appeared for the first time this week with 4 occurrences — the biggest new negative theme. AI models are framing Rokt as traditional ad-tech rather than a commerce media platform. Other new themes: "Not a Full Ecommerce Platform" (+2), "Checkout Experience Sensitivity" (+2), and "Brand Control Concerns" (+2).' },
     { color: 'red', title: 'Culture gap persists for third straight week', text: 'Rokt\'s Culture sentiment has plateaued at ~66% for three consecutive weeks. Fluent (79.1%), Uptick (76.4%), and ThanksCo (74.4%) all remain 8-13pp ahead. This is a structural content gap that won\'t close without dedicated investment in culture-related owned content.' }
   ]
 ];
+
+// Platform priority tiers
+const platformTiers = {
+  'ChatGPT': 1, 'Google Gemini': 1, 'Google AI Mode': 1, 'Google AI Overviews': 1,
+  'Grok': 2, 'Meta AI': 2, 'Perplexity': 2, 'Copilot': 2, 'Microsoft Copilot': 2
+};
+const tierColors = { 1: 'rgba(224, 0, 77, 0.9)', 2: 'rgba(224, 0, 77, 0.35)' };
+const tierLabels = { 1: 'Tier 1 — Primary', 2: 'Tier 2 — Secondary' };
 
 let currentWeekIdx = weekData.length - 1;
 
@@ -1204,20 +1229,39 @@ function renderGaps() {
   });
   lpTable.innerHTML = lhtml + '</tbody>';
 
-  // Content Gaps — moved up, right after low performing topics
+  // Content Gaps — dynamically from negativeThemes or fallback
   const cgTable = document.getElementById('contentGapsTable');
-  const gaps = [
-    { theme: 'Integration Complexity', occ: '9 negative mentions', action: 'Create "How to integrate Rokt in under 30 min" content — counter the complexity narrative with step-by-step guides and time-to-value stories' },
-    { theme: 'Pricing Transparency', occ: '5 negative mentions', action: 'Publish pricing framework — AI models cite pricing concerns because no public content addresses it' },
-    { theme: 'Ecosystem Dependence', occ: '3 negative mentions', action: 'Highlight platform-agnostic capabilities and open API integrations in product content' },
-    { theme: 'Limited Independent Reviews', occ: 'Across all competitors', action: 'Encourage G2/Capterra reviews — Uptick and ThanksCo also flagged for this. More reviews = better AI positioning' },
-    { theme: 'Privacy & Data Concerns', occ: '3 negative mentions', action: 'Create dedicated privacy/compliance content that AI models can cite when asked about data practices' }
-  ];
-  let ghtml = '<thead><tr><th>Negative Theme</th><th>Frequency</th><th>Content Opportunity</th></tr></thead><tbody>';
-  gaps.forEach(g => {
-    ghtml += `<tr><td><strong>${g.theme}</strong></td><td>${g.occ}</td><td style="font-size:12px;">${g.action}</td></tr>`;
-  });
-  cgTable.innerHTML = ghtml + '</tbody>';
+  const contentActions = {
+    'Integration Complexity': 'Create "How to integrate Rokt in under 30 min" content — counter the complexity narrative with step-by-step guides and time-to-value stories',
+    'Ad-Tech Perception Issues': 'Publish content reframing Rokt beyond ad-tech: relevance engine, commerce media, transaction-moment platform. This theme surged from 0→4 this week.',
+    'Pricing Transparency Issues': 'Publish pricing framework — AI models cite pricing concerns because no public content addresses it',
+    'Client Concentration Risk': 'Highlight customer diversity and multi-vertical case studies to address concentration concerns',
+    'Checkout Experience Sensitivity': 'Create content showing how Rokt enhances rather than disrupts the checkout experience — UX studies, merchant testimonials',
+    'Dependency on Data Quality': 'Highlight Rokt\'s ML and data quality infrastructure in product content',
+    'Limited Independent Reviews': 'Encourage G2/Capterra reviews — more reviews = better AI positioning',
+    'Not a Full Ecommerce Platform': 'Clarify Rokt\'s role as a complementary commerce media layer, not a replacement for ecommerce platforms',
+    'Mixed Customer Reviews': 'Amplify positive customer stories and case studies to outweigh mixed signals',
+    'Brand Control Concerns': 'Address brand safety with content about advertiser controls, vetting process, and quality standards',
+    'Dependency on Partner Quality': 'Highlight partner vetting process and quality controls in owned content'
+  };
+  if (week.negativeThemes) {
+    let ghtml = '<thead><tr><th>Negative Theme</th><th>Occurrences</th><th style="width:50px;">Δ</th><th>Content Opportunity</th></tr></thead><tbody>';
+    week.negativeThemes.forEach(t => {
+      const deltaStr = t.isNew ? '<span style="color:var(--red);font-weight:700;">NEW</span>' : (t.delta > 0 ? '<span style="color:var(--red);">+' + t.delta + '</span>' : (t.delta < 0 ? '<span style="color:var(--green);">' + t.delta + '</span>' : '—'));
+      const action = contentActions[t.theme] || 'Create targeted content to address this narrative';
+      ghtml += `<tr><td><strong>${t.theme}</strong></td><td>${t.count}</td><td>${deltaStr}</td><td style="font-size:12px;">${action}</td></tr>`;
+    });
+    cgTable.innerHTML = ghtml + '</tbody>';
+  } else {
+    const gaps = [
+      { theme: 'Integration Complexity', occ: '9 negative mentions', action: contentActions['Integration Complexity'] },
+      { theme: 'Pricing Transparency Issues', occ: '5 negative mentions', action: contentActions['Pricing Transparency Issues'] },
+      { theme: 'Limited Independent Reviews', occ: 'Across all competitors', action: contentActions['Limited Independent Reviews'] }
+    ];
+    let ghtml = '<thead><tr><th>Negative Theme</th><th>Frequency</th><th>Content Opportunity</th></tr></thead><tbody>';
+    gaps.forEach(g => { ghtml += `<tr><td><strong>${g.theme}</strong></td><td>${g.occ}</td><td style="font-size:12px;">${g.action}</td></tr>`; });
+    cgTable.innerHTML = ghtml + '</tbody>';
+  }
 
   // Content gaps insight
   const cgInsight = week.insights.gaps ? week.insights.gaps.find(i => i.text.includes('negative themes')) : null;
@@ -1274,7 +1318,7 @@ function renderCharts() {
     type: 'bar',
     data: {
       labels: week.platforms.labels,
-      datasets: [{ label: 'Non-Branded Mentions', data: week.platforms.mentions, backgroundColor: week.platforms.mentions.map((v, i) => `rgba(224, 0, 77, ${1 - i * 0.1})`), borderRadius: 6, barThickness: 28 }]
+      datasets: [{ label: 'Non-Branded Mentions', data: week.platforms.mentions, backgroundColor: week.platforms.labels.map(l => tierColors[platformTiers[l] || 2]), borderRadius: 6, barThickness: 28 }]
     },
     options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + ' mentions' } } }, scales: { x: { grid: { color: '#F0F0F0' } }, y: { grid: { display: false } } } }
   });
