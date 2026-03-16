@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Rokt — Profound Pulse Dashboard</title>
+<title>Rokt — AI Visibility Dashboard</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
@@ -121,6 +121,7 @@
   .competitor-bar-fill.fluent { background: #3498DB; }
   .competitor-bar-fill.uptick { background: #F39C12; }
   .competitor-bar-fill.thanksCo { background: #7D3C98; }
+  .competitor-bar-fill.disco { background: #1ABC9C; }
 
   .theme-tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; margin: 2px 4px 2px 0; }
   .theme-tag.neg { background: #FDECEC; color: #C0392B; }
@@ -167,8 +168,8 @@
   <div class="header-left">
     <div class="header-logo">R</div>
     <div>
-      <h1>Profound Pulse</h1>
-      <div class="header-sub">Rokt's AI Visibility Tracker</div>
+      <h1>Rokt AI Visibility Dashboard</h1>
+      <div class="header-sub">Powered by Profound</div>
     </div>
   </div>
   <div class="header-meta"><span id="lastUpdated">Last updated: End of Week Feb 16, 2025</span></div>
@@ -823,6 +824,128 @@ const weekData = [
         { tag: 'gap', label: 'Gap', text: '"Ad-Tech Perception Issues" is a new negative theme that surged from 0 to 4 occurrences — AI models are framing Rokt as traditional ad-tech. 5 other new themes also appeared this week. Culture sentiment has plateaued at 66% while competitors maintain a 8-13pp lead.' }
       ]
     }
+  },
+  // ===== WEEK 4: Mar 9–15 =====
+  {
+    weekOf: 'End of Week Mar 9',
+    range: 'Mar 9 – Mar 15',
+    isBaseline: false,
+    branded: {
+      visibility: { value: 99.4, delta: 1.3 },
+      sov: { value: 36.9, delta: 0.9 },
+      avgPos: { value: 1.1, delta: -0.1, rank: '#1' },
+      citation: { value: 42.1, delta: 4.5, rank: '#1' },
+      sentiment: { value: 72.8, delta: 1.7 }
+    },
+    brandedPositionCompetitors: [
+      { asset: 'Rokt', pos: 1.1, delta: -0.1 },
+      { asset: 'AWS', pos: 2.1, delta: -0.3 },
+      { asset: 'Uptick', pos: 2.2, delta: 0.2 },
+      { asset: 'Upcart', pos: 2.2, delta: -0.5 },
+      { asset: 'Thanks', pos: 2.3, delta: -0.1 }
+    ],
+    unbranded: {
+      visibility: { value: 6.6, delta: -0.5, rank: '#12 (↓2)' },
+      sov: { value: 1.3, delta: -0.1, rank: '#12' },
+      avgPos: { value: 2.9, delta: 0.0, rank: '#3 (↑3)' }
+    },
+    platforms: {
+      labels: ['Google AI Mode','Google Gemini','Google AI Overviews','Grok','Meta AI','ChatGPT','Perplexity','Microsoft Copilot'],
+      mentions: [3865,3594,2480,2435,2316,2190,1610,1259]
+    },
+    citationCategories: { owned: 45.6, earned: 15.5, social: 11.1, competition: 2.0, other: 25.8 },
+    prevCitationCategories: { owned: 41.5, earned: 16.6, social: 11.6, competition: 1.9, other: 28.3 },
+    topDomains: [
+      { domain: 'rokt.com', share: 42.1, delta: 4.5, type: 'Owned', cls: 'badge-green' },
+      { domain: 'aftersell.com', share: 3.5, delta: -0.4, type: 'Owned', cls: 'badge-green' },
+      { domain: 'builtin.com', share: 2.6, delta: -0.1, type: 'Other', cls: 'badge-amber' },
+      { domain: 'glassdoor.com', share: 2.6, delta: -0.6, type: 'Social', cls: 'badge-purple' },
+      { domain: 'prnewswire.com', share: 2.3, delta: 0.2, type: 'PR Wire', cls: 'badge-blue' }
+    ],
+    ownedContent: [
+      { type: 'Blog', share: '1,280 citations', topPage: 'What Features Differentiate Rokt' },
+      { type: 'Product Pages', share: '3,050 citations', topPage: 'Rokt Thanks (760), Product Overview (610)' },
+      { type: 'Docs / Help Center', share: '3,820 citations', topPage: 'docs.rokt.com' },
+      { type: 'Homepage', share: '590 citations', topPage: 'rokt.com' }
+    ],
+    unbrandedCitations: [
+      { domain: 'linkedin.com', share: 1.8, delta: 0.2 },
+      { domain: 'shopify.com', share: 1.7, delta: 0.1 },
+      { domain: 'forbes.com', share: 1.6, delta: 0.3 },
+      { domain: 'youtube.com', share: 1.3, delta: 0.3 },
+      { domain: 'rokt.com', share: 1.1, delta: 0.1, highlight: true }
+    ],
+    competition: {
+      sov: { rokt: 16.2, fluent: 4.85, uptick: 3.72, thanksCo: 2.78, disco: 1.45 },
+      sentimentByPlatform: {
+        'Google AI Overviews': { rokt: 85.2, fluent: 76.0, uptick: 74.0, thanksCo: 78.5, disco: 62.0 },
+        'Perplexity': { rokt: 80.0, fluent: 66.5, uptick: 65.0, thanksCo: 72.0, disco: 58.0 },
+        'ChatGPT': { rokt: 67.5, fluent: 63.0, uptick: 57.0, thanksCo: 58.5, disco: 60.0 },
+        'Microsoft Copilot': { rokt: 65.5, fluent: 59.0, uptick: 54.0, thanksCo: 56.0, disco: 55.0 }
+      },
+      sentimentByTopic: {
+        'Competitive': { rokt: 68.9, fluent: 63.1, uptick: 58.3, thanksCo: 58.0, disco: 59.9 },
+        'Culture': { rokt: 65.0, fluent: 77.5, uptick: 68.0, thanksCo: 72.0, disco: 60.0 },
+        'Rokt Catalog': { rokt: 70.0, fluent: 57.0, uptick: 64.0, thanksCo: 62.0, disco: 55.0 },
+        'Rokt Ads': { rokt: 71.5, fluent: 65.0, uptick: 62.0, thanksCo: 68.0, disco: 57.0 },
+        'Rokt Pay+': { rokt: 72.0, fluent: 60.0, uptick: 66.0, thanksCo: 64.0, disco: 54.0 },
+        'Persona-Led': { rokt: 72.5, fluent: 68.0, uptick: 60.0, thanksCo: 67.0, disco: 58.0 },
+        'Rokt Product': { rokt: 73.0, fluent: 58.0, uptick: 55.0, thanksCo: 70.0, disco: 56.0 },
+        'Rokt Aftersell': { rokt: 73.5, fluent: 59.0, uptick: 75.0, thanksCo: 61.0, disco: 53.0 },
+        'Rokt Upcart': { rokt: 74.0, fluent: 67.0, uptick: 63.0, thanksCo: 64.0, disco: 55.0 },
+        'Rokt Thanks': { rokt: 78.0, fluent: 57.0, uptick: 60.0, thanksCo: 65.0, disco: 54.0 },
+        'Industry Thought Leadership': { rokt: 81.0, fluent: 71.0, uptick: 52.0, thanksCo: 55.0, disco: 50.0 }
+      },
+      themes: {
+        rokt: ['Smaller Scale/Network','Lack of Public Information','Integration Complexity','Privacy Concerns','Limited Industry Influence'],
+        fluent: ['Financial Instability','Revenue Declines','Profitability Challenges','Weak Competitive Moat'],
+        uptick: ['Integration Complexity','Narrow Scope','Limited Reviews','Not Full-Funnel'],
+        thanksCo: ['Limited Reviews','Platform Dependency','Lack of Information','Low Trust Score'],
+        disco: ['Limited Market Presence','New Entrant Uncertainty','Unproven Scale']
+      },
+      fluentSpillover: { 'Rokt Product': 24, 'Persona-Led': 8, 'Industry Thought Leadership': 7, 'Rokt Ads': 5, 'Rokt Aftersell': 4 },
+      uptickSpillover: { 'Rokt Product': 2, 'Rokt Aftersell': 1 },
+      thanksCoSpillover: {},
+      discoSpillover: {},
+      sovByTopic: {
+        'Persona-Led': { rokt: 0.28, fluent: 1.10, uptick: 0, thanksCo: 0 },
+        'Industry Thought Leadership': { rokt: 0.85, fluent: 0.14, uptick: 0, thanksCo: 0 }
+      }
+    },
+    negativeThemes: [
+      { theme: 'Smaller Scale / Network', count: 26, delta: 20 },
+      { theme: 'Lack of Public Information', count: 21, delta: 15 },
+      { theme: 'Integration Complexity', count: 7, delta: 2 },
+      { theme: 'Early-Stage Company', count: 7, delta: 3 },
+      { theme: 'Privacy Concerns', count: 5, delta: 5, isNew: true },
+      { theme: 'Limited Industry Influence', count: 5, delta: 5, isNew: true },
+      { theme: 'Work-Life Balance Issues', count: 3, delta: 1 }
+    ],
+    lowSentiment: [
+      { topic: 'Competitive', rate: 68.9, note: 'Rokt leads all competitors; Disco enters at 59.9%' },
+      { topic: 'Culture', rate: 65.0, note: 'Still trailing Fluent (~77%) and ThanksCo (~72%) by 7-12pp' }
+    ],
+    insights: {
+      overview: [
+        { tag: 'platform', label: 'Platform', text: 'AI Overviews staged a dramatic recovery after last week\'s collapse, though it\'s too early to call a sustained reversal — Google is actively calibrating when AI Overviews trigger for branded queries. Tier 1 platforms remain stable. Tier 2 continues mixed: Meta AI grew (+14.8%) while Grok (-33.1%) and Copilot (-25.8%) declined sharply.' },
+        { tag: 'sentiment', label: 'Sentiment', text: 'Rokt\'s competitive sentiment lead is the widest it\'s been at 68.9% — 5.8pp above Fluent, 10.6pp above Uptick. Disco enters tracking at 59.9%. The "Smaller Scale/Network" cluster overtook "Limited Independent Reviews" as the top negative theme. "Privacy Concerns" and "Limited Industry Influence" are new themes this week.' }
+      ],
+      citations: {
+        pieChart: { tag: 'citation', label: 'Citation', text: 'Owned citation share bounced back to 45.6%, the strongest recovery since tracking began. rokt.com drove most of the gain (+4.5pp), recovering to 42.1%. builtin.com and prnewswire.com entering the top 5 branded domains suggests Status Labs content is starting to register in citations.' },
+        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com (42.1%) + aftersell.com (3.5%) = 45.6% combined owned share, up from 41.5% last week. builtin.com rose to 2.6% and prnewswire.com to 2.3% — both Status Labs content indicators. glassdoor.com declined slightly to 2.6% (-0.6pp).' },
+        unbrandedCit: { tag: 'citation', label: 'Citation', text: 'In non-branded queries, linkedin.com leads at 1.8% (+0.2pp). rokt.com recovered to 1.1% (+0.1pp). youtube.com entered the top 5 at 1.3%. 79.4% of non-branded citations go to domains outside our tracked set — significant opportunity to expand earned media footprint.' }
+      },
+      competition: {
+        sov: { tag: 'competition', label: 'Competition', text: 'Rokt\'s sentiment lead is the widest it\'s been — 5.8pp above Fluent, 10.6pp above Uptick. Disco enters tracking at 59.9%. The notable shift is Uptick and ThanksCo both dropping ~9pp while Rokt and Fluent improved.' },
+        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Rokt leads sentiment across all major platforms. The competitive gap widened this week as Uptick dropped from 66.7% to 58.3% and ThanksCo from 67.6% to 58.0%. Fluent improved to 63.1% but still trails Rokt by 5.8pp.' },
+        sentimentTopic: { tag: 'competition', label: 'Competition', text: 'On the competitive topic, Rokt improved from 66.7% to 68.9% while all other incumbents except Fluent declined. Disco debuted at 59.9%, below all other competitors. ThanksCo saw the steepest drop from 67.6% to 58.0%.' },
+        spillover: { tag: 'competition', label: 'Competition', text: 'Fluent spillover into Rokt topics decreased slightly. Uptick remains minimal. Disco has shown no spillover into Rokt topics yet — monitoring for changes as tracking matures.' }
+      },
+      gaps: [
+        { tag: 'gap', label: 'Gap', text: 'Non-branded visibility and SOV both dipped marginally. 79.4% of non-branded citations go to domains outside our tracked set — expanding earned media in industry publications could shift this. Position rank improved to #3, suggesting quality of placement is good even as volume softened.' },
+        { tag: 'gap', label: 'Gap', text: '"Smaller Scale/Network" surged to the #1 negative cluster with 26 occurrences — AI models are increasingly framing Rokt\'s network as smaller relative to incumbents. "Privacy Concerns" and "Limited Industry Influence" are new themes that need monitoring. Positive: "Pricing Transparency Issues" disappeared entirely.' }
+      ]
+    }
   }
 ];
 
@@ -855,6 +978,14 @@ const weekTLDR = [
     { color: 'green', title: 'Unbranded avg position improved to #6', text: 'Rokt\'s average position in non-branded queries improved significantly to 2.9 (-0.5), jumping to rank #6 (↑2). This is the best unbranded position since tracking began. When AI models answer general ecommerce queries, Rokt is now appearing higher in their responses.' },
     { color: 'red', title: '"Ad-Tech Perception Issues" surged as a new negative theme', text: '"Ad-Tech Perception Issues" appeared for the first time this week with 4 occurrences — the biggest new negative theme. AI models are framing Rokt as traditional ad-tech rather than a commerce media platform. Other new themes: "Not a Full Ecommerce Platform" (+2), "Checkout Experience Sensitivity" (+2), and "Brand Control Concerns" (+2).' },
     { color: 'red', title: 'Culture gap persists for third straight week', text: 'Rokt\'s Culture sentiment has plateaued at ~66% for three consecutive weeks. Fluent (79.1%), Uptick (76.4%), and ThanksCo (74.4%) all remain 8-13pp ahead. This is a structural content gap that won\'t close without dedicated investment in culture-related owned content.' }
+  ],
+  // Week 4: Mar 9
+  [
+    { color: 'green', title: 'Branded visibility rebounded to 99.4%', text: 'Branded visibility surged +1.3pp and citation share posted its biggest single-week gain (+4.5pp) since tracking began. Owned share (rokt.com + aftersell.com) recovered to 45.6%, up from last week\'s 41.5% low.' },
+    { color: 'amber', title: 'AI Overviews reversed course after last week\'s collapse', text: 'AI Overviews mentions surged +257% after the trigger collapse flagged last week. Google appears to be oscillating on when to trigger AI Overviews for branded queries. Industry data confirms Google is actively calibrating trigger thresholds across query types.' },
+    { color: 'amber', title: 'Non-branded holding but slightly soft', text: 'Visibility and SOV dipped marginally across industry and category queries where Rokt isn\'t named directly. Citation share held flat and position rank improved to #3. 79.4% of non-branded citations go to domains outside our tracked set — opportunity to expand earned media footprint.' },
+    { color: 'green', title: 'Rokt leads competition on sentiment — widest gap yet', text: 'Rokt sentiment at 68.9% (+2.2pp) — widened gap over all competitors. Uptick and ThanksCo both dropped ~9pp. Disco tracked for the first time at 59.9%. Fluent improved to 63.1% but still trails Rokt by 5.8pp.' },
+    { color: 'red', title: 'Negative themes shifting to scale perception', text: '"Smaller Scale/Network" overtook "Limited Independent Reviews" as the #1 branded negative cluster. "Privacy Concerns" and "Limited Industry Influence" are new this week. "Pricing Transparency Issues" disappeared entirely.' }
   ]
 ];
 
@@ -1075,6 +1206,7 @@ function renderCompetition() {
     { name: 'Uptick', val: comp.sov.uptick, cls: 'uptick' },
     { name: 'ThanksCo', val: comp.sov.thanksCo, cls: 'thanksCo' }
   ];
+  if (comp.sov.disco !== undefined) barData.push({ name: 'Disco', val: comp.sov.disco, cls: 'disco' });
   bars.innerHTML = barData.map(b => `
     <div class="competitor-bar">
       <div class="competitor-bar-label">${b.name}</div>
@@ -1088,8 +1220,10 @@ function renderCompetition() {
   const prevComp = currentWeekIdx > 0 ? weekData[currentWeekIdx - 1].competition : null;
   const sovTable = document.getElementById('sovTrendTable');
   let html = '<thead><tr><th>Company</th><th>SOV This Week</th><th>Δ</th></tr></thead><tbody>';
-  ['rokt', 'fluent', 'uptick', 'thanksCo'].forEach(key => {
-    const label = key === 'rokt' ? '<strong>Rokt</strong>' : key === 'fluent' ? 'Fluent Inc' : key === 'uptick' ? 'Uptick' : 'ThanksCo';
+  const sovKeys = ['rokt', 'fluent', 'uptick', 'thanksCo'];
+  if (comp.sov.disco !== undefined) sovKeys.push('disco');
+  sovKeys.forEach(key => {
+    const label = key === 'rokt' ? '<strong>Rokt</strong>' : key === 'fluent' ? 'Fluent Inc' : key === 'uptick' ? 'Uptick' : key === 'disco' ? 'Disco' : 'ThanksCo';
     const cur = comp.sov[key];
     const prev = prevComp ? prevComp.sov[key] : null;
     let dBadge = '';
@@ -1114,10 +1248,13 @@ function renderCompetition() {
   // Sentiment by Platform
   if (comp.sentimentByPlatform) {
     const spTable = document.getElementById('compSentimentPlatformTable');
-    let h = '<thead><tr><th>Platform</th><th>Rokt</th><th>Fluent</th><th>Uptick</th><th>ThanksCo</th></tr></thead><tbody>';
+    const hasDisco = comp.sov.disco !== undefined;
+    const platCols = ['rokt', 'fluent', 'uptick', 'thanksCo'];
+    if (hasDisco) platCols.push('disco');
+    let h = '<thead><tr><th>Platform</th><th>Rokt</th><th>Fluent</th><th>Uptick</th><th>ThanksCo</th>' + (hasDisco ? '<th>Disco</th>' : '') + '</tr></thead><tbody>';
     Object.entries(comp.sentimentByPlatform).forEach(([plat, vals]) => {
       h += '<tr><td>' + plat + '</td>';
-      ['rokt', 'fluent', 'uptick', 'thanksCo'].forEach(key => {
+      platCols.forEach(key => {
         const v = vals[key];
         if (v === null || v === undefined) { h += '<td style="color:var(--grey-400)">—</td>'; return; }
         const beats = key !== 'rokt' && v > vals.rokt;
@@ -1133,11 +1270,14 @@ function renderCompetition() {
   // Sentiment by Topic
   if (comp.sentimentByTopic) {
     const stTable = document.getElementById('compSentimentTopicTable');
-    let h = '<thead><tr><th>Topic</th><th>Rokt</th><th>Fluent</th><th>Uptick</th><th>ThanksCo</th></tr></thead><tbody>';
+    const topicCols = ['rokt', 'fluent', 'uptick', 'thanksCo'];
+    if (comp.sov.disco !== undefined) topicCols.push('disco');
+    let h = '<thead><tr><th>Topic</th><th>Rokt</th><th>Fluent</th><th>Uptick</th><th>ThanksCo</th>' + (comp.sov.disco !== undefined ? '<th>Disco</th>' : '') + '</tr></thead><tbody>';
     Object.entries(comp.sentimentByTopic).forEach(([topic, vals]) => {
       h += '<tr><td>' + topic + '</td>';
-      ['rokt', 'fluent', 'uptick', 'thanksCo'].forEach(key => {
+      topicCols.forEach(key => {
         const v = vals[key];
+        if (v === null || v === undefined) { h += '<td style="color:var(--grey-400)">—</td>'; return; }
         const beats = key !== 'rokt' && v > vals.rokt;
         h += `<td${beats ? ' class="highlight"' : ''}>${key === 'rokt' ? '<strong>' + v + '%</strong>' : v + '%'}${beats ? ' ↑' : ''}</td>`;
       });
@@ -1152,7 +1292,7 @@ function renderCompetition() {
   if (comp.themes) {
     const themesEl = document.getElementById('sentimentThemes');
     let th = '';
-    const themeLabels = { rokt: 'Rokt', fluent: 'Fluent Inc', uptick: 'Uptick', thanksCo: 'ThanksCo' };
+    const themeLabels = { rokt: 'Rokt', fluent: 'Fluent Inc', uptick: 'Uptick', thanksCo: 'ThanksCo', disco: 'Disco' };
     Object.entries(comp.themes).forEach(([key, themes]) => {
       th += `<div style="margin-bottom: 14px;"><strong style="font-size: 13px;">${themeLabels[key]}</strong><div style="margin-top: 6px;">`;
       themes.forEach(t => { th += `<span class="theme-tag neg">${t}</span>`; });
@@ -1181,6 +1321,9 @@ function renderCompetition() {
   });
   Object.entries(comp.thanksCoSpillover || {}).forEach(([topic, val]) => {
     sp += `<tr><td>ThanksCo</td><td>${topic}</td><td>${val}</td><td><span class="badge badge-amber">NEW</span></td></tr>`;
+  });
+  Object.entries(comp.discoSpillover || {}).forEach(([topic, val]) => {
+    sp += `<tr><td>Disco</td><td>${topic}</td><td>${val}</td><td><span class="badge badge-amber">NEW</span></td></tr>`;
   });
   spillTable.innerHTML = sp + '</tbody>';
 
