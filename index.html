@@ -1188,6 +1188,128 @@ const weekData = [
         { tag: 'gap', label: 'Gap', text: 'Culture sentiment dropped to 62.6% — now the lowest it has ever been. High-Pressure Environment emerged as a new negative theme with 6 occurrences. Combined with Leadership Concerns (3), culture-related negatives now total 9 occurrences. The content response (new culture blogs) may take 2-3 weeks to register in LLM citations.' }
       ]
     }
+  },
+  {
+    weekOf: 'End of Week Apr 5',
+    range: 'Mar 30 – Apr 5',
+    isBaseline: false,
+    branded: {
+      visibility: { value: 99.8, delta: 0.0 },
+      sov: { value: 41.9, delta: 0.9 },
+      avgPos: { value: 1.0, delta: 0.0, rank: '#1' },
+      citation: { value: 47.8, delta: 3.5, rank: '#1' },
+      sentiment: { value: 77.8, delta: -0.7 }
+    },
+    brandedPositionCompetitors: [
+      { asset: 'Rokt', pos: 1.0, delta: 0.0 },
+      { asset: 'Upcart', pos: 2.0, delta: 0.0 },
+      { asset: 'Fluent', pos: 2.0, delta: 0.4 },
+      { asset: 'Uptick', pos: 2.1, delta: 0.0 },
+      { asset: 'Thanks', pos: 2.1, delta: 0.6 }
+    ],
+    unbranded: {
+      visibility: { value: 6.7, delta: 0.8, rank: '#13 (↑1)' },
+      sov: { value: 1.2, delta: 0.1, rank: '#14 (↑2)' },
+      avgPos: { value: 3.6, delta: -0.1, rank: '#10 (↓2)' }
+    },
+    platforms: {
+      labels: ['Perplexity','Google AI Overviews','Google AI Mode','Google Gemini','ChatGPT','Grok','Microsoft Copilot','Meta AI'],
+      mentions: [10250,10093,8968,7904,4679,3152,806,168]
+    },
+    citationCategories: { owned: 47.8, earned: 10.9, social: 11.9, competition: 2.1, other: 27.3 },
+    prevCitationCategories: { owned: 44.3, earned: 12.2, social: 12.7, competition: 2.1, other: 28.7 },
+    topDomains: [
+      { domain: 'rokt.com', share: 47.85, delta: 3.7, type: 'Owned', cls: 'badge-green' },
+      { domain: 'glassdoor.com', share: 3.8, delta: -0.3, type: 'Social', cls: 'badge-purple' },
+      { domain: 'aftersell.com', share: 3.03, delta: 0.01, type: 'Other', cls: 'badge-amber' },
+      { domain: 'builtin.com', share: 2.62, delta: -0.36, type: 'Other', cls: 'badge-amber' },
+      { domain: 'carthook.com', share: 2.03, delta: 0.08, type: 'Other', cls: 'badge-amber' }
+    ],
+    ownedContent: [
+      { type: 'Blog', share: '~1,500 citations', topPage: 'What Features Differentiate Rokt' },
+      { type: 'Product Pages', share: '~3,500 citations', topPage: 'Rokt Thanks, Product Overview' },
+      { type: 'Docs / Help Center', share: '~4,500 citations', topPage: 'docs.rokt.com' },
+      { type: 'Homepage', share: '~700 citations', topPage: 'rokt.com' }
+    ],
+    unbrandedCitations: [
+      { domain: 'shopify.com', share: 2.71, delta: 0.99 },
+      { domain: 'linkedin.com', share: 1.99, delta: 0.19 },
+      { domain: 'stripe.com', share: 1.71, delta: 0.65 },
+      { domain: 'forbes.com', share: 1.68, delta: 0.0 },
+      { domain: 'rokt.com', share: 1.2, delta: 0.0, highlight: true }
+    ],
+    competition: {
+      sov: { rokt: 20.97, fluent: 6.10, uptick: 5.43, thanksCo: 4.10, disco: 0.11 },
+      sentimentByPlatform: {
+        'Google AI Overviews': { rokt: 88.8, fluent: 83.9, uptick: 90.9, thanksCo: 0, disco: 76.6 },
+        'Perplexity': { rokt: 81.1, fluent: 87.9, uptick: 78.3, thanksCo: 0, disco: 76.1 },
+        'ChatGPT': { rokt: 68.2, fluent: 68.4, uptick: 68.8, thanksCo: 0, disco: 59.6 },
+        'Microsoft Copilot': { rokt: 72.0, fluent: 59.5, uptick: 67.3, thanksCo: 0, disco: 61.8 }
+      },
+      sentimentByTopic: {
+        'Competitive': { rokt: 69.8, fluent: 68.1, uptick: 72.6, thanksCo: 0, disco: 61.3 },
+        'Culture': { rokt: 62.6, fluent: 68.9, uptick: 69.1, thanksCo: 0, disco: 63.3 },
+        'Rokt Product': { rokt: 70.0, fluent: 69.5, uptick: 77.9, thanksCo: 0, disco: 66.7 },
+        'Rokt Catalog': { rokt: 95.7, fluent: 80.2, uptick: 90.7, thanksCo: 0, disco: 68.0 },
+        'Rokt Ads': { rokt: 98.1, fluent: 78.3, uptick: 78.4, thanksCo: 0, disco: 72.3 },
+        'Rokt Pay+': { rokt: 92.5, fluent: 75.5, uptick: 77.7, thanksCo: 0, disco: 59.7 },
+        'Persona-Led': { rokt: 75.9, fluent: 71.5, uptick: 69.7, thanksCo: 0, disco: 70.7 },
+        'Rokt Upcart': { rokt: 69.4, fluent: 81.0, uptick: 82.9, thanksCo: 0, disco: 65.9 },
+        'Rokt Thanks': { rokt: 74.9, fluent: 66.7, uptick: 75.9, thanksCo: 0, disco: 70.7 },
+        'Rokt Aftersell': { rokt: 0, fluent: 0, uptick: 0, thanksCo: 0, disco: 0 },
+        'Industry Thought Leadership': { rokt: 80.7, fluent: 72.8, uptick: 59.1, thanksCo: 0, disco: 73.4 }
+      },
+      themes: {
+        rokt: ['Integration Complexity','High-Pressure Environment','Implementation Complexity','Concentration Risk','Privacy Concerns'],
+        fluent: ['Revenue Decline','Relatively New Entrant','Less Embedded in Ecommerce','Job Security Concerns','Dominated by Major Player'],
+        uptick: ['Limited Scope','Workload Pressure','Narrower Scope','Change Fatigue','Niche Focus'],
+        thanksCo: [],
+        disco: ['Integration Complexity','Attribution Complexity','Dependence on Network Quality','Network Dependency','Less Sophisticated Optimization']
+      },
+      fluentSpillover: { 'Rokt Product': 24, 'Industry Thought Leadership': 12, 'Persona-Led': 4, 'Rokt Ads': 3 },
+      uptickSpillover: { 'Rokt Pay+': 2, 'Rokt Ads': 1, 'Industry Thought Leadership': 1 },
+      thanksCoSpillover: { 'Rokt Pay+': 1 },
+      discoSpillover: { 'Rokt Product': 5 },
+      sovByTopic: {
+        'Persona-Led': { rokt: 0.11, fluent: 0.59, uptick: 0, thanksCo: 0 },
+        'Industry Thought Leadership': { rokt: 0.54, fluent: 0.15, uptick: 0.07, thanksCo: 0 }
+      }
+    },
+    negativeThemes: [
+      { theme: 'Integration Complexity', count: 6, delta: -8 },
+      { theme: 'High-Pressure Environment', count: 3, delta: -3 },
+      { theme: 'Implementation Complexity', count: 3, delta: 3, isNew: true },
+      { theme: 'Concentration Risk', count: 2, delta: 0 },
+      { theme: 'Privacy Concerns', count: 2, delta: 2, isNew: true },
+      { theme: 'Narrow Scope', count: 2, delta: 2, isNew: true },
+      { theme: 'Potential UX Trade-offs', count: 2, delta: 0 },
+      { theme: 'Pricing Can Be High', count: 2, delta: 2, isNew: true }
+    ],
+    lowSentiment: [
+      { topic: 'Culture', rate: 62.6, note: 'Unchanged from Week 6 — sixth consecutive week below 66%. Fluent (68.9%) and Uptick (69.1%) still 6-7pp ahead.' },
+      { topic: 'Competitive', rate: 69.8, note: 'Uptick leads again at 72.6% (+0.9pp). Rokt improved marginally (+1.8pp).' }
+    ],
+    insights: {
+      overview: [
+        { tag: 'platform', label: 'Platform', text: 'Total branded mentions surged to ~46K — nearly 3x last week. Perplexity jumped to #1 (10,250), overtaking AI Overviews (10,093). AI Mode and Gemini held strong. Meta AI collapsed to just 168 mentions (from 1,005). The surge is driven by Perplexity and AI Overviews significantly expanding their response volume.' },
+        { tag: 'sentiment', label: 'Sentiment', text: 'Sentiment dipped slightly to 77.8% (-0.7pp) after last week\'s all-time high. Integration Complexity remains the top negative theme at 6 occurrences but halved from last week. High-Pressure Environment also halved (6→3). Several new smaller themes appeared: Privacy Concerns, Narrow Scope, Pricing.' }
+      ],
+      citations: {
+        pieChart: { tag: 'citation', label: 'Citation', text: 'Owned citation share surged to 47.8% (+3.5pp) — the highest since tracking began and the biggest single-week jump. Earned media dipped to 10.9% (from 12.2%). Social held at 11.9%. rokt.com is increasingly dominant as the primary citation source.' },
+        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com jumped to 47.85% (+3.7pp) — nearly half of all branded citations now point to owned content. glassdoor.com dropped to 3.8% (-0.3pp). aftersell.com stable at 3.03%. linkedin.com re-entered top 6 at 1.77% (+0.33pp).' },
+        unbrandedCit: { tag: 'citation', label: 'Citation', text: 'In non-branded queries, shopify.com surged to #1 at 2.71% (+0.99pp). rokt.com held at 1.2% but rank dropped from #5 to #8 (↓3) as competitors grew faster. forbes.com steady at 1.68%. stripe.com jumped +0.65pp to #3.' }
+      },
+      competition: {
+        sov: { tag: 'competition', label: 'Competition', text: 'Rokt competitive SOV held at 20.97% (+0.5pp). Fluent steady at 6.10%, Uptick at 5.43%, ThanksCo at 4.10%. Disco collapsed to 0.11%. Rokt maintains 3.4x Fluent\'s share.' },
+        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Rokt surged on AI Overviews to 88.8% (from 68.1% last week) — the biggest single-platform sentiment jump since tracking began. Copilot improved to 72.0%. Fluent leads on Perplexity (87.9% vs 81.1%). ThanksCo absent from platform data this week.' },
+        sentimentTopic: { tag: 'competition', label: 'Competition', text: 'Culture sentiment unchanged at 62.6% — now six consecutive weeks below 66%. Uptick still leads Competitive topic (72.6% vs 69.8%). Rokt dominates product topics: Ads 98.1%, Catalog 95.7%, Pay+ 92.5%.' },
+        spillover: { tag: 'competition', label: 'Competition', text: 'Fluent spillover continued declining: Industry TL halved from 22 to 12, Rokt Ads from 6 to 3. Rokt Product flat at 24. Third consecutive week of decline — the Week 5 surge is fully unwound. Disco appeared in Rokt Product with 5 mentions — first notable Disco spillover.' }
+      },
+      gaps: [
+        { tag: 'gap', label: 'Gap', text: 'Non-branded citation rank dropped from #5 to #8 despite flat share (1.2%). shopify.com, stripe.com, and bigcommerce.com all grew faster, pushing rokt.com down. Unbranded citation is the one metric that went backwards while visibility and SOV improved.' },
+        { tag: 'gap', label: 'Gap', text: 'Culture sentiment remains stuck at 62.6% for the second straight week — the sixth consecutive week below 66%. Fluent (68.9%) and Uptick (69.1%) continue to hold a 6-7pp advantage. New culture blog content may need another 1-2 weeks to register.' }
+      ]
+    }
   }
 ];
 
@@ -1244,6 +1366,14 @@ const weekTLDR = [
     { color: 'green', title: 'Fluent spillover pulled back sharply — last week\'s surge was a one-off, not a trend', text: 'Rokt Product mentions halved from 43 to 24, Rokt Ads from 13 to 6. Fluent isn\'t sustainably penetrating Rokt\'s branded queries — the "biggest competitive escalation since tracking began" didn\'t stick, and no content intervention was needed.' },
     { color: 'amber', title: 'Culture sentiment hit a new low driven by AI Overviews', text: 'Rokt culture sentiment dropped to 62.6% — the lowest since tracking began. "High-Pressure Environment" emerged as a new theme with 6 occurrences, 4 from AI Overviews and 2 from Copilot. "Integration Complexity" rose to 14 (+5). The top citation sources shaping the culture narrative are Glassdoor (1,897), the BuiltIn network (~2,182), and TeamBlind (242).' },
     { color: 'amber', title: 'YouTube citations surging in branded queries', text: 'YouTube jumped +0.84pp to become the 6th most-cited domain in branded queries. In non-branded, rokt.com improved to rank #5 (↑1) at 1.2%. Unbranded citation share is the one bright spot in an otherwise difficult non-branded week.' }
+  ],
+  // Week 7: Mar 30
+  [
+    { color: 'green', title: 'Owned citation share hit an all-time high at 47.8%', text: 'rokt.com jumped +3.5pp — the biggest single-week citation gain since tracking began. Nearly half of all branded citations now point to owned content. Branded SOV also rose to 41.9% (+0.9pp), the fourth consecutive week of improvement.' },
+    { color: 'green', title: 'Non-branded bounced back after last week\'s dip', text: 'Visibility recovered to 6.7% (+0.8pp, rank #13 ↑1) and SOV climbed to 1.2% (+0.1pp, rank #14 ↑2). Position improved to 3.6. However, unbranded citation rank slipped from #5 to #8 as shopify.com, stripe.com, and bigcommerce.com grew faster.' },
+    { color: 'green', title: 'Fluent spillover fully unwound from the Week 5 surge', text: 'Industry TL halved again from 22 to 12, Rokt Ads from 6 to 3. Third consecutive week of decline. The competitive escalation that peaked in Week 5 is now entirely reversed.' },
+    { color: 'amber', title: 'Culture sentiment stuck at 62.6% for second straight week', text: 'Sixth consecutive week below 66%. Fluent (68.9%) and Uptick (69.1%) hold a persistent 6-7pp advantage. Negative themes are diversifying — "Implementation Complexity" and "Privacy Concerns" appeared as new themes alongside the existing cluster.' },
+    { color: 'amber', title: 'Branded mentions surged ~3x driven by Perplexity and AI Overviews', text: 'Total branded mentions jumped from ~16.7K to ~46K. Perplexity took #1 for the first time (10,250), AI Overviews close behind (10,093). Meta AI collapsed from 1,005 to just 168. This is a major shift in platform distribution.' }
   ]
 ];
 
