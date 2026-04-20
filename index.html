@@ -1444,6 +1444,134 @@ const weekData = [
         { tag: 'gap', label: 'Gap', text: 'Citation share declined 3.5pp — the largest drop since Week 3. rokt.com lost 2.85pp of share to other sources. Competitors may be gaining citation presence in branded queries.' }
       ]
     }
+  },
+  // Week 9: Apr 13
+  {
+    weekOf: 'End of Week Apr 19',
+    range: 'Apr 13 – Apr 19',
+    isBaseline: false,
+    branded: {
+      visibility: { value: 99.9, delta: 0.2 },
+      sov: { value: 36.4, delta: -3.6 },
+      avgPos: { value: 1.0, delta: 0, rank: '#1' },
+      citation: { value: 46.7, delta: 1.7, rank: '#1' },
+      sentiment: { value: 90.6, delta: null }
+    },
+    brandedPositionCompetitors: [
+      { asset: 'Rokt', pos: 1.0, delta: 0.0 },
+      { asset: 'Upcart', pos: 2.0, delta: 0.0 },
+      { asset: 'Fluent', pos: 2.1, delta: 0.4 },
+      { asset: 'Uptick', pos: 2.1, delta: 0.1 },
+      { asset: 'Thanks', pos: 2.3, delta: 1.0 }
+    ],
+    unbranded: {
+      visibility: { value: 7.2, delta: 0.4, rank: '#14 (↑2)' },
+      sov: { value: 1.2, delta: 0.1, rank: '#15' },
+      avgPos: { value: 3.2, delta: -0.4, rank: '#3 (↑1)' }
+    },
+    platforms: {
+      labels: ['Grok','AI Overviews','Gemini','AI Mode','Copilot','Claude','ChatGPT','Perplexity','Meta AI'],
+      mentions: [11179,7377,6695,6351,5841,4669,4417,2964,0]
+    },
+    citationCategories: { owned: 48.5, earned: 10.5, social: 11.5, competition: 2.0, other: 27.5 },
+    prevCitationCategories: { owned: 47.8, earned: 10.9, social: 11.9, competition: 2.1, other: 27.3 },
+    topDomains: [
+      { domain: 'rokt.com', share: 46.65, delta: 1.65, type: 'Owned', cls: 'badge-green' },
+      { domain: 'glassdoor.com', share: 4.83, delta: 1.03, type: 'Social', cls: 'badge-purple' },
+      { domain: 'builtin.com', share: 3.26, delta: 0.64, type: 'Other', cls: 'badge-amber' },
+      { domain: 'aftersell.com', share: 2.89, delta: -0.14, type: 'Other', cls: 'badge-amber' },
+      { domain: 'carthook.com', share: 2.00, delta: -0.03, type: 'Other', cls: 'badge-amber' }
+    ],
+    ownedContent: [
+      { type: 'Blog', share: '~1,600 citations', topPage: 'What Features Differentiate Rokt' },
+      { type: 'Product Pages', share: '~3,700 citations', topPage: 'Rokt Thanks, Product Overview, Catalog' },
+      { type: 'Docs / Help Center', share: '~4,800 citations', topPage: 'docs.rokt.com' },
+      { type: 'Homepage', share: '~750 citations', topPage: 'rokt.com' }
+    ],
+    unbrandedCitations: [
+      { domain: 'shopify.com', share: 2.24, delta: 0.15 },
+      { domain: 'linkedin.com', share: 2.13, delta: 0.21 },
+      { domain: 'rokt.com', share: 1.77, delta: -0.03, highlight: true },
+      { domain: 'forbes.com', share: 1.70, delta: -0.08 },
+      { domain: 'youtube.com', share: 1.42, delta: 0.18 },
+      { domain: 'bigcommerce.com', share: 1.38, delta: -0.02 },
+      { domain: 'stripe.com', share: 1.06, delta: -0.27 },
+      { domain: 'insiderone.com', share: 0.91, delta: 0.0 }
+    ],
+    competition: {
+      sov: { rokt: 14.94, fluent: 4.35, uptick: 3.77, thanksCo: 2.87, disco: 0.07 },
+      sentimentByPlatform: {
+        'Google AI Overviews': { rokt: 88.8, fluent: 83.9, uptick: 90.9, thanksCo: 0, disco: 76.6 },
+        'Perplexity': { rokt: 75.0, fluent: 87.9, uptick: 78.3, thanksCo: 0, disco: 76.1 },
+        'ChatGPT': { rokt: 64.7, fluent: 68.4, uptick: 68.8, thanksCo: 0, disco: 59.6 },
+        'Microsoft Copilot': { rokt: 66.3, fluent: 59.5, uptick: 67.3, thanksCo: 0, disco: 61.8 }
+      },
+      sentimentByTopic: {
+        'Competitive': { rokt: 69.8, fluent: 68.1, uptick: 72.6, thanksCo: 0, disco: 61.3 },
+        'Culture': { rokt: 61.7, fluent: 68.9, uptick: 69.1, thanksCo: 0, disco: 63.3 },
+        'Rokt Product': { rokt: 70.0, fluent: 69.5, uptick: 77.9, thanksCo: 0, disco: 66.7 },
+        'Rokt Catalog': { rokt: 95.7, fluent: 80.2, uptick: 90.7, thanksCo: 0, disco: 68.0 },
+        'Rokt Ads': { rokt: 98.1, fluent: 78.3, uptick: 78.4, thanksCo: 0, disco: 72.3 },
+        'Rokt Pay+': { rokt: 92.5, fluent: 75.5, uptick: 77.7, thanksCo: 0, disco: 59.7 },
+        'Persona-Led': { rokt: 75.9, fluent: 71.5, uptick: 69.7, thanksCo: 0, disco: 70.7 },
+        'Rokt Upcart': { rokt: 69.4, fluent: 81.0, uptick: 82.9, thanksCo: 0, disco: 65.9 },
+        'Rokt Thanks': { rokt: 74.9, fluent: 66.7, uptick: 75.9, thanksCo: 0, disco: 70.7 },
+        'Rokt Aftersell': { rokt: 0, fluent: 0, uptick: 0, thanksCo: 0, disco: 0 },
+        'Industry Thought Leadership': { rokt: 80.7, fluent: 72.8, uptick: 59.1, thanksCo: 0, disco: 73.4 }
+      },
+      themes: {
+        rokt: ['Toxic Workplace Culture','High Employee Turnover','Business Performance Concerns','Integration Setup Complexity','Frequent Reorganizations','Job Security Concerns'],
+        fluent: ['Revenue Decline','Relatively New Entrant','Less Embedded in Ecommerce','Job Security Concerns','Dominated by Major Player'],
+        uptick: ['Limited Scope','Workload Pressure','Narrower Scope','Change Fatigue','Niche Focus'],
+        thanksCo: [],
+        disco: ['Integration Complexity','Attribution Complexity','Dependence on Network Quality','Network Dependency','Less Sophisticated Optimization']
+      },
+      fluentSpillover: { 'Rokt Product': 0, 'Industry Thought Leadership': 0, 'Persona-Led': 0, 'Rokt Ads': 0 },
+      uptickSpillover: { 'Rokt Pay+': 0, 'Rokt Ads': 0, 'Industry Thought Leadership': 0 },
+      thanksCoSpillover: { 'Rokt Pay+': 0 },
+      discoSpillover: { 'Rokt Product': 0 },
+      sovByTopic: {
+        'Persona-Led': { rokt: 0.11, fluent: 0.59, uptick: 0, thanksCo: 0 },
+        'Industry Thought Leadership': { rokt: 0.54, fluent: 0.15, uptick: 0.07, thanksCo: 0 }
+      }
+    },
+    negativeThemes: [
+      { theme: 'Toxic Workplace Culture', count: '13.4% of Culture theme', delta: 0.4 },
+      { theme: 'Integration Setup Complexity', count: '8.2% of Integration theme', delta: -0.4 },
+      { theme: 'High Employee Turnover', count: '5.9% of Company Outlook', delta: 0.2 },
+      { theme: 'Business Performance Concerns', count: '5.1% of Company Outlook', delta: 1.0 },
+      { theme: 'Frequent Reorganizations', count: '4.6% of Company Outlook', delta: -1.5 },
+      { theme: 'Engineering Effort Required', count: '2.1% of Integration theme', delta: -0.5 },
+      { theme: 'Integration Transition Issues', count: '1.6% of Integration theme', delta: 0.3 },
+      { theme: 'Job Security Concerns', count: '1.1% of Company Outlook', delta: -0.4 }
+    ],
+    lowSentiment: [
+      { topic: 'Company Outlook', rate: 82.2, note: 'Lowest positive sentiment theme. Negative attributes: high employee turnover (5.9%), business performance concerns (5.1%), frequent reorganizations (4.6%). All trending down except business performance concerns (+1.0pp). Content opportunity: employer brand and business momentum content.' },
+      { topic: 'Culture', rate: 83.0, note: 'Second lowest. "Toxic workplace culture" (13.4%) is the dominant negative attribute, up +0.4pp. Positive attributes (strong company culture 19.5%, supportive work culture 16.9%) are growing too. Content opportunity: fresh employer/culture content on rokt.com.' },
+      { topic: 'Integration Launch', rate: 88.9, note: 'Integration setup complexity (8.2%) is the main negative, but declining (-0.4pp). "Seamless integration" (44.7%) dominates the positive side. Content opportunity: case studies and guides showing simple integration paths.' }
+    ],
+    insights: {
+      overview: [
+        { tag: 'platform', label: 'Platform', text: 'Grok remains #1 at 11,179 mentions (+8.2%). Claude grew 36% to 4,669 — the fastest-growing platform — though this is partly data ramp-up as Claude was recently added to Profound. ChatGPT dropped below Claude to 4,417. Meta AI returned no data this week.' },
+        { tag: 'sentiment', label: 'Sentiment', text: 'Profound updated its sentiment methodology to attribute-level analysis within themes. New baseline: 90.6% positive (excl. Copilot & Meta AI). Not comparable to prior weeks. Lowest themes: Company Outlook (82.2%), Culture (83%), Integration Launch (88.9%). Top positive themes: Revenue ROI (99.9%), Optimization Automation (99.9%), Personalization (100%).' }
+      ],
+      citations: {
+        pieChart: { tag: 'citation', label: 'Citation', text: 'Citation share recovered to 46.7% (+1.7pp), with rokt.com growing to 46.65%. Owned content continues to dominate branded citations.' },
+        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com gained +1.65pp to 46.65%. glassdoor.com rose to 4.83% (+1.03pp) — reflecting increased culture-related queries. builtin.com also up to 3.26%.' },
+        unbrandedCit: { tag: 'citation', label: 'Citation', text: 'Unbranded citation landscape shifted — linkedin.com rose to 2.13% (+0.21pp), youtube.com up to 1.42% (+0.18pp). rokt.com held at 1.77%, maintaining #3 rank. stripe.com declined most (-0.27pp).' }
+      },
+      competition: {
+        sov: { tag: 'competition', label: 'Competition', text: 'Rokt SOV at 14.94%, down from 17.27% but still commanding. Fluent at 4.35% (from 4.98%), Uptick at 3.77% (from 4.38%), ThanksCo at 2.87% (from 3.36%). All competitors also declined — market-wide normalization.' },
+        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Competitive sentiment by platform data carried forward from Week 8. Sentiment methodology change means platform-level competitive comparisons need re-baselining.' },
+        sentimentTopic: { tag: 'competition', label: 'Competition', text: 'Topic-level competitive sentiment carried forward from Week 8. New attribute-level data provides deeper insight into specific content gaps within each theme.' },
+        spillover: { tag: 'competition', label: 'Competition', text: 'No notable competitor spillover into Rokt topics. The competitive escalation cycle from Weeks 5-6 remains fully reversed.' }
+      },
+      gaps: [
+        { tag: 'gap', label: 'Gap', text: 'Company Outlook (82.2% positive) — "high employee turnover" (5.9%) and "business performance concerns" (5.1%, +1.0pp) are the key negative attributes. Content opportunity: business momentum content, partnership announcements, and growth narrative pieces.' },
+        { tag: 'gap', label: 'Gap', text: 'Culture (83% positive) — "toxic workplace culture" accounts for 13.4% of the theme and is growing (+0.4pp). The top citation sources feeding this remain Glassdoor and BuiltIn. Content opportunity: fresh employer brand content, team stories, and culture initiative pieces on rokt.com.' },
+        { tag: 'gap', label: 'Gap', text: 'Integration Launch (88.9% positive) — "integration setup complexity" (8.2%) is the main negative, though declining. Content opportunity: step-by-step integration guides, no-code setup case studies, and time-to-value content.' }
+      ]
+    }
   }
 ];
 
@@ -1516,13 +1644,20 @@ const weekTLDR = [
     { color: 'amber', title: 'Culture sentiment at a new low, but positive mentions are growing too', text: 'Culture dropped to 61.7%, but positive occurrences grew from 117 to 124. The issue is that negative grew at the same pace (70 to 77). The top sources feeding negatives are BuiltIn\'s workplace-perception page (472 citations), Glassdoor reviews (306), and a 2022 Reddit thread on r/cscareerquestionsOCE (250). ChatGPT and Copilot surface these most aggressively. Actionable: owned culture content on rokt.com is already the #3 most-cited source — doubling down on fresh employer content could tip the ratio.' },
     { color: 'amber', title: 'Platform landscape reshuffled — Grok to #1, Claude appeared', text: 'Grok surged to #1 in total mentions, Perplexity dropped sharply from its #1 position last week. Claude appeared as a tracked platform for the first time. The landscape is now fragmented across nine models.' },
     { color: 'green', title: 'Product pages are starting to get cited in non-branded queries', text: 'The /solutions/use-case/monetization page nearly tripled from 9 to 26 unbranded citations. LLMs are beginning to cite product/solution pages — not just blog content — in category queries. This suggests opportunity to optimize more product pages for AI discoverability.' }
+  ],
+  // Week 9: Apr 13
+  [
+    { color: 'green', title: 'Owned content continuing to gain traction in unbranded queries', text: 'Unbranded visibility and rank both improved for the second straight week, with Rokt climbing to #3 in citation rank. Product and solution pages — not just blog content — are being cited in category-level queries. Average position improved to 3.2 (up from 3.6), the best since Week 3.' },
+    { color: 'amber', title: 'Branded SOV eased but the core position remains the strongest since tracking began', text: 'SOV pulled back to 36.4% (-3.6pp) after several weeks of gains, while citation share ticked up to 46.7% (+1.7pp) and average position held at a perfect 1.0. This looks like natural fluctuation rather than a structural shift — Rokt holds #1 rank across every branded metric.' },
+    { color: 'amber', title: 'Profound updated its sentiment methodology — new baseline at 90.6% positive', text: 'Sentiment now reports at the attribute level within themes, replacing the old single-percentage view. Under the new format, overall sentiment sits at 90.6% positive (excl. Copilot & Meta AI). The lowest-scoring themes point directly to content opportunities: Company Outlook (82.2%) is pulled down by "high employee turnover" and "business performance concerns"; Culture (83%) by "toxic workplace culture"; and Integration Launch (88.9%) by "integration setup complexity." All three are trending up week-over-week.' },
+    { color: 'green', title: 'Competitive landscape holding steady', text: 'Rokt maintains a commanding SOV lead at 14.94% — over 3x the nearest competitor. All competitors also declined in SOV this week, suggesting market-wide normalization rather than Rokt-specific softening. No notable spillover into Rokt topics.' }
   ]
 ];
 
 // Platform priority tiers
 const platformTiers = {
   'ChatGPT': 1, 'Google Gemini': 1, 'Google AI Mode': 1, 'Google AI Overviews': 1,
-  'Grok': 2, 'Meta AI': 2, 'Perplexity': 2, 'Copilot': 2, 'Microsoft Copilot': 2
+  'Grok': 2, 'Meta AI': 2, 'Perplexity': 2, 'Copilot': 2, 'Microsoft Copilot': 2, 'Claude': 2
 };
 const tierColors = { 1: 'rgba(224, 0, 77, 0.9)', 2: 'rgba(224, 0, 77, 0.35)' };
 const tierLabels = { 1: 'Tier 1 — Primary', 2: 'Tier 2 — Secondary' };
@@ -1915,10 +2050,19 @@ function renderGaps() {
     'Not a Full Ecommerce Platform': 'Clarify Rokt\'s role as a complementary commerce media layer, not a replacement for ecommerce platforms',
     'Mixed Customer Reviews': 'Amplify positive customer stories and case studies to outweigh mixed signals',
     'Brand Control Concerns': 'Address brand safety with content about advertiser controls, vetting process, and quality standards',
-    'Dependency on Partner Quality': 'Highlight partner vetting process and quality controls in owned content'
+    'Dependency on Partner Quality': 'Highlight partner vetting process and quality controls in owned content',
+    'Toxic Workplace Culture': 'Publish fresh employer brand content — team stories, culture initiatives, and employee spotlights on rokt.com to counter the Glassdoor/BuiltIn narrative',
+    'High Employee Turnover': 'Create content highlighting employee tenure, internal mobility programs, and career growth stories',
+    'Business Performance Concerns': 'Publish business momentum content — partnership announcements, growth metrics, and customer expansion stories',
+    'Integration Setup Complexity': 'Create step-by-step integration guides, no-code setup case studies, and time-to-value content showing fast deployment',
+    'Frequent Reorganizations': 'Content showing strategic clarity and organizational stability — leadership vision pieces, team structure content',
+    'Engineering Effort Required': 'Highlight no-code/low-code setup options and rapid deployment in technical documentation and case studies',
+    'Integration Transition Issues': 'Publish migration guides and transition support content to address onboarding friction concerns',
+    'Job Security Concerns': 'Address with content about company growth trajectory, hiring plans, and long-term investment commitments'
   };
   if (week.negativeThemes) {
-    let ghtml = '<thead><tr><th>Negative Theme</th><th>Occurrences</th><th style="width:50px;">Δ</th><th>Content Opportunity</th></tr></thead><tbody>';
+    const isAttrFormat = typeof week.negativeThemes[0].count === 'string';
+    let ghtml = '<thead><tr><th>Negative Theme</th><th>' + (isAttrFormat ? 'Response Share' : 'Occurrences') + '</th><th style="width:50px;">Δ</th><th>Content Opportunity</th></tr></thead><tbody>';
     week.negativeThemes.forEach(t => {
       const deltaStr = t.isNew ? '<span style="color:var(--red);font-weight:700;">NEW</span>' : (t.delta > 0 ? '<span style="color:var(--red);">+' + t.delta + '</span>' : (t.delta < 0 ? '<span style="color:var(--green);">' + t.delta + '</span>' : '—'));
       const action = contentActions[t.theme] || 'Create targeted content to address this narrative';
