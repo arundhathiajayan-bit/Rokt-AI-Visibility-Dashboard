@@ -147,6 +147,9 @@
   .tldr-section { background: var(--white); border-radius: 12px; padding: 22px 26px; border: 1px solid var(--grey-200); margin-bottom: 16px; }
   .tldr-section h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--grey-900); display: flex; align-items: center; gap: 8px; }
   .tldr-section p { font-size: 13px; color: var(--grey-700); line-height: 1.6; }
+  .tldr-section ul { list-style: none; padding: 0; margin: 0; }
+  .tldr-section li { font-size: 13px; color: var(--grey-700); line-height: 1.6; padding: 6px 0; border-top: 1px solid var(--grey-100); }
+  .tldr-section li:first-child { border-top: none; padding-top: 0; }
   .tldr-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
   .tldr-dot.green { background: var(--green); }
   .tldr-dot.amber { background: var(--amber); }
@@ -1793,10 +1796,26 @@ const weekTLDR = [
   ],
   // Week 10: Apr 20
   [
-    { color: 'green', title: 'Culture sentiment posted the biggest improvement of any theme', text: 'Culture jumped +4.6pp to 83.1% — the first meaningful positive shift after weeks of stagnation.<br><br><strong>Driver:</strong> LLMs shifted their citation mix toward owned content. The "What Makes Rokt\'s Company Culture Unique" blog surged +25%, the /company/culture page grew +14%, and the "Candid Look at Our Culture" blog gained +8% — while Glassdoor and the Reddit thread both pulled back.<br><br><strong>3-month view:</strong> New sentiment methodology began Week 9 with Culture as the weakest theme at 83%. One week in, it\'s already moving in the right direction.' },
-    { color: 'green', title: 'Unbranded position hit #2 — the best since tracking began', text: 'Average position improved to 3.0, rank #2 (↑1). Visibility rose to 7.7% (+0.5pp).<br><br><strong>Driver:</strong> Product and solution pages broke into unbranded citations for the first time — the Monetization and Optimization pages both appeared from zero, and the "What Features Differentiate Rokt" blog grew significantly. LLMs are now citing a wider range of Rokt content, not just blog posts.<br><br><strong>3-month view:</strong> Position started at 3.3 in Feb with no rank data — now 3.0 at rank #2. rokt.com unbranded citations have grown +130% since March, with product pages now joining blogs as citation sources.' },
-    { color: 'amber', title: 'Branded metrics held steady with minor easing', text: 'SOV eased to 36% (-0.4pp) and citation share to 46.2% (-0.5pp). Visibility at 99.9%, position at 1.0. All #1 ranks maintained.<br><br><strong>Driver:</strong> Week-to-week noise rather than any structural shift.<br><br><strong>3-month view:</strong> Visibility has been near-100% since Feb. The real story is SOV nearly tripling from 13.2% to 36%. Citation share and position have held steady throughout.' },
-    { color: 'amber', title: 'Integration Launch sentiment dropped sharply — biggest decline this week', text: 'Fell -5.6pp to 86.2%, replacing Company Outlook as the weakest product-adjacent theme.<br><br><strong>Driver:</strong> Setup complexity, deployment speed, and migration transitions are what LLMs are surfacing as negatives. Clear content gap for integration guides and no-code walkthroughs.<br><br><strong>3-month view:</strong> Was 88.9% when the new methodology launched in Week 9. First theme to show a meaningful decline — worth watching as a content priority alongside Culture.' }
+    { color: 'green', title: 'Culture sentiment posted the biggest improvement of any theme', bullets: [
+      'Culture jumped +4.6pp to 83.1% — the first meaningful positive shift after weeks of stagnation.',
+      '<strong>Driver:</strong> LLMs shifted their citation mix toward owned content. The "What Makes Rokt\'s Company Culture Unique" blog surged +25%, the /company/culture page grew +14%, and the "Candid Look at Our Culture" blog gained +8% — while Glassdoor and the Reddit thread pulled back.',
+      '<strong>3-month view:</strong> New sentiment methodology began Week 9 with Culture as the weakest theme at 83%. One week in, already moving in the right direction.'
+    ]},
+    { color: 'green', title: 'Unbranded position hit #2 — the best since tracking began', bullets: [
+      'Position improved to 3.0 (rank #2 ↑1). Visibility rose to 7.7% (+0.5pp).',
+      '<strong>Driver:</strong> Product and solution pages broke into unbranded citations for the first time — the Monetization and Optimization pages both appeared from zero. LLMs are now citing a wider range of Rokt content, not just blogs.',
+      '<strong>3-month view:</strong> Started at 3.3 in Feb with no rank. rokt.com unbranded citations up +130% since March, with product pages now joining blogs as citation sources.'
+    ]},
+    { color: 'amber', title: 'Branded metrics held steady with minor easing', bullets: [
+      'SOV eased to 36% (-0.4pp), citation share to 46.2% (-0.5pp). Visibility 99.9%, position 1.0. All #1 ranks held.',
+      '<strong>Driver:</strong> Week-to-week noise, not structural.',
+      '<strong>3-month view:</strong> Visibility near-100% since Feb. SOV nearly tripled from 13.2% to 36%. Citation share and position steady throughout.'
+    ]},
+    { color: 'amber', title: 'Integration Launch sentiment dropped sharply — biggest decline this week', bullets: [
+      'Fell -5.6pp to 86.2%, now the weakest product-adjacent theme.',
+      '<strong>Driver:</strong> Setup complexity, deployment speed, and migration transitions. Clear content gap for integration guides and no-code walkthroughs.',
+      '<strong>3-month view:</strong> Was 88.9% when new methodology launched Week 9. First theme to decline — worth watching alongside Culture.'
+    ]}
   ]
 ];
 
@@ -1887,12 +1906,12 @@ function renderTLDR() {
   const items = weekTLDR[currentWeekIdx] || [];
   const el = document.getElementById('tldrContent');
   if (!items.length) { el.innerHTML = '<div class="tldr-section"><p style="color:var(--grey-400)">No TLDR available for this week.</p></div>'; return; }
-  el.innerHTML = items.map(item => `
-    <div class="tldr-section">
-      <h3><span class="tldr-dot ${item.color}"></span>${item.title}</h3>
-      <p>${item.text}</p>
-    </div>
-  `).join('');
+  el.innerHTML = items.map(item => {
+    const body = item.bullets
+      ? '<ul>' + item.bullets.map(b => `<li>${b}</li>`).join('') + '</ul>'
+      : `<p>${item.text}</p>`;
+    return `<div class="tldr-section"><h3><span class="tldr-dot ${item.color}"></span>${item.title}</h3>${body}</div>`;
+  }).join('');
 }
 
 function navigateWeek(dir) {
