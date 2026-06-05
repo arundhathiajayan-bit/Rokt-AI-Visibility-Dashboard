@@ -55,6 +55,23 @@
   .week-nav-dots { display: flex; gap: 6px; justify-content: center; margin-top: 8px; }
   .week-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grey-200); cursor: pointer; transition: all 0.2s; }
   .week-dot.active { background: var(--beetroot); width: 20px; border-radius: 4px; }
+  .week-dot.phase-q2 { background: var(--grey-300); border: 1px solid var(--beetroot); }
+  .week-dot.phase-q2.active { background: var(--beetroot); border: none; }
+  .phase-divider { display: flex; align-items: center; margin: 0 6px; font-size: 9px; font-weight: 700; color: var(--beetroot); letter-spacing: 0.5px; }
+  .phase-divider::before { content: ''; width: 1px; height: 14px; background: var(--beetroot); margin-right: 4px; }
+  .phase-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; margin-left: 8px; }
+  .phase-badge.q1 { background: #F0F0F0; color: var(--grey-700); }
+  .phase-badge.q2 { background: rgba(194,0,117,0.1); color: var(--beetroot); }
+  .cadence-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 500; background: #EEF2FF; color: #4F46E5; margin-left: 6px; }
+  .cohort-panel { background: var(--white); border-radius: 12px; padding: 16px 20px; border: 1px solid var(--grey-200); margin-bottom: 20px; }
+  .cohort-panel h3 { font-size: 14px; font-weight: 700; color: var(--grey-900); margin-bottom: 12px; }
+  .cohort-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cohort-card { background: var(--grey-50); border-radius: 8px; padding: 14px; border: 1px solid var(--grey-200); }
+  .cohort-card h4 { font-size: 12px; font-weight: 600; color: var(--grey-700); margin-bottom: 10px; }
+  .cohort-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .cohort-metric { text-align: center; }
+  .cohort-metric .cm-label { font-size: 10px; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.5px; }
+  .cohort-metric .cm-value { font-size: 16px; font-weight: 700; color: var(--grey-900); margin-top: 2px; }
 
   .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
   .kpi-card { background: var(--white); border-radius: 12px; padding: 18px 20px; border: 1px solid var(--grey-200); transition: box-shadow 0.2s; }
@@ -233,6 +250,12 @@
       <div class="metrics-note">Key metrics: Avg Position, Citation Share, Sentiment</div>
     </div>
     <div class="kpi-row" id="kpiBranded"></div>
+
+    <!-- Q1/Q2 Cohort Panel (only shown for Q2 entries) -->
+    <div id="cohortPanel" class="cohort-panel" style="display:none;">
+      <h3>Prompt Cohort Breakdown <span class="phase-badge q2">Q2 REFRESH</span></h3>
+      <div class="cohort-grid" id="cohortGrid"></div>
+    </div>
 
     <!-- Branded avg position competitors table -->
     <div class="card full-card" id="brandedPositionCard">
@@ -1900,6 +1923,134 @@ const weekData = [
         { tag: 'gap', label: 'Gap', text: 'Unbranded position recovered to 2.7 (↑0.2) and visibility held at 8.8%. rokt.com at 1.8% citation share in unbranded queries — up from 1.2% in March. Unbranded momentum continues to build.' }
       ]
     }
+  },
+  // ── Week 14: May 18 – May 24 (Final Q1 Weekly) ──
+  {
+    weekOf: 'End of Week May 24',
+    range: 'May 18 – May 24',
+    phase: 'Q1',
+    cadence: 'weekly',
+    branded: {
+      visibility: { value: 99.9, delta: 0.1 },
+      sov: { value: 34.9, delta: -0.1 },
+      avgPos: { value: 1.0, delta: 0, rank: '#1' },
+      citation: { value: 43.9, delta: -1.6, rank: '#1' },
+      sentiment: { value: 79.2, delta: -0.9 }
+    },
+    brandedPositionCompetitors: [
+      { asset: 'Rokt', pos: 1.0, delta: 0.0 },
+      { asset: 'Uptick', pos: 2.1, delta: 0.0 },
+      { asset: 'ThanksCo', pos: 2.2, delta: 0.0 }
+    ],
+    unbranded: {
+      visibility: { value: 9.2, delta: 0.4, rank: '#10' },
+      sov: { value: 1.4, delta: 0.0 },
+      avgPos: { value: 3.0, delta: 0.3, rank: '#2' }
+    },
+    unbrandedCitations: [
+      { domain: 'linkedin.com', share: 2.3, delta: 0.1 },
+      { domain: 'shopify.com', share: 2.0, delta: 0.0 },
+      { domain: 'rokt.com', share: 2.0, delta: 0.2, highlight: true },
+      { domain: 'reddit.com', share: 1.9, delta: 0.4 },
+      { domain: 'youtube.com', share: 1.5, delta: 0.0 }
+    ],
+    platforms: {
+      labels: ['AI Mode','Gemini','Copilot','ChatGPT','Perplexity','Claude','AI Overviews','Grok'],
+      mentions: [945,944,941,939,938,938,934,602]
+    },
+    negativeThemes: [
+      { theme: 'Culture', count: '13.3% response share, 69.5% positive', delta: -7.4 },
+      { theme: 'Rokt Product', count: '13% response share, 71.8% positive', delta: -5.1 },
+      { theme: 'Rokt Upcart', count: '12.4% response share, 72.7% positive', delta: 0 },
+      { theme: 'Rokt Thanks', count: '12.5% response share, 73.7% positive', delta: 0 },
+      { theme: 'Competitive', count: '11.9% response share, 76.6% positive', delta: 0 }
+    ],
+    lowSentiment: [
+      { topic: 'Culture', rate: 69.5, note: 'Continued decline. Fourth consecutive week of deterioration under the new methodology. Now the weakest theme by a significant margin.' },
+      { topic: 'Rokt Product', rate: 71.8, note: 'Dropped below prior readings. Product perception needs attention alongside Culture.' }
+    ],
+    insights: {
+      overview: [
+        { tag: 'platform', label: 'Platform', text: 'Mentions fell from ~57K to ~7.2K as Grok dropped from 14K to 602 — an outlier correction after its record Week 13. The remaining seven platforms converged in a narrow 934-945 range, the tightest spread since tracking began.' },
+        { tag: 'sentiment', label: 'Sentiment', text: 'Culture remains the weakest theme at 69.5%, continuing its decline. Rokt Product and Competitive topics also sit below 80%. Rokt Ads (93%) and Pay+ (95.5%) remain the strongest themes — the gap between product and perception topics is widening.' }
+      ],
+      citations: { pieChart: null, topDomains: null, unbrandedCit: null },
+      competition: {
+        sov: { tag: 'competition', label: 'Competition', text: 'Branded SOV at 34.9% (-0.1pp). Competitor positions unchanged — Uptick at 2.1, ThanksCo at 2.2. Citation share dipped to 43.9% (-1.6pp) — first time below 44% since early April.' },
+        sentimentPlatform: null, sentimentTopic: null, spillover: null
+      },
+      gaps: [
+        { tag: 'gap', label: 'Gap', text: 'Culture sentiment at 69.5% — the lowest since the new methodology launched. Four consecutive weeks of decline. The gap between Culture and the next-weakest theme (Rokt Product at 71.8%) is narrowing, suggesting broader sentiment softening beyond just Culture.' },
+        { tag: 'gap', label: 'Gap', text: 'rokt.com unbranded citation share reached 2.0% — up from 1.8% last week and 1.2% in March. Now #3 behind linkedin.com and shopify.com. Steady organic growth in non-branded citation presence.' }
+      ]
+    }
+  },
+  // ── Bi-weekly 1: May 25 – Jun 4 (First Q2 Entry) ──
+  {
+    weekOf: 'Bi-weekly Jun 4',
+    range: 'May 25 – Jun 4',
+    phase: 'Q2',
+    cadence: 'biweekly',
+    isPhaseStart: true,
+    cohorts: {
+      q1: { label: 'Q1 Continuity (303 prompts)', vis: 48.3, sov: 11.3, pos: 1.2, mentions: 7474 },
+      q2: { label: 'Q2 New (95 prompts)', vis: 77.6, sov: 14.6, pos: 1.3, mentions: 802 }
+    },
+    branded: {
+      visibility: { value: 99.9, delta: 0.0 },
+      sov: { value: 35.8, delta: 0.9 },
+      avgPos: { value: 1.0, delta: 0, rank: '#1' },
+      citation: { value: 45.5, delta: 1.6, rank: '#1' },
+      sentiment: { value: 80.2, delta: 1.0 }
+    },
+    brandedPositionCompetitors: [
+      { asset: 'Rokt', pos: 1.0, delta: 0.0 },
+      { asset: 'Uptick', pos: 2.0, delta: -0.1 },
+      { asset: 'ThanksCo', pos: 2.1, delta: -0.1 }
+    ],
+    unbranded: {
+      visibility: { value: 9.4, delta: 0.2, rank: '#10' },
+      sov: { value: 1.6, delta: 0.2 },
+      avgPos: { value: 2.9, delta: -0.1, rank: '#2' }
+    },
+    unbrandedCitations: [
+      { domain: 'reddit.com', share: 2.4, delta: 0.5 },
+      { domain: 'rokt.com', share: 2.2, delta: 0.2, highlight: true },
+      { domain: 'linkedin.com', share: 2.1, delta: -0.2 },
+      { domain: 'shopify.com', share: 1.8, delta: -0.2 },
+      { domain: 'forbes.com', share: 1.4, delta: 0.0 }
+    ],
+    platforms: {
+      labels: ['AI Mode','Gemini','Copilot','AI Overviews','Claude','Perplexity','ChatGPT'],
+      mentions: [1440,1435,1434,1431,1431,1430,1430]
+    },
+    negativeThemes: [
+      { theme: 'Rokt Product', count: '13.1% response share, 71.8% positive', delta: 0.0 },
+      { theme: 'Culture', count: '12.4% response share, 72.2% positive', delta: 2.7 },
+      { theme: 'Rokt Upcart', count: '12.3% response share, 73.6% positive', delta: 0.9 },
+      { theme: 'Competitive', count: '11.8% response share, 77.3% positive', delta: 0.7 },
+      { theme: 'Rokt Thanks', count: '13.1% response share, 78.1% positive', delta: 4.4 }
+    ],
+    lowSentiment: [
+      { topic: 'Rokt Product', rate: 71.8, note: 'Unchanged from May 18-24. Product perception is flat — not declining but not improving. Needs targeted content.' },
+      { topic: 'Culture', rate: 72.2, note: 'Reversed the four-week decline with a +2.7pp improvement. First positive movement since Week 10. Q2 prompt refresh may be helping.' },
+      { topic: 'Rokt Upcart', rate: 73.6, note: 'Slight improvement (+0.9pp). Upcart sentiment has been stable in the low 70s range.' }
+    ],
+    insights: {
+      overview: [
+        { tag: 'platform', label: 'Platform', text: 'Grok absent from this period entirely — all seven remaining platforms in a tight 1,430-1,440 range. AI Mode leads marginally. Total branded mentions ~10K for the bi-weekly period.' },
+        { tag: 'sentiment', label: 'Sentiment', text: 'Sentiment improved to 80.2% (+1.0pp). Culture reversed its four-week decline, rising to 72.2% (+2.7pp). Rokt Thanks improved to 78.1% (+4.4pp). The Q2 prompt refresh appears to have had a positive early impact on sentiment themes.' }
+      ],
+      citations: { pieChart: null, topDomains: null, unbrandedCit: null },
+      competition: {
+        sov: { tag: 'competition', label: 'Competition', text: 'Branded SOV rebounded to 35.8% (+0.9pp). Both Uptick and ThanksCo slightly improved position (2.0 and 2.1). Citation share recovered to 45.5% (+1.6pp) — back to Week 13 levels.' },
+        sentimentPlatform: null, sentimentTopic: null, spillover: null
+      },
+      gaps: [
+        { tag: 'gap', label: 'Gap', text: 'Culture is no longer the weakest theme — Rokt Product (71.8%) is now marginally lower. The Q2 prompt refresh may be shifting how LLMs discuss Rokt\'s culture, but the improvement is small and needs sustained momentum.' },
+        { tag: 'gap', label: 'Gap', text: 'Q2 new prompts show 77.6% visibility — strong for a brand-new prompt set live for only 10 days. Blended branded visibility remains at 99.9%. The Q1 continuity set shows 48.3% visibility as expected for a subset filtered by the Q1 tag.' }
+      ]
+    }
   }
 ];
 
@@ -2071,6 +2222,20 @@ const weekTLDR = [
       '<strong>Driver:</strong> Business momentum narrative and partnership announcements are registering. Integration content is sustainably landing.',
       '<strong>3-month view:</strong> Integration Launch went 88.9% → 86.2% → 90.7% → 91% — a clear recovery arc. Company Outlook had been declining, now reversing. Two of three watchlist themes are improving; Culture is the outlier.'
     ]}
+  ],
+  // Week 14: May 24 (Final Q1 Weekly)
+  [
+    { color: 'blue', title: 'Q1 tracking closes out — this is the final weekly entry', text: 'May 18-24 is the last update under the original Q1 prompt set. Starting next period, tracking shifts to bi-weekly with the Q2 refreshed prompts. All Q1 trends carry forward as the comparison baseline.' },
+    { color: 'red', title: 'Grok correction masks an otherwise stable week', text: 'Total branded mentions plunged from 57K to 7.2K — but this is entirely Grok falling from its record 14K back to 602. The other seven platforms sat in a narrow 934-945 band, the tightest clustering since tracking began. Platform-by-platform, nothing changed.' },
+    { color: 'red', title: 'Culture is pulling the overall sentiment story down', text: 'Culture dropped to 69.5% — the lowest since the new methodology launched. But it\'s no longer isolated: Rokt Product (71.8%) and Competitive (76.6%) are also soft. The strongest themes remain Rokt Ads (93%) and Pay+ (95.5%), creating a widening gap between product and perception topics.' },
+    { color: 'green', title: 'Unbranded citation momentum continues building', text: 'rokt.com reached 2.0% of unbranded citations — up from 1.2% in March. Now #3 behind LinkedIn and Shopify. Product and solution pages are increasingly appearing in non-branded AI answers, which is the hardest visibility to earn.' }
+  ],
+  // Bi-weekly 1: Jun 4 (First Q2 Entry)
+  [
+    { color: 'blue', title: 'Q2 prompt refresh is live — first bi-weekly read', text: 'This is the first entry under the new prompt set. 95 new prompts are now being tracked alongside the 303 Q1 continuity prompts. The Q2 set already shows 77.6% branded visibility after just 10 days — a strong early signal that the new prompts are well-calibrated.' },
+    { color: 'green', title: 'Culture sentiment reversed its four-week decline', text: 'Culture improved to 72.2% (+2.7pp) — the first positive shift since Week 10. It\'s too early to attribute this to the Q2 prompt refresh, but the timing aligns. Rokt Thanks also improved sharply (+4.4pp to 78.1%).' },
+    { color: 'green', title: 'Branded metrics strengthened across the board', text: 'SOV rebounded to 35.8%, citation share recovered to 45.5%, and position held at #1. Competitors slightly improved their positions but remain well behind. The branded foundation is solid heading into Q2.' },
+    { color: 'amber', title: 'Grok disappeared and platform distribution flattened', text: 'Grok was absent entirely from this bi-weekly period. The remaining seven platforms all clustered in a narrow 1,430-1,440 mention range — the most even distribution since tracking began. This removes a single-platform dependency but also eliminates the volume uplift Grok was providing.' }
   ]
 ];
 
@@ -2129,17 +2294,38 @@ const unbrandedConfigs = [
 
 function renderWeekNav() {
   const week = weekData[currentWeekIdx];
-  document.getElementById('weekDateDisplay').textContent = week.weekOf;
+  // Build display text with phase/cadence badges
+  let dateText = week.weekOf;
+  let phaseHTML = '';
+  if (week.phase) {
+    phaseHTML += `<span class="phase-badge ${week.phase.toLowerCase()}">${week.phase}</span>`;
+  }
+  if (week.cadence === 'biweekly') {
+    phaseHTML += '<span class="cadence-badge">Bi-weekly</span>';
+  }
+  document.getElementById('weekDateDisplay').innerHTML = dateText + phaseHTML;
   let rangeText = week.range;
-  rangeText += week.isBaseline ? ' · Baseline' : ' · vs. previous week';
+  if (week.isBaseline) rangeText += ' · Baseline';
+  else if (week.cadence === 'biweekly') rangeText += ' · vs. previous period';
+  else rangeText += ' · vs. previous week';
   document.getElementById('weekRangeDisplay').textContent = rangeText;
   document.getElementById('prevWeekBtn').disabled = (currentWeekIdx === 0);
   document.getElementById('nextWeekBtn').disabled = (currentWeekIdx === weekData.length - 1);
   const dots = document.getElementById('weekDots');
   dots.innerHTML = '';
+  let lastPhase = null;
   weekData.forEach((w, i) => {
+    // Insert phase divider when transitioning from Q1 to Q2
+    if (w.phase && lastPhase && w.phase !== lastPhase) {
+      const divider = document.createElement('div');
+      divider.className = 'phase-divider';
+      divider.textContent = 'Q2';
+      dots.appendChild(divider);
+    }
+    lastPhase = w.phase || lastPhase;
     const d = document.createElement('div');
-    d.className = 'week-dot' + (i === currentWeekIdx ? ' active' : '');
+    d.className = 'week-dot' + (i === currentWeekIdx ? ' active' : '') + (w.phase === 'Q2' ? ' phase-q2' : '');
+    d.title = w.range + (w.phase ? ' (' + w.phase + ')' : '');
     d.onclick = () => { currentWeekIdx = i; updateAll(); };
     dots.appendChild(d);
   });
@@ -2150,7 +2336,7 @@ function renderWeekNav() {
     const rn = document.getElementById('weekRangeDisplay' + n);
     const pb = document.getElementById('prevWeekBtn' + n);
     const nb = document.getElementById('nextWeekBtn' + n);
-    if (dt) dt.textContent = week.weekOf;
+    if (dt) dt.innerHTML = dateText + phaseHTML;
     if (rn) rn.textContent = rangeText;
     if (pb) pb.disabled = (currentWeekIdx === 0);
     if (nb) nb.disabled = (currentWeekIdx === weekData.length - 1);
@@ -2590,11 +2776,36 @@ function switchTab(tabName, el) {
   el.classList.add('active');
 }
 
+function renderCohortPanel() {
+  const week = weekData[currentWeekIdx];
+  const panel = document.getElementById('cohortPanel');
+  if (!week.cohorts) { panel.style.display = 'none'; return; }
+  panel.style.display = '';
+  const grid = document.getElementById('cohortGrid');
+  let html = '';
+  ['q1', 'q2'].forEach(key => {
+    const c = week.cohorts[key];
+    if (!c) return;
+    const tagClass = key === 'q1' ? 'q1' : 'q2';
+    html += `<div class="cohort-card">
+      <h4><span class="phase-badge ${tagClass}">${key.toUpperCase()}</span> ${c.label}</h4>
+      <div class="cohort-metrics">
+        <div class="cohort-metric"><div class="cm-label">Visibility</div><div class="cm-value">${c.vis}%</div></div>
+        <div class="cohort-metric"><div class="cm-label">SOV</div><div class="cm-value">${c.sov}%</div></div>
+        <div class="cohort-metric"><div class="cm-label">Avg Pos</div><div class="cm-value">${c.pos}</div></div>
+        <div class="cohort-metric"><div class="cm-label">Mentions</div><div class="cm-value">${c.mentions.toLocaleString()}</div></div>
+      </div>
+    </div>`;
+  });
+  grid.innerHTML = html;
+}
+
 function updateAll() {
   const week = weekData[currentWeekIdx];
   renderWeekNav();
   renderTLDR();
   renderKPI('kpiBranded', week.branded, brandedConfigs);
+  renderCohortPanel();
   renderBrandedPosition();
   renderKPI('kpiUnbranded', week.unbranded, unbrandedConfigs);
   renderCharts();
