@@ -201,7 +201,6 @@
   <div class="nav-tab" onclick="switchTab('citations', this)">Citations & Sources</div>
   <div class="nav-tab" onclick="switchTab('competition', this)">Competition</div>
   <div class="nav-tab" onclick="switchTab('gaps', this)">Gaps</div>
-  <div class="nav-tab" onclick="switchTab('attribution', this)">Attribution</div>
 </div>
 
 <div class="content">
@@ -414,38 +413,15 @@
     <div class="card full-card">
       <table class="data-table" id="lowSentimentTable"></table>
     </div>
+
+    <!-- Attribution: embedded in gaps tab -->
+    <div id="attributionSection" style="display:none;">
+      <div class="section-title" style="margin-top:28px;">What's driving the shifts?</div>
+      <p style="font-size: 13px; color: var(--grey-700); margin: -8px 0 20px;">Citation-level attribution — which content is helping or hurting sentiment for topics that moved</p>
+      <div id="attributionDeepDives"></div>
+    </div>
   </div>
 
-  <!-- ===================== TAB 5: ATTRIBUTION ===================== -->
-  <div id="tab-attribution" class="tab-content">
-
-    <div class="week-nav">
-      <button class="week-nav-btn" id="prevWeekBtn6" onclick="navigateWeek(-1)"><span>&#8592;</span> Previous</button>
-      <div class="week-nav-center">
-        <div class="week-nav-date" id="weekDateDisplay6"></div>
-        <div class="week-nav-range" id="weekRangeDisplay6"></div>
-      </div>
-      <button class="week-nav-btn" id="nextWeekBtn6" onclick="navigateWeek(1)">Next <span>&#8594;</span></button>
-    </div>
-
-    <div class="section-title">What's driving sentiment changes?</div>
-    <p style="font-size: 13px; color: var(--grey-700); margin: -8px 0 20px;">Citation-level attribution for topics that moved ±2pp between periods. Shows which content is helping or hurting sentiment.</p>
-
-    <div id="attributionNoData" style="display:none;" class="card full-card">
-      <p style="text-align:center;color:var(--grey-400);padding:24px;font-size:14px;">Attribution data not available for this period. Attribution analysis requires two consecutive periods to compare.</p>
-    </div>
-
-    <!-- Topic Movers Summary -->
-    <div id="attributionMovers" class="card full-card" style="margin-bottom:24px;">
-      <h3 style="margin-bottom:4px;">Topic movers</h3>
-      <p class="card-sub">Topics ranked by sentiment shift between periods</p>
-      <div style="height:260px;position:relative;"><canvas id="moverBarChart"></canvas></div>
-    </div>
-
-    <!-- Flagged Topic Deep Dives -->
-    <div id="attributionDeepDives"></div>
-
-  </div>
 
 </div>
 
@@ -2443,7 +2419,7 @@ function renderWeekNav() {
   });
   document.getElementById('lastUpdated').textContent = 'Last updated: ' + weekData[weekData.length - 1].weekOf;
   // Sync all tab week navs
-  [2, 3, 4, 5, 6].forEach(n => {
+  [2, 3, 4, 5].forEach(n => {
     const dt = document.getElementById('weekDateDisplay' + n);
     const rn = document.getElementById('weekRangeDisplay' + n);
     const pb = document.getElementById('prevWeekBtn' + n);
@@ -2937,114 +2913,69 @@ function renderCohortPanel() {
   grid.innerHTML = html;
 }
 
-// ===== ATTRIBUTION TAB =====
-let moverChart;
+// ===== ATTRIBUTION (embedded in Gaps tab) =====
 const deepDivePlatCharts = {};
 
 function renderAttribution() {
   const week = weekData[currentWeekIdx];
-  const noData = document.getElementById('attributionNoData');
-  const moversCard = document.getElementById('attributionMovers');
-  const divesContainer = document.getElementById('attributionDeepDives');
+  const section = document.getElementById('attributionSection');
+  const container = document.getElementById('attributionDeepDives');
 
   if (!week.attribution) {
-    noData.style.display = '';
-    moversCard.style.display = 'none';
-    divesContainer.innerHTML = '';
-    if (moverChart) { moverChart.destroy(); moverChart = null; }
+    section.style.display = 'none';
+    container.innerHTML = '';
+    Object.values(deepDivePlatCharts).forEach(c => c.destroy());
     return;
   }
-  noData.style.display = 'none';
-  moversCard.style.display = '';
+  section.style.display = '';
+  Object.values(deepDivePlatCharts).forEach(c => c.destroy());
 
   const attr = week.attribution;
+  let html = '';
 
-  // Mover bar chart
-  if (moverChart) moverChart.destroy();
-  const moverLabels = attr.movers.map(m => m.topic);
-  const moverDeltas = attr.movers.map(m => m.delta);
-  const moverColors = moverDeltas.map(d => d >= 2 ? '#2ECC71' : d <= -2 ? '#E74C3C' : d > 0 ? 'rgba(46,204,113,0.5)' : d < 0 ? 'rgba(231,76,60,0.5)' : '#ADB5BD');
-
-  moverChart = new Chart(document.getElementById('moverBarChart'), {
-    type: 'bar',
-    data: {
-      labels: moverLabels,
-      datasets: [{
-        data: moverDeltas,
-        backgroundColor: moverColors,
-        borderRadius: 4,
-        barThickness: 22
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: function(ctx) { return (ctx.raw > 0 ? '+' : '') + ctx.raw.toFixed(1) + 'pp'; } } }
-      },
-      scales: {
-        x: { grid: { color: '#F0F0F0' }, ticks: { callback: function(v) { return (v > 0 ? '+' : '') + v + 'pp'; }, font: { size: 11 } }, min: -4, max: 6 },
-        y: { grid: { display: false }, ticks: { font: { size: 12 } } }
-      }
-    }
-  });
-
-  // Deep dive cards
-  Object.values(deepDivePlatCharts).forEach(c => c.destroy());
-  let ddHtml = '';
   attr.deepDives.forEach((dd, i) => {
-    const dirIcon = dd.direction === 'improved' ? '&#x2191;' : dd.direction === 'declined' ? '&#x2193;' : '&#x26A0;';
     const dirColor = dd.direction === 'improved' ? 'var(--green)' : dd.direction === 'declined' ? 'var(--red)' : 'var(--amber)';
-    const dirLabel = dd.direction === 'improved' ? 'Improved' : dd.direction === 'declined' ? 'Declined' : 'Watch';
+    const dirBg = dd.direction === 'improved' ? '#E8F8F0' : dd.direction === 'watch' ? '#FFF8E1' : '#FDECEC';
+    const arrow = dd.direction === 'improved' ? '&#x2191;' : dd.direction === 'declined' ? '&#x2193;' : '&#x26A0;';
 
-    ddHtml += `<div class="card full-card" style="margin-bottom:24px;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:${dirColor};color:#fff;font-weight:700;font-size:14px;">${dirIcon}</span>
-        <h3 style="margin:0;">${dd.topic} <span style="font-weight:400;color:${dirColor};">${dd.delta}</span></h3>
-        <span style="font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;background:${dd.direction === 'improved' ? '#E8F8F0' : dd.direction === 'watch' ? '#FFF8E1' : '#FDECEC'};color:${dirColor};">${dirLabel}</span>
+    html += `<div class="card full-card" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:5px;background:${dirColor};color:#fff;font-weight:700;font-size:12px;">${arrow}</span>
+        <h3 style="margin:0;font-size:14px;">${dd.topic} <span style="font-weight:400;color:${dirColor};">${dd.delta}</span></h3>
       </div>
-      <p style="font-size:13px;color:var(--grey-700);margin-bottom:16px;">${dd.summary}</p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <p style="font-size:12px;color:var(--grey-700);margin-bottom:14px;">${dd.summary}</p>
+      <div style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:16px;">
         <div>
-          <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--grey-400);margin-bottom:8px;">Citation shifts</div>
-          <table class="data-table" style="font-size:12px;">
-            <thead><tr><th>Source</th><th style="width:50px;">Before</th><th style="width:50px;">After</th><th style="width:60px;">Δ</th></tr></thead>
+          <table class="data-table" style="font-size:11px;">
+            <thead><tr><th>Source</th><th style="width:40px;text-align:center;">Before</th><th style="width:40px;text-align:center;">After</th><th style="width:45px;text-align:center;">Δ</th></tr></thead>
             <tbody>`;
 
     dd.citations.forEach(c => {
-      const deltaColor = c.delta > 0 ? 'var(--green)' : c.delta < 0 ? 'var(--red)' : 'var(--grey-400)';
-      const newTag = c.isNew ? ' <span style="font-size:9px;font-weight:700;color:var(--beetroot);background:var(--beetroot-light);padding:1px 4px;border-radius:3px;">NEW</span>' : '';
-      const goneTag = c.countB === 0 ? ' <span style="font-size:9px;font-weight:700;color:var(--red);background:#FDECEC;padding:1px 4px;border-radius:3px;">GONE</span>' : '';
-      ddHtml += `<tr>
-        <td><strong>${c.source}</strong>${newTag}${goneTag}<br><span style="color:var(--grey-400);font-size:11px;">${c.detail}</span></td>
+      const dCol = c.delta > 0 ? 'var(--green)' : c.delta < 0 ? 'var(--red)' : 'var(--grey-400)';
+      const tag = c.isNew ? ' <span style="font-size:8px;font-weight:700;color:var(--beetroot);background:var(--beetroot-light);padding:1px 3px;border-radius:2px;">NEW</span>' : (c.countB === 0 ? ' <span style="font-size:8px;font-weight:700;color:var(--red);background:#FDECEC;padding:1px 3px;border-radius:2px;">GONE</span>' : '');
+      html += `<tr>
+        <td><strong>${c.source}</strong>${tag}<br><span style="color:var(--grey-400);font-size:10px;">${c.detail}</span></td>
         <td style="text-align:center;">${c.countA}</td>
         <td style="text-align:center;">${c.countB}</td>
-        <td style="text-align:center;color:${deltaColor};font-weight:600;">${c.delta > 0 ? '+' : ''}${c.delta}</td>
+        <td style="text-align:center;color:${dCol};font-weight:600;">${c.delta > 0 ? '+' : ''}${c.delta}</td>
       </tr>`;
     });
 
-    ddHtml += `</tbody></table>
+    html += `</tbody></table>
         </div>
         <div>
-          <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--grey-400);margin-bottom:8px;">Platform sentiment</div>
-          <div style="height:200px;position:relative;"><canvas id="attrPlatChart${i}"></canvas></div>
-          <div style="margin-top:16px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--grey-400);margin-bottom:8px;">Actions</div>
-          <ul style="font-size:12px;color:var(--grey-700);padding-left:16px;list-style:disc;">`;
-
-    dd.actions.forEach(a => { ddHtml += `<li style="margin-bottom:6px;">${a}</li>`; });
-
-    ddHtml += `</ul>
+          <div style="height:180px;position:relative;"><canvas id="attrPlatChart${i}"></canvas></div>
+          <ul style="font-size:11px;color:var(--grey-700);padding-left:14px;list-style:disc;margin-top:12px;">`;
+    dd.actions.forEach(a => { html += `<li style="margin-bottom:4px;">${a}</li>`; });
+    html += `</ul>
         </div>
       </div>
     </div>`;
   });
 
-  divesContainer.innerHTML = ddHtml;
+  container.innerHTML = html;
 
-  // Render platform charts
+  // Render platform mini-charts
   attr.deepDives.forEach((dd, i) => {
     const canvas = document.getElementById('attrPlatChart' + i);
     if (!canvas) return;
@@ -3053,16 +2984,16 @@ function renderAttribution() {
       data: {
         labels: dd.platforms.map(p => p.name),
         datasets: [
-          { label: attr.periodA, data: dd.platforms.map(p => p.rateA), backgroundColor: 'rgba(224,0,77,0.25)', borderRadius: 3, barThickness: 12 },
-          { label: attr.periodB, data: dd.platforms.map(p => p.rateB), backgroundColor: '#E0004D', borderRadius: 3, barThickness: 12 }
+          { label: attr.periodA, data: dd.platforms.map(p => p.rateA), backgroundColor: 'rgba(224,0,77,0.25)', borderRadius: 3, barThickness: 10 },
+          { label: attr.periodB, data: dd.platforms.map(p => p.rateB), backgroundColor: '#E0004D', borderRadius: 3, barThickness: 10 }
         ]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.raw + '%'; } } } },
+        plugins: { legend: { position: 'top', labels: { boxWidth: 8, font: { size: 9 } } }, tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.raw + '%'; } } } },
         scales: {
-          y: { min: 40, max: 105, ticks: { callback: function(v) { return v + '%'; }, font: { size: 10 } }, grid: { color: '#F0F0F0' } },
-          x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 45 } }
+          y: { min: 40, max: 105, ticks: { callback: function(v) { return v + '%'; }, font: { size: 9 } }, grid: { color: '#F0F0F0' } },
+          x: { grid: { display: false }, ticks: { font: { size: 8 }, maxRotation: 45 } }
         }
       }
     });
