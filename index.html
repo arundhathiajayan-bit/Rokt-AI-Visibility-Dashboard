@@ -201,6 +201,7 @@
   <div class="nav-tab" onclick="switchTab('citations', this)">Citations & Sources</div>
   <div class="nav-tab" onclick="switchTab('competition', this)">Competition</div>
   <div class="nav-tab" onclick="switchTab('gaps', this)">Gaps</div>
+  <div class="nav-tab" onclick="switchTab('attribution', this)">Attribution</div>
 </div>
 
 <div class="content">
@@ -413,6 +414,37 @@
     <div class="card full-card">
       <table class="data-table" id="lowSentimentTable"></table>
     </div>
+  </div>
+
+  <!-- ===================== TAB 5: ATTRIBUTION ===================== -->
+  <div id="tab-attribution" class="tab-content">
+
+    <div class="week-nav">
+      <button class="week-nav-btn" id="prevWeekBtn6" onclick="navigateWeek(-1)"><span>&#8592;</span> Previous</button>
+      <div class="week-nav-center">
+        <div class="week-nav-date" id="weekDateDisplay6"></div>
+        <div class="week-nav-range" id="weekRangeDisplay6"></div>
+      </div>
+      <button class="week-nav-btn" id="nextWeekBtn6" onclick="navigateWeek(1)">Next <span>&#8594;</span></button>
+    </div>
+
+    <div class="section-title">What's driving sentiment changes?</div>
+    <p style="font-size: 13px; color: var(--grey-700); margin: -8px 0 20px;">Citation-level attribution for topics that moved ±2pp between periods. Shows which content is helping or hurting sentiment.</p>
+
+    <div id="attributionNoData" style="display:none;" class="card full-card">
+      <p style="text-align:center;color:var(--grey-400);padding:24px;font-size:14px;">Attribution data not available for this period. Attribution analysis requires two consecutive periods to compare.</p>
+    </div>
+
+    <!-- Topic Movers Summary -->
+    <div id="attributionMovers" class="card full-card" style="margin-bottom:24px;">
+      <h3 style="margin-bottom:4px;">Topic movers</h3>
+      <p class="card-sub">Topics ranked by sentiment shift between periods</p>
+      <div style="height:260px;position:relative;"><canvas id="moverBarChart"></canvas></div>
+    </div>
+
+    <!-- Flagged Topic Deep Dives -->
+    <div id="attributionDeepDives"></div>
+
   </div>
 
 </div>
@@ -2039,6 +2071,83 @@ const weekData = [
       { topic: 'Culture', rate: 72.2, note: 'Reversed the four-week decline with a +2.7pp improvement. First positive movement since Week 10. Q2 prompt refresh may be helping.' },
       { topic: 'Rokt Upcart', rate: 73.6, note: 'Slight improvement (+0.9pp). Upcart sentiment has been stable in the low 70s range.' }
     ],
+    attribution: {
+      responsesA: 481, responsesB: 693,
+      periodA: 'May 18-24', periodB: 'May 25-Jun 4',
+      movers: [
+        { topic: 'Rokt Thanks', rateA: 96.2, rateB: 100.0, delta: 3.8, flag: 'improved' },
+        { topic: 'Rokt Upcart', rateA: 98.1, rateB: 100.0, delta: 1.9, flag: 'minor' },
+        { topic: 'Rokt Catalog', rateA: 98.1, rateB: 100.0, delta: 1.9, flag: 'minor' },
+        { topic: 'Rokt Pay+', rateA: 100.0, rateB: 100.0, delta: 0, flag: 'stagnant' },
+        { topic: 'Rokt Product', rateA: 100.0, rateB: 100.0, delta: 0, flag: 'stagnant' },
+        { topic: 'Industry TL', rateA: 100.0, rateB: 100.0, delta: 0, flag: 'stagnant' },
+        { topic: 'Competitive', rateA: 100.0, rateB: 100.0, delta: 0, flag: 'stagnant' },
+        { topic: 'Rokt Ads', rateA: 100.0, rateB: 100.0, delta: 0, flag: 'stagnant' },
+        { topic: 'Culture', rateA: 100.0, rateB: 98.7, delta: -1.3, flag: 'minor' }
+      ],
+      deepDives: [
+        {
+          topic: 'Rokt Thanks',
+          delta: '+3.8pp',
+          direction: 'improved',
+          summary: 'Sentiment rose from 96.2% to 100% positive. All responses in Period B classified positive. Driven by owned content gaining citation share — rokt.com product pages, docs.rokt.com, and third-party credibility signals all grew.',
+          citations: [
+            { source: 'rokt.com', detail: 'Thanks product page', countA: 35, countB: 50, delta: 15, sentiment: '100%', isNew: false },
+            { source: 'docs.rokt.com', detail: 'Ecommerce overview', countA: 1, countB: 14, delta: 13, sentiment: '100%', isNew: false },
+            { source: 'rokt.com', detail: 'Features differentiation', countA: 7, countB: 16, delta: 9, sentiment: '100%', isNew: false },
+            { source: 'en.wikipedia.org', detail: 'Rokt', countA: 13, countB: 21, delta: 8, sentiment: '100%', isNew: false },
+            { source: 'linkedin.com', detail: 'Thanks profit article', countA: 4, countB: 11, delta: 7, sentiment: '100%', isNew: false },
+            { source: 'finextra.com', detail: 'PayPal taps Rokt', countA: 0, countB: 4, delta: 4, sentiment: '100%', isNew: true },
+            { source: 'aftersell.com', detail: 'Thanks page', countA: 21, countB: 16, delta: -5, sentiment: '100%', isNew: false },
+            { source: 'retail-insider.com', detail: 'Pricing transparency', countA: 4, countB: 0, delta: -4, sentiment: 'N/A', isNew: false }
+          ],
+          platforms: [
+            { name: 'Perplexity', rateA: 100, rateB: 100 },
+            { name: 'Claude', rateA: 100, rateB: 100 },
+            { name: 'AI Overviews', rateA: 100, rateB: 100 },
+            { name: 'AI Mode', rateA: 100, rateB: 100 },
+            { name: 'Copilot', rateA: 100, rateB: 100 },
+            { name: 'Gemini', rateA: 71, rateB: 91 },
+            { name: 'ChatGPT', rateA: 86, rateB: 82 }
+          ],
+          actions: [
+            'Continue investing in rokt.com/thanks content — it\'s the #1 cited source and growing.',
+            'docs.rokt.com surged from 1→14 citations. Technical documentation is being picked up by LLMs — keep it updated.',
+            'PayPal partnership (finextra.com) is a new credibility signal. Amplify with owned content about the partnership.',
+            'Monitor ChatGPT — only platform where Rokt Thanks sentiment dipped slightly (86%→82%).'
+          ]
+        },
+        {
+          topic: 'Culture',
+          delta: '-1.3pp',
+          direction: 'watch',
+          summary: 'Minor dip from 100% to 98.7% — 1 non-positive response out of 77. Not alarming, but ChatGPT is the weakest platform at 55% positive. ChatGPT cites Glassdoor and Reddit heavily, which carry mixed employee sentiment.',
+          citations: [
+            { source: 'retail-insider.com', detail: 'Promotes From Within', countA: 10, countB: 46, delta: 36, sentiment: '98%', isNew: false },
+            { source: 'fortune.com', detail: 'Building culture at speed', countA: 5, countB: 20, delta: 15, sentiment: '100%', isNew: false },
+            { source: 'rokt.com', detail: 'Culture page', countA: 30, countB: 45, delta: 15, sentiment: '100%', isNew: false },
+            { source: 'builtin.com', detail: 'Rokt Careers & Perks', countA: 15, countB: 29, delta: 14, sentiment: '100%', isNew: false },
+            { source: 'rokt.com', detail: 'What Is It Like to Work at Rokt', countA: 0, countB: 11, delta: 11, sentiment: '100%', isNew: true },
+            { source: 'comparably.com', detail: 'Rokt Culture', countA: 20, countB: 8, delta: -12, sentiment: '75%', isNew: false }
+          ],
+          platforms: [
+            { name: 'Perplexity', rateA: 100, rateB: 100 },
+            { name: 'Claude', rateA: 100, rateB: 100 },
+            { name: 'AI Mode', rateA: 100, rateB: 100 },
+            { name: 'Copilot', rateA: 71, rateB: 91 },
+            { name: 'AI Overviews', rateA: 100, rateB: 91 },
+            { name: 'Gemini', rateA: 100, rateB: 82 },
+            { name: 'ChatGPT', rateA: 71, rateB: 55 }
+          ],
+          actions: [
+            'ChatGPT Culture sentiment dropped to 55% — worst of any platform/topic combo. It cites Glassdoor, Reddit, and Indeed reviews that surface "toxic leadership", "fear-based management", and "work-life balance" themes.',
+            'Comparably.com dropped -12 citations — employee review site losing share but still influencing ChatGPT responses.',
+            'New rokt.com page "What Is It Like to Work at Rokt" gained 11 citations — owned culture content is working, do more.',
+            'Can\'t outrun review sites on ChatGPT — focus on volume of positive owned content so positive themes outnumber negatives.'
+          ]
+        }
+      ]
+    },
     insights: {
       overview: [
         { tag: 'platform', label: 'Platform', text: 'Grok absent from this period entirely — all seven remaining platforms in a tight 1,430-1,440 range. AI Mode leads marginally. Total branded mentions ~10K for the bi-weekly period.' },
@@ -2334,7 +2443,7 @@ function renderWeekNav() {
   });
   document.getElementById('lastUpdated').textContent = 'Last updated: ' + weekData[weekData.length - 1].weekOf;
   // Sync all tab week navs
-  [2, 3, 4, 5].forEach(n => {
+  [2, 3, 4, 5, 6].forEach(n => {
     const dt = document.getElementById('weekDateDisplay' + n);
     const rn = document.getElementById('weekRangeDisplay' + n);
     const pb = document.getElementById('prevWeekBtn' + n);
@@ -2828,6 +2937,138 @@ function renderCohortPanel() {
   grid.innerHTML = html;
 }
 
+// ===== ATTRIBUTION TAB =====
+let moverChart;
+const deepDivePlatCharts = {};
+
+function renderAttribution() {
+  const week = weekData[currentWeekIdx];
+  const noData = document.getElementById('attributionNoData');
+  const moversCard = document.getElementById('attributionMovers');
+  const divesContainer = document.getElementById('attributionDeepDives');
+
+  if (!week.attribution) {
+    noData.style.display = '';
+    moversCard.style.display = 'none';
+    divesContainer.innerHTML = '';
+    if (moverChart) { moverChart.destroy(); moverChart = null; }
+    return;
+  }
+  noData.style.display = 'none';
+  moversCard.style.display = '';
+
+  const attr = week.attribution;
+
+  // Mover bar chart
+  if (moverChart) moverChart.destroy();
+  const moverLabels = attr.movers.map(m => m.topic);
+  const moverDeltas = attr.movers.map(m => m.delta);
+  const moverColors = moverDeltas.map(d => d >= 2 ? '#2ECC71' : d <= -2 ? '#E74C3C' : d > 0 ? 'rgba(46,204,113,0.5)' : d < 0 ? 'rgba(231,76,60,0.5)' : '#ADB5BD');
+
+  moverChart = new Chart(document.getElementById('moverBarChart'), {
+    type: 'bar',
+    data: {
+      labels: moverLabels,
+      datasets: [{
+        data: moverDeltas,
+        backgroundColor: moverColors,
+        borderRadius: 4,
+        barThickness: 22
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { return (ctx.raw > 0 ? '+' : '') + ctx.raw.toFixed(1) + 'pp'; } } }
+      },
+      scales: {
+        x: { grid: { color: '#F0F0F0' }, ticks: { callback: function(v) { return (v > 0 ? '+' : '') + v + 'pp'; }, font: { size: 11 } }, min: -4, max: 6 },
+        y: { grid: { display: false }, ticks: { font: { size: 12 } } }
+      }
+    }
+  });
+
+  // Deep dive cards
+  Object.values(deepDivePlatCharts).forEach(c => c.destroy());
+  let ddHtml = '';
+  attr.deepDives.forEach((dd, i) => {
+    const dirIcon = dd.direction === 'improved' ? '&#x2191;' : dd.direction === 'declined' ? '&#x2193;' : '&#x26A0;';
+    const dirColor = dd.direction === 'improved' ? 'var(--green)' : dd.direction === 'declined' ? 'var(--red)' : 'var(--amber)';
+    const dirLabel = dd.direction === 'improved' ? 'Improved' : dd.direction === 'declined' ? 'Declined' : 'Watch';
+
+    ddHtml += `<div class="card full-card" style="margin-bottom:24px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:${dirColor};color:#fff;font-weight:700;font-size:14px;">${dirIcon}</span>
+        <h3 style="margin:0;">${dd.topic} <span style="font-weight:400;color:${dirColor};">${dd.delta}</span></h3>
+        <span style="font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;background:${dd.direction === 'improved' ? '#E8F8F0' : dd.direction === 'watch' ? '#FFF8E1' : '#FDECEC'};color:${dirColor};">${dirLabel}</span>
+      </div>
+      <p style="font-size:13px;color:var(--grey-700);margin-bottom:16px;">${dd.summary}</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--grey-400);margin-bottom:8px;">Citation shifts</div>
+          <table class="data-table" style="font-size:12px;">
+            <thead><tr><th>Source</th><th style="width:50px;">Before</th><th style="width:50px;">After</th><th style="width:60px;">Δ</th></tr></thead>
+            <tbody>`;
+
+    dd.citations.forEach(c => {
+      const deltaColor = c.delta > 0 ? 'var(--green)' : c.delta < 0 ? 'var(--red)' : 'var(--grey-400)';
+      const newTag = c.isNew ? ' <span style="font-size:9px;font-weight:700;color:var(--beetroot);background:var(--beetroot-light);padding:1px 4px;border-radius:3px;">NEW</span>' : '';
+      const goneTag = c.countB === 0 ? ' <span style="font-size:9px;font-weight:700;color:var(--red);background:#FDECEC;padding:1px 4px;border-radius:3px;">GONE</span>' : '';
+      ddHtml += `<tr>
+        <td><strong>${c.source}</strong>${newTag}${goneTag}<br><span style="color:var(--grey-400);font-size:11px;">${c.detail}</span></td>
+        <td style="text-align:center;">${c.countA}</td>
+        <td style="text-align:center;">${c.countB}</td>
+        <td style="text-align:center;color:${deltaColor};font-weight:600;">${c.delta > 0 ? '+' : ''}${c.delta}</td>
+      </tr>`;
+    });
+
+    ddHtml += `</tbody></table>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--grey-400);margin-bottom:8px;">Platform sentiment</div>
+          <div style="height:200px;position:relative;"><canvas id="attrPlatChart${i}"></canvas></div>
+          <div style="margin-top:16px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--grey-400);margin-bottom:8px;">Actions</div>
+          <ul style="font-size:12px;color:var(--grey-700);padding-left:16px;list-style:disc;">`;
+
+    dd.actions.forEach(a => { ddHtml += `<li style="margin-bottom:6px;">${a}</li>`; });
+
+    ddHtml += `</ul>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  divesContainer.innerHTML = ddHtml;
+
+  // Render platform charts
+  attr.deepDives.forEach((dd, i) => {
+    const canvas = document.getElementById('attrPlatChart' + i);
+    if (!canvas) return;
+    deepDivePlatCharts[i] = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: dd.platforms.map(p => p.name),
+        datasets: [
+          { label: attr.periodA, data: dd.platforms.map(p => p.rateA), backgroundColor: 'rgba(224,0,77,0.25)', borderRadius: 3, barThickness: 12 },
+          { label: attr.periodB, data: dd.platforms.map(p => p.rateB), backgroundColor: '#E0004D', borderRadius: 3, barThickness: 12 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.raw + '%'; } } } },
+        scales: {
+          y: { min: 40, max: 105, ticks: { callback: function(v) { return v + '%'; }, font: { size: 10 } }, grid: { color: '#F0F0F0' } },
+          x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 45 } }
+        }
+      }
+    });
+  });
+}
+
 function updateAll() {
   const week = weekData[currentWeekIdx];
   renderWeekNav();
@@ -2843,6 +3084,7 @@ function updateAll() {
   renderCitationInsights();
   renderCompetition();
   renderGaps();
+  renderAttribution();
   renderInsightStrip('overviewInsights', week.insights.overview);
 }
 
