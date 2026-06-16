@@ -264,12 +264,6 @@
       <div class="cohort-items" id="cohortGrid"></div>
     </div>
 
-    <!-- Branded avg position competitors table -->
-    <div class="card full-card" id="brandedPositionCard">
-      <h3>Average Position — Branded Queries</h3>
-      <p class="card-sub">Top 5 assets by average position when someone asks about Rokt by name</p>
-      <table class="data-table" id="brandedPositionTable"></table>
-    </div>
 
     <!-- Charts -->
     <div class="two-col">
@@ -2002,9 +1996,28 @@ const weekData = [
         'Gemini': { rokt: 80.5, fluent: 69.3, uptick: 74.6, thanksCo: 66.9 },
         'ChatGPT': { rokt: 72.1, fluent: 63.4, uptick: 68.2, thanksCo: 60.8 }
       },
-      fluentSpillover: {},
-      uptickSpillover: {},
-      thanksCoSpillover: {}
+      sentimentByTopic: {
+        'Rokt Product': { rokt: 71.8, fluent: 68.2, uptick: 66.9, thanksCo: 65.4 },
+        'Culture': { rokt: 72.2, fluent: 71.1, uptick: 85.3, thanksCo: 78.6 },
+        'Rokt Upcart': { rokt: 73.6, fluent: 65.1, uptick: 76.4, thanksCo: 64.8 },
+        'Competitive': { rokt: 77.3, fluent: 57.8, uptick: 69.2, thanksCo: 68.1 },
+        'Rokt Thanks': { rokt: 78.1, fluent: 64.5, uptick: 72.8, thanksCo: 81.2 },
+        'Rokt Pay+': { rokt: 79.5, fluent: 62.8, uptick: 78.1, thanksCo: 56.2 },
+        'Persona-Led': { rokt: 74.8, fluent: 72.6, uptick: 75.1, thanksCo: 65.3 },
+        'Rokt Ads': { rokt: 82.1, fluent: 70.4, uptick: 63.5, thanksCo: 65.1 },
+        'Rokt Catalog': { rokt: 80.3, fluent: 59.8, uptick: 65.2, thanksCo: 67.4 },
+        'Rokt Aftersell': { rokt: 81.6, fluent: 55.2, uptick: 66.7, thanksCo: 74.8 },
+        'Industry Thought Leadership': { rokt: 83.2, fluent: 77.1, uptick: 58.4, thanksCo: 41.2 }
+      },
+      themes: {
+        rokt: ['Integration Complexity', 'Pricing Transparency', 'Ecosystem Dependence', 'Privacy & Data Concerns'],
+        fluent: ['Financial Instability', 'Revenue Declines', 'Profitability Challenges', 'Weak Competitive Moat'],
+        uptick: ['Integration Complexity', 'Narrow Scope', 'Limited Reviews', 'Not Full-Funnel'],
+        thanksCo: ['Limited Reviews', 'Platform Dependency', 'Lack of Information', 'Low Trust Score']
+      },
+      fluentSpillover: { 'Rokt Product': 22, 'Industry Thought Leadership': 12, 'Persona-Led': 8, 'Rokt Aftersell': 7, 'Rokt Ads': 3 },
+      uptickSpillover: { 'Industry Thought Leadership': 2, 'Rokt Product': 1, 'Rokt Catalog': 1 },
+      thanksCoSpillover: { 'Rokt Catalog': 1, 'Rokt Thanks': 1 }
     },
     cohorts: {
       q1: { label: 'Q1 Continuity (303 prompts)', vis: 48.3, sov: 11.3, pos: 1.2, mentions: 7474 },
@@ -2158,7 +2171,8 @@ const weekData = [
       competition: {
         sov: { tag: 'competition', label: 'Competition', text: 'Branded SOV rebounded to 35.8% (+0.9pp). Both Uptick and ThanksCo slightly improved position (2.0 and 2.1). Citation share recovered to 45.5% (+1.6pp) — back to Week 13 levels.' },
         sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Rokt leads all competitors on every platform. AI Mode (84.1%) and AI Overviews (83.7%) are Rokt\'s strongest platforms. ChatGPT remains the weakest at 72.1% — still 8.7pp above Fluent. Copilot improved to 78.3%, up from the low 60s in Q1.' },
-        sentimentTopic: null, spillover: null
+        sentimentTopic: { tag: 'competition', label: 'Competition', text: 'Culture (72.2%) and Rokt Product (71.8%) remain the weakest topics. Uptick beats Rokt on Culture (85.3% vs 72.2%) and ThanksCo beats on Rokt Thanks (81.2% vs 78.1%). Rokt leads on Industry Thought Leadership (83.2%), Rokt Ads (82.1%), and Aftersell (81.6%).' },
+        spillover: { tag: 'competition', label: 'Competition', text: 'Fluent spillover reduced from previous peaks — 22 mentions in Rokt Product (down from 26) and 12 in Industry Thought Leadership (down from 15). Uptick and ThanksCo spillover minimal at 4 and 2 total topic appearances respectively.' }
       },
       gaps: [
         { tag: 'gap', label: 'Gap', text: 'Culture is no longer the weakest theme — Rokt Product (71.8%) is now marginally lower. The Q2 prompt refresh may be shifting how LLMs discuss Rokt\'s culture, but the improvement is small and needs sustained momentum.' },
@@ -2473,32 +2487,6 @@ function navigateWeek(dir) {
   if (n >= 0 && n < weekData.length) { currentWeekIdx = n; updateAll(); }
 }
 
-function renderBrandedPosition() {
-  const week = weekData[currentWeekIdx];
-  if (!week.brandedPositionCompetitors) {
-    document.getElementById('brandedPositionCard').style.display = 'none';
-    return;
-  }
-  document.getElementById('brandedPositionCard').style.display = '';
-  const el = document.getElementById('brandedPositionTable');
-  let html = '<thead><tr><th>Asset</th><th>Avg Position</th><th>Δ</th></tr></thead><tbody>';
-  week.brandedPositionCompetitors.forEach(d => {
-    const isRokt = d.asset === 'Rokt';
-    const name = isRokt ? '<strong>Rokt</strong>' : d.asset;
-    let dBadge = '';
-    if (d.delta === null) dBadge = '<span class="badge badge-baseline">Baseline</span>';
-    else if (d.delta === 0) dBadge = '<span class="badge badge-grey">—</span>';
-    else {
-      const better = d.delta > 0; // higher position number = worse for avg position, but delta here is position change
-      const sign = d.delta > 0 ? '+' : '';
-      // For position: negative delta = position improved (moved up), positive = worsened
-      const cls = d.delta < 0 ? 'badge-green' : d.delta > 0 ? 'badge-red' : 'badge-grey';
-      dBadge = `<span class="badge ${cls}">${sign}${d.delta}</span>`;
-    }
-    html += `<tr><td>${name}</td><td>${d.pos}</td><td>${dBadge}</td></tr>`;
-  });
-  el.innerHTML = html + '</tbody>';
-}
 
 function fmtDelta(val) {
   if (val === null || val === undefined) return '<span class="badge badge-baseline">Baseline</span>';
@@ -2793,7 +2781,7 @@ function renderCharts() {
         { label: 'Non-Branded', data: weekData.map(w => w.unbranded.sov.value), borderColor: blue, backgroundColor: 'rgba(52,152,219,0.1)', fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: blue, borderDash: [5,5] }
       ]
     },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } }, scales: { y: { min: 0, max: 50, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } } }
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } }, scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } } }
   });
 
   const week = weekData[currentWeekIdx];
@@ -2804,7 +2792,7 @@ function renderCharts() {
       labels: week.platforms.labels,
       datasets: [{ label: 'Non-Branded Mentions', data: week.platforms.mentions, backgroundColor: week.platforms.labels.map(l => tierColors[platformTiers[l] || 2]), borderRadius: 6, barThickness: 28 }]
     },
-    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + ' mentions' } } }, scales: { x: { grid: { color: '#F0F0F0' } }, y: { grid: { display: false } } } }
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const total = ctx.dataset.data.reduce((s,v) => s+v, 0); const pct = ((ctx.parsed.x / total) * 100).toFixed(1); return ctx.parsed.x.toLocaleString() + ' mentions (' + pct + '% of total)'; } } } }, scales: { x: { grid: { color: '#F0F0F0' } }, y: { grid: { display: false } } } }
   });
 
   if (week.citationCategories) {
@@ -2813,7 +2801,11 @@ function renderCharts() {
     citChart = new Chart(document.getElementById('citationPieChart'), {
       type: 'doughnut',
       data: {
-        labels: ['Owned (' + cc.owned + '%)', 'Earned Media (' + cc.earned + '%)', 'Social (' + cc.social + '%)', 'Competition (' + cc.competition + '%)', 'Other (' + cc.other + '%)'],
+        labels: (() => {
+          const pcc = week.prevCitationCategories;
+          const d = (cur, prev) => { if (!pcc) return ''; const delta = (cur - prev).toFixed(1); return delta > 0 ? ' ↑' + delta + 'pp' : delta < 0 ? ' ' + delta + 'pp' : ''; };
+          return ['Owned (' + cc.owned + '%' + d(cc.owned, pcc?.owned) + ')', 'Earned Media (' + cc.earned + '%' + d(cc.earned, pcc?.earned) + ')', 'Social (' + cc.social + '%' + d(cc.social, pcc?.social) + ')', 'Competition (' + cc.competition + '%' + d(cc.competition, pcc?.competition) + ')', 'Other (' + cc.other + '%' + d(cc.other, pcc?.other) + ')'];
+        })(),
         datasets: [{ data: [cc.owned, cc.earned, cc.social, cc.competition, cc.other], backgroundColor: ['#E0004D', '#3498DB', '#7D3C98', '#F39C12', '#E9ECEF'], borderWidth: 0 }]
       },
       options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, padding: 10, font: { size: 11 } } } } }
@@ -3008,7 +3000,6 @@ function updateAll() {
   renderNonBrandedCallout();
   renderPlatformContext();
   renderCohortPanel();
-  renderBrandedPosition();
   renderCharts();
   renderTopDomains();
   renderOwnedContent();
