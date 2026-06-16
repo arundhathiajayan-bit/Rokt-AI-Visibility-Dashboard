@@ -63,15 +63,19 @@
   .phase-badge.q1 { background: #F0F0F0; color: var(--grey-700); }
   .phase-badge.q2 { background: rgba(194,0,117,0.1); color: var(--beetroot); }
   .cadence-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 500; background: #EEF2FF; color: #4F46E5; margin-left: 6px; }
-  .cohort-panel { background: var(--white); border-radius: 12px; padding: 16px 20px; border: 1px solid var(--grey-200); margin-bottom: 20px; }
-  .cohort-panel h3 { font-size: 14px; font-weight: 700; color: var(--grey-900); margin-bottom: 12px; }
-  .cohort-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .cohort-card { background: var(--grey-50); border-radius: 8px; padding: 14px; border: 1px solid var(--grey-200); }
-  .cohort-card h4 { font-size: 12px; font-weight: 600; color: var(--grey-700); margin-bottom: 10px; }
-  .cohort-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .cohort-metric { text-align: center; }
-  .cohort-metric .cm-label { font-size: 10px; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.5px; }
-  .cohort-metric .cm-value { font-size: 16px; font-weight: 700; color: var(--grey-900); margin-top: 2px; }
+  .cohort-panel { background: var(--grey-50); border-radius: 8px; padding: 10px 16px; border: 1px solid var(--grey-200); margin-bottom: 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .cohort-panel .cohort-label { font-size: 11px; font-weight: 600; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  .cohort-panel .cohort-items { display: flex; gap: 20px; flex-wrap: wrap; }
+  .cohort-panel .cohort-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--grey-700); }
+  .cohort-panel .cohort-item .cv { font-weight: 700; color: var(--grey-900); }
+  .comparison-row { background: var(--white); border-radius: 12px; padding: 14px 20px; border: 1px solid var(--grey-200); margin-bottom: 20px; }
+  .comparison-row h3 { font-size: 12px; font-weight: 600; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .comparison-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .comparison-table th { text-align: left; font-size: 10px; font-weight: 600; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 12px 6px 0; }
+  .comparison-table td { padding: 6px 12px 6px 0; color: var(--grey-900); }
+  .comparison-table td.metric-val { font-weight: 700; font-size: 13px; }
+  .comparison-table tr.branded-row td { border-bottom: 1px solid var(--grey-200); }
+  .comparison-table .delta-cell { font-size: 11px; }
 
   .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
   .kpi-card { background: var(--white); border-radius: 12px; padding: 18px 20px; border: 1px solid var(--grey-200); transition: box-shadow 0.2s; }
@@ -248,10 +252,16 @@
     <div class="section-title">Branded Queries Performance</div>
     <div class="kpi-row" id="kpiBranded"></div>
 
-    <!-- Q1/Q2 Cohort Panel (only shown for Q2 entries) -->
+    <!-- Branded vs Non-Branded comparison -->
+    <div class="comparison-row" id="comparisonRow">
+      <h3>Branded vs Non-Branded</h3>
+      <table class="comparison-table" id="comparisonTable"></table>
+    </div>
+
+    <!-- Q1/Q2 Cohort callout (only shown for Q2 entries) -->
     <div id="cohortPanel" class="cohort-panel" style="display:none;">
-      <h3>Prompt Cohort Breakdown <span class="phase-badge q2">Q2 REFRESH</span></h3>
-      <div class="cohort-grid" id="cohortGrid"></div>
+      <div class="cohort-label">Prompt Cohorts</div>
+      <div class="cohort-items" id="cohortGrid"></div>
     </div>
 
     <!-- Branded avg position competitors table -->
@@ -260,10 +270,6 @@
       <p class="card-sub">Top 5 assets by average position when someone asks about Rokt by name</p>
       <table class="data-table" id="brandedPositionTable"></table>
     </div>
-
-    <!-- Unbranded Section -->
-    <div class="section-title">Non-Branded Queries Performance</div>
-    <div class="kpi-row" id="kpiUnbranded"></div>
 
     <!-- Charts -->
     <div class="two-col">
@@ -2819,18 +2825,41 @@ function renderCohortPanel() {
   ['q1', 'q2'].forEach(key => {
     const c = week.cohorts[key];
     if (!c) return;
-    const tagClass = key === 'q1' ? 'q1' : 'q2';
-    html += `<div class="cohort-card">
-      <h4><span class="phase-badge ${tagClass}">${key.toUpperCase()}</span> ${c.label}</h4>
-      <div class="cohort-metrics">
-        <div class="cohort-metric"><div class="cm-label">Visibility</div><div class="cm-value">${c.vis}%</div></div>
-        <div class="cohort-metric"><div class="cm-label">SOV</div><div class="cm-value">${c.sov}%</div></div>
-        <div class="cohort-metric"><div class="cm-label">Avg Pos</div><div class="cm-value">${c.pos}</div></div>
-        <div class="cohort-metric"><div class="cm-label">Mentions</div><div class="cm-value">${c.mentions.toLocaleString()}</div></div>
-      </div>
-    </div>`;
+    html += `<div class="cohort-item"><span class="phase-badge ${key}">${key.toUpperCase()}</span> ${c.label} — <span class="cv">${c.vis}%</span> vis, <span class="cv">${c.sov}%</span> SOV, <span class="cv">${c.mentions.toLocaleString()}</span> mentions</div>`;
   });
   grid.innerHTML = html;
+}
+
+function renderComparison() {
+  const week = weekData[currentWeekIdx];
+  const b = week.branded;
+  const u = week.unbranded;
+  const table = document.getElementById('comparisonTable');
+  function fmt(val, suffix) { return val != null ? val + suffix : '—'; }
+  function delt(d, unit, lowerBetter) {
+    if (d == null) return '<span style="color:var(--grey-400)">—</span>';
+    const good = lowerBetter ? d < 0 : d > 0;
+    const col = good ? 'var(--green)' : d === 0 ? 'var(--grey-400)' : 'var(--red)';
+    const arrow = good ? '↑' : d === 0 ? '—' : '↓';
+    return `<span style="color:${col}">${arrow} ${Math.abs(d)}${unit}</span>`;
+  }
+  table.innerHTML = `<thead><tr><th></th><th>Visibility</th><th>SOV</th><th>Avg Position</th><th>Sentiment</th></tr></thead>
+  <tbody>
+    <tr class="branded-row">
+      <td style="font-weight:600;">Branded</td>
+      <td class="metric-val">${fmt(b.visibility.value,'%')} <span class="delta-cell">${delt(b.visibility.delta,'pp')}</span></td>
+      <td class="metric-val">${fmt(b.sov.value,'%')} <span class="delta-cell">${delt(b.sov.delta,'pp')}</span></td>
+      <td class="metric-val">${fmt(b.avgPos.value,'')} <span class="delta-cell">${delt(b.avgPos.delta,'',true)}</span></td>
+      <td class="metric-val">${fmt(b.sentiment.value,'%')} <span class="delta-cell">${delt(b.sentiment.delta,'pp')}</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;color:var(--grey-400);">Non-Branded</td>
+      <td class="metric-val" style="color:var(--grey-700);">${fmt(u.visibility.value,'%')} <span class="delta-cell">${delt(u.visibility.delta,'pp')}</span></td>
+      <td class="metric-val" style="color:var(--grey-700);">${fmt(u.sov.value,'%')} <span class="delta-cell">${delt(u.sov.delta,'pp')}</span></td>
+      <td class="metric-val" style="color:var(--grey-700);">${fmt(u.avgPos.value,'')} <span class="delta-cell">${delt(u.avgPos.delta,'',true)}</span></td>
+      <td style="color:var(--grey-400);font-size:11px;">—</td>
+    </tr>
+  </tbody>`;
 }
 
 // ===== ATTRIBUTION (embedded in Gaps tab) =====
@@ -2925,9 +2954,9 @@ function updateAll() {
   renderWeekNav();
   renderTLDR();
   renderKPI('kpiBranded', week.branded, brandedConfigs);
+  renderComparison();
   renderCohortPanel();
   renderBrandedPosition();
-  renderKPI('kpiUnbranded', week.unbranded, unbrandedConfigs);
   renderCharts();
   renderTopDomains();
   renderOwnedContent();
