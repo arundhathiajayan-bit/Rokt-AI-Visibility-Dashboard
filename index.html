@@ -68,14 +68,14 @@
   .cohort-panel .cohort-items { display: flex; gap: 20px; flex-wrap: wrap; }
   .cohort-panel .cohort-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--grey-700); }
   .cohort-panel .cohort-item .cv { font-weight: 700; color: var(--grey-900); }
-  .comparison-row { background: var(--white); border-radius: 12px; padding: 14px 20px; border: 1px solid var(--grey-200); margin-bottom: 20px; }
-  .comparison-row h3 { font-size: 12px; font-weight: 600; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
-  .comparison-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .comparison-table th { text-align: left; font-size: 10px; font-weight: 600; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 12px 6px 0; }
-  .comparison-table td { padding: 6px 12px 6px 0; color: var(--grey-900); }
-  .comparison-table td.metric-val { font-weight: 700; font-size: 13px; }
-  .comparison-table tr.branded-row td { border-bottom: 1px solid var(--grey-200); }
-  .comparison-table .delta-cell { font-size: 11px; }
+  .adjusted-callout { background: var(--grey-50); border-radius: 8px; padding: 8px 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--grey-700); flex-wrap: wrap; }
+  .adjusted-callout .ac-label { font-weight: 600; color: var(--grey-400); font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
+  .adjusted-callout .ac-val { font-weight: 700; color: var(--grey-900); }
+  .adjusted-callout .ac-sep { color: var(--grey-300); }
+  .adjusted-callout .ac-note { font-style: italic; color: var(--grey-400); font-size: 11px; }
+  .nonbranded-callout { background: var(--grey-50); border-radius: 8px; padding: 8px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--grey-700); flex-wrap: wrap; }
+  .nonbranded-callout .nb-label { font-weight: 600; color: var(--grey-400); font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
+  .nonbranded-callout .nb-val { font-weight: 700; color: var(--grey-900); }
 
   .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
   .kpi-card { background: var(--white); border-radius: 12px; padding: 18px 20px; border: 1px solid var(--grey-200); transition: box-shadow 0.2s; }
@@ -252,11 +252,11 @@
     <div class="section-title">Branded Queries Performance</div>
     <div class="kpi-row" id="kpiBranded"></div>
 
-    <!-- Branded vs Non-Branded comparison -->
-    <div class="comparison-row" id="comparisonRow">
-      <h3>Branded vs Non-Branded</h3>
-      <table class="comparison-table" id="comparisonTable"></table>
-    </div>
+    <!-- Adjusted metrics callout (excl. Grok & Meta AI) -->
+    <div id="adjustedCallout" class="adjusted-callout" style="display:none;"></div>
+
+    <!-- Non-branded summary -->
+    <div id="nonBrandedCallout" class="nonbranded-callout"></div>
 
     <!-- Q1/Q2 Cohort callout (only shown for Q2 entries) -->
     <div id="cohortPanel" class="cohort-panel" style="display:none;">
@@ -291,6 +291,7 @@
         <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(224,0,77,0.9);vertical-align:middle;margin-right:4px;"></span>Tier 1 — Primary</span>
         <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(224,0,77,0.35);vertical-align:middle;margin-right:4px;"></span>Tier 2 — Secondary</span>
       </div>
+      <div id="platformContext" style="margin-top:12px;padding:10px 14px;background:var(--grey-50);border-radius:8px;font-size:12px;color:var(--grey-700);line-height:1.5;"></div>
     </div>
 
   </div>
@@ -1989,9 +1990,18 @@ const weekData = [
     phase: 'Q2',
     cadence: 'biweekly',
     isPhaseStart: true,
+    adjusted: { visibility: 99.9, sov: 35.8, sentiment: 80.2, note: 'Grok & Meta AI both absent this period — headline numbers already reflect core platforms' },
     competition: {
       sov: { rokt: 15.26, fluent: 4.49, uptick: 3.66, thanksCo: 2.76 },
-      sentimentByPlatform: null,
+      sentimentByPlatform: {
+        'Perplexity': { rokt: 82.4, fluent: 71.2, uptick: 76.8, thanksCo: 68.1 },
+        'Claude': { rokt: 81.9, fluent: 70.5, uptick: 75.3, thanksCo: 67.4 },
+        'AI Overviews': { rokt: 83.7, fluent: 72.8, uptick: 78.1, thanksCo: 70.2 },
+        'AI Mode': { rokt: 84.1, fluent: 73.1, uptick: 77.5, thanksCo: 69.8 },
+        'Copilot': { rokt: 78.3, fluent: 65.8, uptick: 72.1, thanksCo: 64.5 },
+        'Gemini': { rokt: 80.5, fluent: 69.3, uptick: 74.6, thanksCo: 66.9 },
+        'ChatGPT': { rokt: 72.1, fluent: 63.4, uptick: 68.2, thanksCo: 60.8 }
+      },
       fluentSpillover: {},
       uptickSpillover: {},
       thanksCoSpillover: {}
@@ -2023,6 +2033,24 @@ const weekData = [
       { domain: 'linkedin.com', share: 2.1, delta: -0.2 },
       { domain: 'shopify.com', share: 1.8, delta: -0.2 },
       { domain: 'forbes.com', share: 1.4, delta: 0.0 }
+    ],
+    citationCategories: { owned: 47.2, earned: 11.3, social: 12.5, competition: 1.9, other: 27.1 },
+    prevCitationCategories: { owned: 46.2, earned: 10.0, social: 13.8, competition: 2.1, other: 27.9 },
+    topDomains: [
+      { domain: 'rokt.com', share: 44.1, delta: -2.1, type: 'Owned', cls: 'badge-green' },
+      { domain: 'docs.rokt.com', share: 5.2, delta: 1.3, type: 'Owned', cls: 'badge-green' },
+      { domain: 'aftersell.com', share: 3.8, delta: -0.2, type: 'Owned', cls: 'badge-green' },
+      { domain: 'builtin.com', share: 2.8, delta: 0.2, type: 'Earned', cls: 'badge-blue' },
+      { domain: 'glassdoor.com', share: 2.5, delta: -0.1, type: 'Social', cls: 'badge-purple' },
+      { domain: 'retail-insider.com', share: 2.3, delta: 0.8, type: 'Earned', cls: 'badge-blue' },
+      { domain: 'linkedin.com', share: 2.1, delta: -0.1, type: 'Social', cls: 'badge-purple' },
+      { domain: 'reddit.com', share: 1.4, delta: 0.0, type: 'Social', cls: 'badge-purple' }
+    ],
+    ownedContent: [
+      { type: 'Product Pages', share: '3,180 citations', topPage: 'Rokt Thanks (742), Product Overview (595), Features (412)' },
+      { type: 'Docs / Help Center', share: '4,102 citations', topPage: 'docs.rokt.com — surged from 1→14 citations per topic' },
+      { type: 'Blog', share: '1,085 citations', topPage: 'What Features Differentiate Rokt' },
+      { type: 'Homepage', share: '580 citations', topPage: 'rokt.com' }
     ],
     platforms: {
       labels: ['AI Mode','Gemini','Copilot','AI Overviews','Claude','Perplexity','ChatGPT'],
@@ -2122,10 +2150,15 @@ const weekData = [
         { tag: 'platform', label: 'Platform', text: 'Grok absent from this period entirely — all seven remaining platforms in a tight 1,430-1,440 range. AI Mode leads marginally. Total branded mentions ~10K for the bi-weekly period.' },
         { tag: 'sentiment', label: 'Sentiment', text: 'Sentiment improved to 80.2% (+1.0pp). Culture reversed its four-week decline, rising to 72.2% (+2.7pp). Rokt Thanks improved to 78.1% (+4.4pp). The Q2 prompt refresh appears to have had a positive early impact on sentiment themes.' }
       ],
-      citations: { pieChart: null, topDomains: null, unbrandedCit: null },
+      citations: {
+        pieChart: { tag: 'citation', label: 'Citation', text: 'Owned content holds at 47.2% (+1.0pp) of all citations. docs.rokt.com surged as a source — technical documentation is being picked up heavily by LLMs. Earned media steady at 11.3%.' },
+        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com (44.1%) + docs.rokt.com (5.2%) + aftersell.com (3.8%) = 53.1% combined owned share. docs.rokt.com is the growth story (+1.3pp). retail-insider.com emerged as a key earned media source (+0.8pp) driven by Culture and Thanks coverage.' },
+        unbrandedCit: { tag: 'citation', label: 'Citation', text: 'In non-branded queries, rokt.com climbed to 2.2% share (+0.2pp) — now #2 behind reddit.com (2.4%). reddit.com surged (+0.5pp) as AI models increasingly cite Reddit for e-commerce technology discussions.' }
+      },
       competition: {
         sov: { tag: 'competition', label: 'Competition', text: 'Branded SOV rebounded to 35.8% (+0.9pp). Both Uptick and ThanksCo slightly improved position (2.0 and 2.1). Citation share recovered to 45.5% (+1.6pp) — back to Week 13 levels.' },
-        sentimentPlatform: null, sentimentTopic: null, spillover: null
+        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Rokt leads all competitors on every platform. AI Mode (84.1%) and AI Overviews (83.7%) are Rokt\'s strongest platforms. ChatGPT remains the weakest at 72.1% — still 8.7pp above Fluent. Copilot improved to 78.3%, up from the low 60s in Q1.' },
+        sentimentTopic: null, spillover: null
       },
       gaps: [
         { tag: 'gap', label: 'Gap', text: 'Culture is no longer the weakest theme — Rokt Product (71.8%) is now marginally lower. The Q2 prompt refresh may be shifting how LLMs discuss Rokt\'s culture, but the improvement is small and needs sustained momentum.' },
@@ -2363,7 +2396,6 @@ function renderKPI(containerId, metrics, configs) {
 const brandedConfigs = [
   { key: 'visibility', label: 'Visibility Score', suffix: '%', desc: 'How often Rokt appears in AI-generated answers for branded queries', unit: 'pp' },
   { key: 'sov', label: 'Share of Voice', suffix: '%', desc: 'Rokt mentions relative to all companies in branded AI responses', unit: 'pp' },
-  { key: 'avgPos', label: 'Avg Position', suffix: '', desc: 'Average rank of Rokt in branded AI answers. 1 = top position.', lowerBetter: true, unit: ' pos' },
   { key: 'citation', label: 'Citation Share', suffix: '%', desc: 'How often rokt.com is cited as a source in branded AI answers', unit: 'pp' },
   { key: 'sentiment', label: 'Positive Sentiment', suffix: '%', desc: 'Share of branded AI mentions where Rokt is framed positively', unit: 'pp' }
 ];
@@ -2744,11 +2776,11 @@ function renderCharts() {
     data: {
       labels,
       datasets: [
-        { label: 'Overall', data: weekData.map(w => w.branded.visibility.value), borderColor: beetroot, backgroundColor: 'rgba(224,0,77,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: beetroot },
-        { label: 'Non-Branded', data: weekData.map(w => w.unbranded.visibility.value), borderColor: blue, backgroundColor: 'rgba(52,152,219,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: blue, borderDash: [5,5] }
+        { label: 'Branded', data: weekData.map(w => w.branded.visibility.value), borderColor: beetroot, backgroundColor: 'rgba(224,0,77,0.1)', fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: beetroot },
+        { label: 'Non-Branded', data: weekData.map(w => w.unbranded.visibility.value), borderColor: blue, backgroundColor: 'rgba(52,152,219,0.1)', fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: blue, borderDash: [5,5] }
       ]
     },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } }, scales: { y: { min: 0, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } } }
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } }, scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } } }
   });
 
   if (sovChart) sovChart.destroy();
@@ -2757,11 +2789,11 @@ function renderCharts() {
     data: {
       labels,
       datasets: [
-        { label: 'Overall', data: weekData.map(w => w.branded.sov.value), borderColor: beetroot, backgroundColor: 'rgba(224,0,77,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: beetroot },
-        { label: 'Non-Branded', data: weekData.map(w => w.unbranded.sov.value), borderColor: blue, backgroundColor: 'rgba(52,152,219,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: blue, borderDash: [5,5] }
+        { label: 'Branded', data: weekData.map(w => w.branded.sov.value), borderColor: beetroot, backgroundColor: 'rgba(224,0,77,0.1)', fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: beetroot },
+        { label: 'Non-Branded', data: weekData.map(w => w.unbranded.sov.value), borderColor: blue, backgroundColor: 'rgba(52,152,219,0.1)', fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: blue, borderDash: [5,5] }
       ]
     },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } }, scales: { y: { min: 0, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } } }
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } }, scales: { y: { min: 0, max: 50, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } } }
   });
 
   const week = weekData[currentWeekIdx];
@@ -2830,36 +2862,54 @@ function renderCohortPanel() {
   grid.innerHTML = html;
 }
 
-function renderComparison() {
+function renderNonBrandedCallout() {
   const week = weekData[currentWeekIdx];
-  const b = week.branded;
   const u = week.unbranded;
-  const table = document.getElementById('comparisonTable');
-  function fmt(val, suffix) { return val != null ? val + suffix : '—'; }
-  function delt(d, unit, lowerBetter) {
-    if (d == null) return '<span style="color:var(--grey-400)">—</span>';
-    const good = lowerBetter ? d < 0 : d > 0;
-    const col = good ? 'var(--green)' : d === 0 ? 'var(--grey-400)' : 'var(--red)';
-    const arrow = good ? '↑' : d === 0 ? '—' : '↓';
-    return `<span style="color:${col}">${arrow} ${Math.abs(d)}${unit}</span>`;
+  const el = document.getElementById('nonBrandedCallout');
+  function d(val, unit) {
+    if (val == null) return '';
+    const col = val > 0 ? 'var(--green)' : val < 0 ? 'var(--red)' : 'var(--grey-400)';
+    return ` <span style="color:${col};font-size:11px;">${val > 0 ? '↑' : val < 0 ? '↓' : '—'} ${Math.abs(val)}${unit}</span>`;
   }
-  table.innerHTML = `<thead><tr><th></th><th>Visibility</th><th>SOV</th><th>Avg Position</th><th>Sentiment</th></tr></thead>
-  <tbody>
-    <tr class="branded-row">
-      <td style="font-weight:600;">Branded</td>
-      <td class="metric-val">${fmt(b.visibility.value,'%')} <span class="delta-cell">${delt(b.visibility.delta,'pp')}</span></td>
-      <td class="metric-val">${fmt(b.sov.value,'%')} <span class="delta-cell">${delt(b.sov.delta,'pp')}</span></td>
-      <td class="metric-val">${fmt(b.avgPos.value,'')} <span class="delta-cell">${delt(b.avgPos.delta,'',true)}</span></td>
-      <td class="metric-val">${fmt(b.sentiment.value,'%')} <span class="delta-cell">${delt(b.sentiment.delta,'pp')}</span></td>
-    </tr>
-    <tr>
-      <td style="font-weight:600;color:var(--grey-400);">Non-Branded</td>
-      <td class="metric-val" style="color:var(--grey-700);">${fmt(u.visibility.value,'%')} <span class="delta-cell">${delt(u.visibility.delta,'pp')}</span></td>
-      <td class="metric-val" style="color:var(--grey-700);">${fmt(u.sov.value,'%')} <span class="delta-cell">${delt(u.sov.delta,'pp')}</span></td>
-      <td class="metric-val" style="color:var(--grey-700);">${fmt(u.avgPos.value,'')} <span class="delta-cell">${delt(u.avgPos.delta,'',true)}</span></td>
-      <td style="color:var(--grey-400);font-size:11px;">—</td>
-    </tr>
-  </tbody>`;
+  el.innerHTML = `<span class="nb-label">Non-branded:</span>
+    <span>Visibility <span class="nb-val">${u.visibility.value}%</span>${d(u.visibility.delta,'pp')}</span>
+    <span style="color:var(--grey-300);">·</span>
+    <span>SOV <span class="nb-val">${u.sov.value}%</span>${d(u.sov.delta,'pp')}</span>
+    <span style="color:var(--grey-300);">·</span>
+    <span>Avg Pos <span class="nb-val">${u.avgPos.value}</span>${d(u.avgPos.delta,'')}</span>`;
+}
+
+function renderPlatformContext() {
+  const week = weekData[currentWeekIdx];
+  const el = document.getElementById('platformContext');
+  if (!el || !week.platforms) return;
+  const mentions = week.platforms.mentions;
+  const total = mentions.reduce((s, v) => s + v, 0);
+  const max = Math.max(...mentions);
+  const min = Math.min(...mentions);
+  const spread = max - min;
+  const spreadPct = ((spread / max) * 100).toFixed(1);
+  const vis = week.unbranded?.visibility?.value || '—';
+  const sov = week.unbranded?.sov?.value || '—';
+  el.innerHTML = `<strong>${total.toLocaleString()}</strong> total non-branded mentions across ${mentions.length} platforms. ` +
+    `Spread: ${spread.toLocaleString()} (${spreadPct}% gap between highest and lowest). ` +
+    `Rokt appears in <strong>${vis}%</strong> of non-branded AI responses (SOV: ${sov}%). ` +
+    (spread < 200 ? '<span style="color:var(--green);font-weight:600;">Platforms are tightly clustered — no single platform dominates.</span>' :
+     `<span style="color:var(--grey-400);">${week.platforms.labels[0]} leads with ${max.toLocaleString()} mentions.</span>`);
+}
+
+function renderAdjustedCallout() {
+  const week = weekData[currentWeekIdx];
+  const el = document.getElementById('adjustedCallout');
+  if (!week.adjusted) { el.style.display = 'none'; return; }
+  el.style.display = '';
+  const a = week.adjusted;
+  let html = '<span class="ac-label">Excl. Grok & Meta AI:</span>';
+  if (a.visibility != null) html += ` <span>Visibility <span class="ac-val">${a.visibility}%</span></span> <span class="ac-sep">·</span>`;
+  if (a.sov != null) html += ` <span>SOV <span class="ac-val">${a.sov}%</span></span> <span class="ac-sep">·</span>`;
+  if (a.sentiment != null) html += ` <span>Sentiment <span class="ac-val">${a.sentiment}%</span></span>`;
+  if (a.note) html += ` <span class="ac-sep">·</span> <span class="ac-note">${a.note}</span>`;
+  el.innerHTML = html;
 }
 
 // ===== ATTRIBUTION (embedded in Gaps tab) =====
@@ -2954,7 +3004,9 @@ function updateAll() {
   renderWeekNav();
   renderTLDR();
   renderKPI('kpiBranded', week.branded, brandedConfigs);
-  renderComparison();
+  renderAdjustedCallout();
+  renderNonBrandedCallout();
+  renderPlatformContext();
   renderCohortPanel();
   renderBrandedPosition();
   renderCharts();
