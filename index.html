@@ -401,19 +401,6 @@
       <table class="data-table" id="lowPerformingTable"></table>
     </div>
 
-    <div class="section-title">Content Gaps</div>
-    <p style="font-size: 13px; color: var(--grey-700); margin: -8px 0 20px;">Rokt's negative sentiment themes point to content opportunities</p>
-    <div class="card full-card">
-      <table class="data-table" id="contentGapsTable"></table>
-      <div class="inline-insight" id="contentGapsInsight"></div>
-    </div>
-
-    <div class="section-title">Low Sentiment Topics</div>
-    <p style="font-size: 13px; color: var(--grey-700); margin: -8px 0 20px;">Topics where Rokt has the lowest positive sentiment rate — competitors beat Rokt</p>
-    <div class="card full-card">
-      <table class="data-table" id="lowSentimentTable"></table>
-    </div>
-
     <!-- Attribution: embedded in gaps tab -->
     <div id="attributionSection" style="display:none;">
       <div class="section-title" style="margin-top:28px;">What's driving the shifts?</div>
@@ -2735,73 +2722,6 @@ function renderGaps() {
     lhtml += row;
   });
   lpTable.innerHTML = lhtml + '</tbody>';
-
-  // Content Gaps — dynamically from negativeThemes or fallback
-  const cgTable = document.getElementById('contentGapsTable');
-  const contentActions = {
-    'Integration Complexity': 'Create "How to integrate Rokt in under 30 min" content — counter the complexity narrative with step-by-step guides and time-to-value stories',
-    'Ad-Tech Perception Issues': 'Publish content reframing Rokt beyond ad-tech: relevance engine, commerce media, transaction-moment platform. This theme surged from 0→4 this week.',
-    'Pricing Transparency Issues': 'Publish pricing framework — AI models cite pricing concerns because no public content addresses it',
-    'Client Concentration Risk': 'Highlight customer diversity and multi-vertical case studies to address concentration concerns',
-    'Checkout Experience Sensitivity': 'Create content showing how Rokt enhances rather than disrupts the checkout experience — UX studies, merchant testimonials',
-    'Dependency on Data Quality': 'Highlight Rokt\'s ML and data quality infrastructure in product content',
-    'Limited Independent Reviews': 'Encourage G2/Capterra reviews — more reviews = better AI positioning',
-    'Not a Full Ecommerce Platform': 'Clarify Rokt\'s role as a complementary commerce media layer, not a replacement for ecommerce platforms',
-    'Mixed Customer Reviews': 'Amplify positive customer stories and case studies to outweigh mixed signals',
-    'Brand Control Concerns': 'Address brand safety with content about advertiser controls, vetting process, and quality standards',
-    'Dependency on Partner Quality': 'Highlight partner vetting process and quality controls in owned content',
-    'Toxic Workplace Culture': 'Publish fresh employer brand content — team stories, culture initiatives, and employee spotlights on rokt.com to counter the Glassdoor/BuiltIn narrative',
-    'High Employee Turnover': 'Create content highlighting employee tenure, internal mobility programs, and career growth stories',
-    'Business Performance Concerns': 'Publish business momentum content — partnership announcements, growth metrics, and customer expansion stories',
-    'Integration Setup Complexity': 'Create step-by-step integration guides, no-code setup case studies, and time-to-value content showing fast deployment',
-    'Frequent Reorganizations': 'Content showing strategic clarity and organizational stability — leadership vision pieces, team structure content',
-    'Engineering Effort Required': 'Highlight no-code/low-code setup options and rapid deployment in technical documentation and case studies',
-    'Integration Transition Issues': 'Publish migration guides and transition support content to address onboarding friction concerns',
-    'Job Security Concerns': 'Address with content about company growth trajectory, hiring plans, and long-term investment commitments',
-    'Culture': 'Publish fresh employer brand content — team stories, leadership perspectives, and day-to-day culture pieces on rokt.com. Counter the Glassdoor/BuiltIn narrative with authentic, recent owned content.',
-    'Rokt Product': 'Strengthen product positioning content with customer outcomes, ROI data, and use-case specifics. Current product content isn\'t landing strongly enough in LLM responses.',
-    'Rokt Upcart': 'Create more Upcart-specific success stories and integration guides. Position Upcart as a seamless, low-friction add-on rather than a complex product.',
-    'Competitive': 'Develop clear competitive differentiation content — what makes Rokt different from Fluent, Uptick, ThanksCo. AI models need distinct positioning signals.',
-    'Rokt Thanks': 'Rokt Thanks sentiment improved +4.4pp — the strongest mover. Continue investing in content that showcases the thank-you page experience and merchant value.',
-    'Rokt Ads': 'Rokt Ads sentiment is the strongest theme (93%+). Use this as a proof point in broader product narratives — the ads experience is the flagship story.',
-    'Rokt Pay+': 'Create content addressing payment experience quality and merchant control. Position Pay+ alongside the checkout experience narrative.',
-    'Rokt Catalog': 'Catalog sentiment dropped -4.3pp — investigate which LLM narratives shifted. May need fresh product content about catalog capabilities and merchant benefits.',
-    'Industry Thought Leadership': 'Rokt needs more thought leadership content that AI models will reference — publish research, market reports, and executive perspectives on commerce media.',
-    'Company Outlook': 'Business momentum content is landing well. Continue with partnership announcements, growth metrics, and customer expansion stories.'
-  };
-  if (week.negativeThemes) {
-    const isAttrFormat = typeof week.negativeThemes[0].count === 'string';
-    let ghtml = '<thead><tr><th>Negative Theme</th><th>' + (isAttrFormat ? 'Response Share' : 'Occurrences') + '</th><th style="width:50px;">Δ</th><th>Content Opportunity</th></tr></thead><tbody>';
-    week.negativeThemes.forEach(t => {
-      const deltaStr = t.isNew ? '<span style="color:var(--red);font-weight:700;">NEW</span>' : (t.delta > 0 ? '<span style="color:var(--green);font-weight:600;">+' + t.delta + 'pp</span>' : (t.delta < 0 ? '<span style="color:var(--red);font-weight:600;">' + t.delta + 'pp</span>' : '<span style="color:var(--grey-400);">—</span>'));
-      const action = contentActions[t.theme] || 'Create targeted content to address this narrative';
-      ghtml += `<tr><td><strong>${t.theme}</strong></td><td>${t.count}</td><td>${deltaStr}</td><td style="font-size:12px;">${action}</td></tr>`;
-    });
-    cgTable.innerHTML = ghtml + '</tbody>';
-  } else {
-    const gaps = [
-      { theme: 'Integration Complexity', occ: '9 negative mentions', action: contentActions['Integration Complexity'] },
-      { theme: 'Pricing Transparency Issues', occ: '5 negative mentions', action: contentActions['Pricing Transparency Issues'] },
-      { theme: 'Limited Independent Reviews', occ: 'Across all competitors', action: contentActions['Limited Independent Reviews'] }
-    ];
-    let ghtml = '<thead><tr><th>Negative Theme</th><th>Frequency</th><th>Content Opportunity</th></tr></thead><tbody>';
-    gaps.forEach(g => { ghtml += `<tr><td><strong>${g.theme}</strong></td><td>${g.occ}</td><td style="font-size:12px;">${g.action}</td></tr>`; });
-    cgTable.innerHTML = ghtml + '</tbody>';
-  }
-
-  // Content gaps insight
-  const cgInsight = week.insights.gaps ? week.insights.gaps.find(i => i.text.includes('negative themes')) : null;
-  renderInlineInsight('contentGapsInsight', cgInsight);
-
-  // Low Sentiment Topics
-  const lsTable = document.getElementById('lowSentimentTable');
-  if (week.lowSentiment) {
-    let html = '<thead><tr><th>Topic</th><th>Positive Sentiment</th><th>Note</th></tr></thead><tbody>';
-    week.lowSentiment.forEach(d => {
-      html += `<tr><td><strong>${d.topic}</strong></td><td>${d.rate}%</td><td style="font-size:12px;color:var(--grey-400)">${d.note}</td></tr>`;
-    });
-    lsTable.innerHTML = html + '</tbody>';
-  }
 }
 
 // ===== CHARTS =====
