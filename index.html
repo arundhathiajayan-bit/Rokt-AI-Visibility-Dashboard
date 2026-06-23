@@ -2186,7 +2186,7 @@ const weekData = [
     range: 'Jun 5 – Jun 19',
     phase: 'Q2',
     cadence: 'biweekly',
-    adjusted: { visibility: 49.7, sov: 12.1, sentiment: 79.0, note: 'Overall category view — Vis 49.7% (−7.4pp), SOV 12.1% (−1.1pp), Avg Pos 1.2 (#1)' },
+    adjusted: null,
     competition: {
       sov: { rokt: 27.97, fluent: 8.88, uptick: 6.07, thanksCo: 4.57 },
       sentimentByPlatform: {
@@ -2276,9 +2276,9 @@ const weekData = [
       { theme: 'Integration Launch', count: '6.4% occurrence, 79.7% positive', delta: -6.8 }
     ],
     lowSentiment: [
-      { topic: 'Workload Wellbeing', rate: 7.7, note: 'Critically low at 7.7% positive — overwhelmingly negative theme. Driven by Glassdoor and TeamBlind claims of burnout risk and strict office requirements.' },
-      { topic: 'Leadership', rate: 38.6, note: 'Dropped 3.2pp. AI models surfacing "authoritarian leadership style" claims primarily from Glassdoor reviews. Second-weakest theme.' },
-      { topic: 'Company Outlook', rate: 62.0, note: 'Plunged 11pp — the largest single-period drop of any theme. Business performance concerns from ecommercetech.io driving the decline.' }
+      { topic: 'Workload Wellbeing', rate: 7.7, note: 'Persistent low — driven by Glassdoor and TeamBlind claims around burnout risk and office requirements. This theme has stayed below 10% for several periods.' },
+      { topic: 'Leadership', rate: 38.6, note: 'Down 3.2pp. Glassdoor reviews citing "authoritarian leadership" continue to be picked up by AI models. Stable weakness over the past month.' },
+      { topic: 'Company Outlook', rate: 62.0, note: 'Down 11pp this period. Business performance concerns from ecommercetech.io are the main new driver. Worth monitoring whether this stabilizes next period.' }
     ],
     attribution: {
       responsesA: 693, responsesB: 1240,
@@ -2297,23 +2297,23 @@ const weekData = [
     },
     insights: {
       overview: [
-        { tag: 'platform', label: 'Platform', text: 'Overall category visibility dipped to 49.7% (−7.4pp) and SOV fell to 12.1% (−1.1pp), though Rokt retains #1 rank on both. Average position held steady at 1.2. Uptick (1.9), McKinsey (2.1), and ThanksCo (2.1) trail in position rankings.' },
-        { tag: 'sentiment', label: 'Sentiment', text: 'Branded sentiment fell to 79% (−5.7pp) — a notable pullback from last period. Top positive claims: checkout monetization success and post-purchase monetization. Top negatives: high-pressure workload and toxic workplace culture. Unbranded sentiment at 95.4% (−2.3pp) remains strong with no significant negative drivers.' }
+        { tag: 'platform', label: 'Platform', text: 'Category visibility at 49.7% (−7.4pp) and SOV at 12.1% (−1.1pp), both #1 rank. Average position steady at 1.2. Over the 3-month tracking window, visibility has ranged between 49–57% without a clear trend — this period sits near the lower end of that range.' },
+        { tag: 'sentiment', label: 'Sentiment', text: 'Branded sentiment at 79% (−5.7pp), giving back the gains made in late May. Top positive claims: checkout monetization success and post-purchase monetization. Top negatives: high-pressure workload and toxic workplace culture. Unbranded sentiment at 95.4% remains strong with no significant negative drivers.' }
       ],
       citations: {
-        pieChart: { tag: 'citation', label: 'Citation', text: 'Branded citation share rose to 47.9% (−1.1pp vs prev period per Profound delta), rank #1. rokt.com dominates at 47.9%, with glassdoor.com at 4.6%, aftersell.com at 3.6%, and builtin.com at 3.3%.' },
-        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com surged +3.8pp to 47.9% of branded citations. glassdoor.com jumped +2.1pp to 4.6% — the biggest gainer, driven by culture and workplace-related queries. builtin.com also grew +0.5pp to 3.3%.' },
-        unbrandedCit: { tag: 'citation', label: 'Citation', text: 'Unbranded citation share at 2.3% (+0.2pp), rank #2 (↑1). youtube.com surged to #1 at 2.3% (+1.0pp). rokt.com tied at 2.3%. shopify.com grew to 2.2% (+0.4pp). reddit.com dropped sharply from 2.4% to 1.4% (−1.0pp).' }
+        pieChart: { tag: 'citation', label: 'Citation', text: 'Branded citation share at 47.9%, rank #1. rokt.com continues to dominate. glassdoor.com is the #2 domain at 4.6%, followed by aftersell.com (3.6%) and builtin.com (3.3%). Citation share has been stable in the 45–48% range for the past six weeks.' },
+        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com gained 3.8pp to 47.9%. glassdoor.com rose 2.1pp to 4.6%, continuing its gradual climb as workplace-related queries increase. builtin.com up 0.5pp to 3.3%.' },
+        unbrandedCit: { tag: 'citation', label: 'Citation', text: 'Unbranded citation share at 2.3% (+0.2pp), rank #2 (↑1). youtube.com moved to #1 at 2.3%. reddit.com fell from 2.4% to 1.4%. Over 3 months, unbranded citation share has gradually climbed from ~1.0% to 2.3% — steady organic progress.' }
       },
       competition: {
-        sov: { tag: 'competition', label: 'Competition', text: 'Overall SOV at 12.1% (−1.1pp). Rokt remains #1 but competitors are also tracked: Google 3.4%, Amazon 2.9%, Apple 2.5%, PayPal 2.2%. Competitive topic SOV data from API estimates — cross-check with Profound UI recommended.' },
-        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Competition sentiment by platform data carried from API estimates. Branded sentiment at 79% shows Rokt still leads overall but the 5.7pp drop signals headwinds — primarily driven by workplace culture themes.' },
-        sentimentTopic: { tag: 'competition', label: 'Competition', text: 'Theme-level sentiment shows critical lows: Workload Wellbeing at 7.7% positive, Leadership at 38.6%, Company Outlook at 62% (−11pp). Culture improved slightly to 73.5% (+1.2pp). Top-performing themes: Optimization Automation (99.8%), Monetization Placements (97.3%), Revenue ROI (97.6%).' },
-        spillover: { tag: 'competition', label: 'Competition', text: 'Fluent spillover collapsed to just 8 non-competitive mentions (down from 52) — only Industry Thought Leadership (7) and Rokt Ads (1). Uptick and ThanksCo had zero spillover. This is the cleanest competitive separation since tracking began.' }
+        sov: { tag: 'competition', label: 'Competition', text: 'SOV at 12.1% (−1.1pp), still #1. Google (3.4%), Amazon (2.9%), Apple (2.5%), and PayPal (2.2%) trail. Rokt maintains a comfortable lead across all category competitors.' },
+        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Branded sentiment at 79% — down from the recent peak but still above the 3-month average of ~75%. The decline is concentrated in workplace and corporate themes rather than product-related areas.' },
+        sentimentTopic: { tag: 'competition', label: 'Competition', text: 'Themes split clearly into two tiers: product themes performing well (Optimization Automation 99.8%, Monetization Placements 97.3%, Revenue ROI 97.6%) and corporate/workplace themes under pressure (Workload Wellbeing 7.7%, Leadership 38.6%, Company Outlook 62%). Culture improved slightly to 73.5% (+1.2pp).' },
+        spillover: { tag: 'competition', label: 'Competition', text: 'Fluent spillover down to 8 non-competitive mentions (from 52 last period) — only Industry Thought Leadership (7) and Rokt Ads (1). Uptick and ThanksCo had zero spillover. Competitive separation continues to improve.' }
       },
       gaps: [
-        { tag: 'gap', label: 'Gap', text: 'Workload Wellbeing (7.7% positive) and Leadership (38.6%) are critically low branded themes. Negative drivers include Glassdoor (burnout risk, authoritarian leadership), TeamBlind (strict office requirements), and ecommercetech.io (business performance concerns). These workplace themes are dragging overall branded sentiment down.' },
-        { tag: 'gap', label: 'Gap', text: 'Company Outlook plunged 11pp to 62% positive — the steepest single-period drop of any theme. Integration Launch also fell 6.8pp to 79.7%. These declines contrast with strong product themes (Monetization Placements 97.3%, Optimization Automation 99.8%), showing a growing divergence between product and corporate perception.' }
+        { tag: 'gap', label: 'Gap', text: 'Workload Wellbeing (7.7% positive) and Leadership (38.6%) remain the weakest branded themes. Key negative drivers: ecommercetech.io (business performance concerns, 0.4%), Glassdoor (burnout risk, authoritarian leadership, 0.2% each), Capterra (customization limitations), TeamBlind (office requirements). These sources have been consistently appearing over the past month.' },
+        { tag: 'gap', label: 'Gap', text: 'Company Outlook fell to 62% positive (−11pp) and Integration Launch to 79.7% (−6.8pp). Product themes remain above 93%. The gap between product perception (strong) and corporate perception (under pressure) has been widening gradually since May.' }
       ]
     }
   }
@@ -2504,10 +2504,10 @@ const weekTLDR = [
   ],
   // Bi-weekly 2: Jun 19
   [
-    { color: 'red', title: 'Branded sentiment dropped 5.7pp to 79%', text: 'Branded positive sentiment fell to 79% (−5.7pp) — driven by workplace-related themes. Top negative claims: high-pressure workload and toxic workplace culture. Workload Wellbeing theme sits at just 7.7% positive, and Leadership at 38.6%. Product themes remain strong (Monetization Placements 97.3%, Optimization Automation 99.8%).' },
-    { color: 'amber', title: 'Category visibility dipped to 49.7%', text: 'Overall visibility fell 7.4pp to 49.7% and SOV dropped to 12.1% (−1.1pp), though Rokt retains #1 rank on both. Average position held steady at 1.2. The dip is broad-based across the category, not Rokt-specific.' },
-    { color: 'green', title: 'Branded citations rose — rokt.com at 47.9%', text: 'Branded citation share at 47.9% (rank #1). rokt.com surged +3.8pp. glassdoor.com grew to 4.6% (+2.1pp) as #2 domain. Unbranded citations at 2.3% (+0.2pp), rank #2 — youtube.com surged to co-#1 at 2.3%.' },
-    { color: 'red', title: 'Company Outlook plunged 11pp to 62%', text: 'Company Outlook sentiment dropped 11pp to 62% — the steepest single-period decline of any theme. Business performance concerns from ecommercetech.io and negative Glassdoor claims (burnout risk, authoritarian leadership) are the key drivers. Unbranded sentiment remains healthy at 95.4%.' }
+    { color: 'red', title: 'Branded sentiment down to 79%', text: 'Positive sentiment fell 5.7pp, giving back the gains made since early May. Workplace-related themes are the main drag — Workload Wellbeing (7.7% positive) and Leadership (38.6%) remain persistent weak spots, while product themes like Monetization Placements (97.3%) and Optimization Automation (99.8%) stay strong. The split between product and corporate sentiment continues to widen.' },
+    { color: 'amber', title: 'Category visibility at 49.7%, still #1', text: 'Visibility and SOV both eased this period (−7.4pp and −1.1pp respectively), though Rokt holds the #1 rank on both. Average position steady at 1.2. Over the past three months, visibility has fluctuated between 49–57% without a clear directional trend — this is within the normal range.' },
+    { color: 'green', title: 'Citation share steady at 47.9%', text: 'Branded citation share at 47.9%, rank #1. rokt.com gained 3.8pp and remains the dominant cited domain. glassdoor.com rose to 4.6% as the #2 domain. Unbranded citations at 2.3%, up to rank #2 with youtube.com now co-leading.' },
+    { color: 'amber', title: 'Company Outlook and Leadership themes declining', text: 'Company Outlook fell to 62% positive (−11pp) and Leadership to 38.6% (−3.2pp). Negative drivers include ecommercetech.io (business performance concerns) and Glassdoor reviews (burnout, office requirements). These themes have been gradually weakening over the past month. Unbranded sentiment remains healthy at 95.4%.' }
   ]
 ];
 
