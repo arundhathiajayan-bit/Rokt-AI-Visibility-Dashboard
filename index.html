@@ -2186,7 +2186,7 @@ const weekData = [
     range: 'Jun 5 – Jun 19',
     phase: 'Q2',
     cadence: 'biweekly',
-    adjusted: { visibility: 99.9, sov: 36.4, sentiment: 82.7, note: 'Grok & Meta AI both absent this period — headline numbers reflect core platforms only' },
+    adjusted: { visibility: 49.7, sov: 12.1, sentiment: 79.0, note: 'Overall category view — Vis 49.7% (−7.4pp), SOV 12.1% (−1.1pp), Avg Pos 1.2 (#1)' },
     competition: {
       sov: { rokt: 27.97, fluent: 8.88, uptick: 6.07, thanksCo: 4.57 },
       sentimentByPlatform: {
@@ -2224,16 +2224,18 @@ const weekData = [
       q2: { label: 'Q2 New (95 prompts)', vis: 79.2, sov: 15.2, pos: 1.3, mentions: 9961 }
     },
     branded: {
-      visibility: { value: 99.9, delta: 0.0 },
-      sov: { value: 36.4, delta: 0.6 },
-      avgPos: { value: 1.0, delta: 0, rank: '#1' },
-      citation: { value: 46.2, delta: 0.7, rank: '#1' },
-      sentiment: { value: 82.7, delta: 2.5 }
+      visibility: { value: 49.7, delta: -7.4 },
+      sov: { value: 12.1, delta: -1.1 },
+      avgPos: { value: 1.2, delta: 0.2, rank: '#1' },
+      citation: { value: 47.9, delta: 2.4, rank: '#1' },
+      sentiment: { value: 79.0, delta: -1.2 }
     },
     brandedPositionCompetitors: [
-      { asset: 'Rokt', pos: 1.0, delta: 0.0 },
-      { asset: 'Uptick', pos: 2.0, delta: 0.0 },
-      { asset: 'ThanksCo', pos: 2.1, delta: 0.0 }
+      { asset: 'Rokt', pos: 1.2, delta: 0.2 },
+      { asset: 'Uptick', pos: 1.9, delta: -0.1 },
+      { asset: 'McKinsey', pos: 2.1, delta: 0.0 },
+      { asset: 'ThanksCo', pos: 2.1, delta: 0.0 },
+      { asset: 'Apple', pos: 2.3, delta: 0.0 }
     ],
     unbranded: {
       visibility: { value: 9.8, delta: 0.4, rank: '#10' },
@@ -2241,23 +2243,20 @@ const weekData = [
       avgPos: { value: 2.8, delta: -0.1, rank: '#2' }
     },
     unbrandedCitations: [
-      { domain: 'reddit.com', share: 2.5, delta: 0.1 },
+      { domain: 'youtube.com', share: 2.3, delta: 1.0 },
       { domain: 'rokt.com', share: 2.3, delta: 0.1, highlight: true },
+      { domain: 'shopify.com', share: 2.2, delta: 0.4 },
       { domain: 'linkedin.com', share: 2.0, delta: -0.1 },
-      { domain: 'shopify.com', share: 1.7, delta: -0.1 },
-      { domain: 'forbes.com', share: 1.4, delta: 0.0 }
+      { domain: 'reddit.com', share: 1.4, delta: -1.0 }
     ],
     citationCategories: { owned: 43.7, earned: 12.7, social: 15.2, competition: 3.6, other: 24.8 },
     prevCitationCategories: { owned: 47.2, earned: 11.3, social: 12.5, competition: 1.9, other: 27.1 },
     topDomains: [
-      { domain: 'rokt.com', share: 43.5, delta: -0.6, type: 'Owned', cls: 'badge-green' },
-      { domain: 'glassdoor.com', share: 4.1, delta: 1.6, type: 'Social', cls: 'badge-purple' },
-      { domain: 'aftersell.com', share: 3.1, delta: -0.7, type: 'Owned', cls: 'badge-green' },
-      { domain: 'builtin.com', share: 2.6, delta: -0.2, type: 'Earned', cls: 'badge-blue' },
-      { domain: 'prnewswire.com', share: 2.1, delta: 0.0, type: 'Earned', cls: 'badge-blue' },
-      { domain: 'linkedin.com', share: 2.0, delta: -0.1, type: 'Social', cls: 'badge-purple' },
-      { domain: 'youtube.com', share: 1.7, delta: 0.0, type: 'Social', cls: 'badge-purple' },
-      { domain: 'fluentco.com', share: 1.7, delta: 0.0, type: 'Competition', cls: 'badge-red' }
+      { domain: 'rokt.com', share: 47.9, delta: 3.8, type: 'Owned', cls: 'badge-green' },
+      { domain: 'glassdoor.com', share: 4.6, delta: 2.1, type: 'Social', cls: 'badge-purple' },
+      { domain: 'aftersell.com', share: 3.6, delta: -0.2, type: 'Owned', cls: 'badge-green' },
+      { domain: 'builtin.com', share: 3.3, delta: 0.5, type: 'Earned', cls: 'badge-blue' },
+      { domain: 'reddit.com', share: 1.8, delta: 0.4, type: 'Social', cls: 'badge-purple' }
     ],
     ownedContent: [
       { type: 'Product Pages', share: '3,450 citations', topPage: 'Rokt Thanks (810), Product Overview (620), Features (445)' },
@@ -2270,16 +2269,16 @@ const weekData = [
       mentions: [5429,4667,4356,4013,3909,3392,2224]
     },
     negativeThemes: [
-      { theme: 'Culture', count: '11.8% response share, 68.8% positive', delta: -3.4 },
-      { theme: 'Rokt Product', count: '12.6% response share, 73.3% positive', delta: 1.5 },
-      { theme: 'Rokt Upcart', count: '12.1% response share, 75.0% positive', delta: 1.4 },
-      { theme: 'Competitive', count: '11.5% response share, 75.6% positive', delta: -1.7 },
-      { theme: 'Rokt Thanks', count: '13.4% response share, 84.6% positive', delta: 6.5 }
+      { theme: 'Workload Wellbeing', count: '4.3% occurrence, 7.7% positive', delta: 1.2 },
+      { theme: 'Leadership', count: '4.3% occurrence, 38.6% positive', delta: -3.2 },
+      { theme: 'Company Outlook', count: '5.8% occurrence, 62% positive', delta: -11.0 },
+      { theme: 'Culture', count: '6.8% occurrence, 73.5% positive', delta: 1.2 },
+      { theme: 'Integration Launch', count: '6.4% occurrence, 79.7% positive', delta: -6.8 }
     ],
     lowSentiment: [
-      { topic: 'Culture', rate: 68.8, note: 'Reversed last period\'s improvement, dropping 3.4pp to its second-lowest reading. Culture remains the most volatile topic and the only one below 70%.' },
-      { topic: 'Rokt Product', rate: 73.3, note: 'Improved +1.5pp from 71.8%. Modest but positive movement. Product perception is finally trending upward after weeks of stagnation.' },
-      { topic: 'Rokt Upcart', rate: 75.0, note: 'Slight improvement (+1.4pp). Upcart continues its slow upward trajectory from the low 70s range.' }
+      { topic: 'Workload Wellbeing', rate: 7.7, note: 'Critically low at 7.7% positive — overwhelmingly negative theme. Driven by Glassdoor and TeamBlind claims of burnout risk and strict office requirements.' },
+      { topic: 'Leadership', rate: 38.6, note: 'Dropped 3.2pp. AI models surfacing "authoritarian leadership style" claims primarily from Glassdoor reviews. Second-weakest theme.' },
+      { topic: 'Company Outlook', rate: 62.0, note: 'Plunged 11pp — the largest single-period drop of any theme. Business performance concerns from ecommercetech.io driving the decline.' }
     ],
     attribution: {
       responsesA: 693, responsesB: 1240,
@@ -2298,23 +2297,23 @@ const weekData = [
     },
     insights: {
       overview: [
-        { tag: 'platform', label: 'Platform', text: 'Gemini leads with 5,429 branded mentions — platform distribution widened significantly from the flat ~1,430 range last period. Total branded mentions ~28K for the bi-weekly period, a substantial volume increase. Perplexity trails at 2,224.' },
-        { tag: 'sentiment', label: 'Sentiment', text: 'Overall sentiment surged to 82.7% (+2.5pp) — the strongest reading since tracking began. Three topics hit near-perfect scores: Rokt Ads (100%), Rokt Catalog (100%), and Rokt Pay+ (96.4%). Rokt Thanks jumped to 84.6% (+6.5pp). However, Culture dropped back to 68.8% (-3.4pp) and remains the only topic below 70%.' }
+        { tag: 'platform', label: 'Platform', text: 'Overall category visibility dipped to 49.7% (−7.4pp) and SOV fell to 12.1% (−1.1pp), though Rokt retains #1 rank on both. Average position held steady at 1.2. Uptick (1.9), McKinsey (2.1), and ThanksCo (2.1) trail in position rankings.' },
+        { tag: 'sentiment', label: 'Sentiment', text: 'Branded sentiment fell to 79% (−5.7pp) — a notable pullback from last period. Top positive claims: checkout monetization success and post-purchase monetization. Top negatives: high-pressure workload and toxic workplace culture. Unbranded sentiment at 95.4% (−2.3pp) remains strong with no significant negative drivers.' }
       ],
       citations: {
-        pieChart: { tag: 'citation', label: 'Citation', text: 'Owned content share dipped to 43.7% (-3.5pp) as social citations surged to 15.2% (+2.7pp) — the biggest category shift this period. Glassdoor.com grew to 4.1% (+1.6pp), becoming the #2 cited domain. Earned media expanded to 12.7% (+1.4pp).' },
-        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com (43.5%) remains dominant but eased 0.6pp. glassdoor.com surged to #2 at 4.1% — a 1.6pp jump driven by Culture queries. aftersell.com dipped to 3.1% (-0.7pp). fluentco.com appeared in top 8 at 1.7% — first time a competitor domain is this prominent.' },
-        unbrandedCit: { tag: 'citation', label: 'Citation', text: 'In non-branded queries, rokt.com climbed to 2.3% share (+0.1pp) — maintaining its #2 position behind reddit.com (2.5%). Steady incremental progress in organic non-branded citation presence.' }
+        pieChart: { tag: 'citation', label: 'Citation', text: 'Branded citation share rose to 47.9% (−1.1pp vs prev period per Profound delta), rank #1. rokt.com dominates at 47.9%, with glassdoor.com at 4.6%, aftersell.com at 3.6%, and builtin.com at 3.3%.' },
+        topDomains: { tag: 'citation', label: 'Citation', text: 'rokt.com surged +3.8pp to 47.9% of branded citations. glassdoor.com jumped +2.1pp to 4.6% — the biggest gainer, driven by culture and workplace-related queries. builtin.com also grew +0.5pp to 3.3%.' },
+        unbrandedCit: { tag: 'citation', label: 'Citation', text: 'Unbranded citation share at 2.3% (+0.2pp), rank #2 (↑1). youtube.com surged to #1 at 2.3% (+1.0pp). rokt.com tied at 2.3%. shopify.com grew to 2.2% (+0.4pp). reddit.com dropped sharply from 2.4% to 1.4% (−1.0pp).' }
       },
       competition: {
-        sov: { tag: 'competition', label: 'Competition', text: 'Competitive topic SOV nearly doubled to 28.0% (from 15.3%) — the largest single-period jump since tracking began. Fluent also rose to 8.9%, Uptick to 6.1%, ThanksCo to 4.6%. AI models are discussing all competitors more frequently, but Rokt gained the most share. Branded SOV ticked up to 36.4% (+0.6pp).' },
-        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Rokt leads on five of seven platforms. AI Mode (98.1%) and Claude (94.7%) are Rokt\'s strongest platforms. Copilot remains weakest at 73.8% but Rokt still leads there. Notably, Fluent and ThanksCo hit 100% on AI Overviews and AI Mode — small sample sizes but worth monitoring.' },
-        sentimentTopic: { tag: 'competition', label: 'Competition', text: 'Culture (68.8%) is now the clear weakest topic and Fluent beats Rokt there (76.2% vs 68.8%). Fluent also leads on Rokt Product (94.7% vs 73.3%) and Rokt Upcart (86.4% vs 75.0%) — a new development. Rokt dominates Rokt Ads (100%), Rokt Catalog (100%), Rokt Pay+ (96.4%), and Industry TL (88.1%).' },
+        sov: { tag: 'competition', label: 'Competition', text: 'Overall SOV at 12.1% (−1.1pp). Rokt remains #1 but competitors are also tracked: Google 3.4%, Amazon 2.9%, Apple 2.5%, PayPal 2.2%. Competitive topic SOV data from API estimates — cross-check with Profound UI recommended.' },
+        sentimentPlatform: { tag: 'competition', label: 'Competition', text: 'Competition sentiment by platform data carried from API estimates. Branded sentiment at 79% shows Rokt still leads overall but the 5.7pp drop signals headwinds — primarily driven by workplace culture themes.' },
+        sentimentTopic: { tag: 'competition', label: 'Competition', text: 'Theme-level sentiment shows critical lows: Workload Wellbeing at 7.7% positive, Leadership at 38.6%, Company Outlook at 62% (−11pp). Culture improved slightly to 73.5% (+1.2pp). Top-performing themes: Optimization Automation (99.8%), Monetization Placements (97.3%), Revenue ROI (97.6%).' },
         spillover: { tag: 'competition', label: 'Competition', text: 'Fluent spillover collapsed to just 8 non-competitive mentions (down from 52) — only Industry Thought Leadership (7) and Rokt Ads (1). Uptick and ThanksCo had zero spillover. This is the cleanest competitive separation since tracking began.' }
       },
       gaps: [
-        { tag: 'gap', label: 'Gap', text: 'Culture dropped back to 68.8% (-3.4pp) — reversing last period\'s recovery. It is now the only topic below 70% and the gap to the next-weakest (Rokt Product at 73.3%) has widened to 4.5pp. Culture remains the most persistent gap in AI visibility.' },
-        { tag: 'gap', label: 'Gap', text: 'Q2 new prompts advanced to 79.2% visibility (+1.6pp) — strong continued growth. Q1 continuity set at 49.1% (+0.8pp). The Q2 cohort\'s rapid visibility gains suggest the new prompt set is well-aligned with how LLMs discover and discuss Rokt.' }
+        { tag: 'gap', label: 'Gap', text: 'Workload Wellbeing (7.7% positive) and Leadership (38.6%) are critically low branded themes. Negative drivers include Glassdoor (burnout risk, authoritarian leadership), TeamBlind (strict office requirements), and ecommercetech.io (business performance concerns). These workplace themes are dragging overall branded sentiment down.' },
+        { tag: 'gap', label: 'Gap', text: 'Company Outlook plunged 11pp to 62% positive — the steepest single-period drop of any theme. Integration Launch also fell 6.8pp to 79.7%. These declines contrast with strong product themes (Monetization Placements 97.3%, Optimization Automation 99.8%), showing a growing divergence between product and corporate perception.' }
       ]
     }
   }
@@ -2505,10 +2504,10 @@ const weekTLDR = [
   ],
   // Bi-weekly 2: Jun 19
   [
-    { color: 'green', title: 'Sentiment hit an all-time high at 82.7%', text: 'Overall branded sentiment surged +2.5pp to 82.7% — the strongest reading since tracking began. Three topics hit near-perfect scores: Rokt Ads (100%), Rokt Catalog (100%), and Rokt Pay+ (96.4%). Rokt Thanks jumped 6.5pp to 84.6%. The Q2 prompt refresh is delivering sustained sentiment gains.' },
-    { color: 'green', title: 'Competitive SOV nearly doubled to 28%', text: 'Rokt\'s share of voice in competitive-topic queries jumped from 15.3% to 28.0% — the largest single-period gain on record. Fluent, Uptick, and ThanksCo also grew but at slower rates. When AI models discuss the competitive landscape, Rokt now appears in more than 1 in 4 responses.' },
-    { color: 'red', title: 'Culture dropped back below 70%', text: 'Culture sentiment fell to 68.8% (-3.4pp), reversing last period\'s recovery and making it the only topic below 70%. The gap to the next-weakest topic (Rokt Product at 73.3%) widened to 4.5pp. Culture remains the most persistent and volatile gap in Rokt\'s AI visibility profile.' },
-    { color: 'amber', title: 'Social citations surged as Glassdoor climbed to #2 domain', text: 'Social citations grew from 12.5% to 15.2% of all sources — the biggest category shift this period. Glassdoor.com jumped to 4.1% citation share (+1.6pp), becoming the #2 most-cited domain. This likely explains the Culture sentiment drop, as Glassdoor reviews carry mixed employee sentiment that AI models amplify.' }
+    { color: 'red', title: 'Branded sentiment dropped 5.7pp to 79%', text: 'Branded positive sentiment fell to 79% (−5.7pp) — driven by workplace-related themes. Top negative claims: high-pressure workload and toxic workplace culture. Workload Wellbeing theme sits at just 7.7% positive, and Leadership at 38.6%. Product themes remain strong (Monetization Placements 97.3%, Optimization Automation 99.8%).' },
+    { color: 'amber', title: 'Category visibility dipped to 49.7%', text: 'Overall visibility fell 7.4pp to 49.7% and SOV dropped to 12.1% (−1.1pp), though Rokt retains #1 rank on both. Average position held steady at 1.2. The dip is broad-based across the category, not Rokt-specific.' },
+    { color: 'green', title: 'Branded citations rose — rokt.com at 47.9%', text: 'Branded citation share at 47.9% (rank #1). rokt.com surged +3.8pp. glassdoor.com grew to 4.6% (+2.1pp) as #2 domain. Unbranded citations at 2.3% (+0.2pp), rank #2 — youtube.com surged to co-#1 at 2.3%.' },
+    { color: 'red', title: 'Company Outlook plunged 11pp to 62%', text: 'Company Outlook sentiment dropped 11pp to 62% — the steepest single-period decline of any theme. Business performance concerns from ecommercetech.io and negative Glassdoor claims (burnout risk, authoritarian leadership) are the key drivers. Unbranded sentiment remains healthy at 95.4%.' }
   ]
 ];
 
